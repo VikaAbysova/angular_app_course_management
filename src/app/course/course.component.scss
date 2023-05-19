@@ -1,0 +1,42 @@
+.course {
+  margin: 1.5rem 5rem;
+  padding: 2rem;
+  border-radius: 5px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.btn-content {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+}
+
+.fa-pen,
+.fa-trash,
+.calendar {
+  font-size: small;
+  color: #aaa;
+}
+
+.describe {
+  width: 80%;
+}
+
+.course-header, .course-timing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-timing {
+  gap: 2rem;
+}
+
+.course-header {
+  margin-bottom: 1rem;
+}
