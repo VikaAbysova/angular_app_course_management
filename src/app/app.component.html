@@ -1,0 +1,13 @@
+<app-header>
+  <app-logo></app-logo>
+</app-header>
+
+<app-breadcrumbs></app-breadcrumbs>
+
+<app-courses-page>
+  <app-course
+  *ngFor="let c of courses"
+  [course]="c"
+  ></app-course>
+  <app-footer></app-footer>
+</app-courses-page>
