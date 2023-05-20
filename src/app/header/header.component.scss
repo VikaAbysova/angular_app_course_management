@@ -34,13 +34,10 @@
   border: none;
   outline: none;
   color: white;
+  display: inline;
 }
 
-.login::placeholder {
-  color: white;
-}
-
-.user {
+.user-block {
   display: flex;
   justify-content: space-around;
 }

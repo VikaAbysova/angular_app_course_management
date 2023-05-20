@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./courses-page.component.scss'],
 })
 export class CoursesPageComponent {
+  searchCourse = '';
+
+  searchClick() {
+    console.log(this.searchCourse);
+  }
 }

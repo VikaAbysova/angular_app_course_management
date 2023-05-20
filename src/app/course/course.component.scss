@@ -4,8 +4,8 @@
   border-radius: 5px;
   background: white;
   display: flex;
-  justify-content: center;
-  gap: 2rem;
+  justify-content: space-between;
+  box-shadow: 0 0 10px 5px #aaa;
 }
 
 .btn-content {
@@ -18,22 +18,24 @@
 
 .fa-pen,
 .fa-trash,
-.calendar {
+.calendar,
+.time {
   font-size: small;
   color: #aaa;
 }
 
 .describe {
-  width: 80%;
+  width: 70%;
 }
 
-.course-header, .course-timing {
+.course-header,
+.time {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.course-timing {
+.time {
   gap: 2rem;
 }
 
