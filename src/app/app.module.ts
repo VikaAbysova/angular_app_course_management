@@ -10,6 +10,7 @@ import {CourseComponent} from './course/course.component';
 import {CoursesPageComponent} from './courses-page/courses-page.component';
 import {NgOptimizedImage} from "@angular/common";
 import { FormsModule } from '@angular/forms';
+import { LoadMoreBtnComponent } from './load-more-btn/load-more-btn.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     LogoComponent,
     BreadcrumbsComponent,
     CourseComponent,
-    CoursesPageComponent
+    CoursesPageComponent,
+    LoadMoreBtnComponent
   ],
   imports: [
     BrowserModule,

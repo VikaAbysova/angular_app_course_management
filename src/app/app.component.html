@@ -1,13 +1,22 @@
-<app-header>
-  <app-logo></app-logo>
-</app-header>
+<div class="app">
 
-<app-breadcrumbs></app-breadcrumbs>
+  <app-header>
+    <app-logo></app-logo>
+  </app-header>
 
-<app-courses-page>
+  <app-breadcrumbs></app-breadcrumbs>
+
+  <app-courses-page></app-courses-page>
+
   <app-course
-  *ngFor="let c of courses"
-  [course]="c"
+    *ngFor="let c of courses"
+    [course]="c"
+    (deleteId)="deleteCourse($event)"
   ></app-course>
+
+  <app-load-more-btn></app-load-more-btn>
+
   <app-footer></app-footer>
-</app-courses-page>
+
+</div>
+

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Course} from '../app.component';
 
 @Component({
@@ -6,7 +6,20 @@ import {Course} from '../app.component';
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss'],
 })
-export class CourseComponent {
+export class CourseComponent implements OnChanges, OnInit {
 
   @Input() course: Course;
+  @Output() deleteId: EventEmitter<string> = new EventEmitter<string>()
+
+  deleteCourse() {
+    this.deleteId.emit(this.course.id);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges', changes);
+  }
+
+  ngOnInit() {
+    console.log('ngOnInit in course')
+  }
 }

@@ -5,6 +5,7 @@
       <div class="time">
         <div>
           <i class="fa-regular fa-clock" style="color: #aaa"></i>
+          {{ course.durationMin}}
         </div>
         <div class="calendar">
           <i class="fa-solid fa-calendar-days" style="color: #aaa"></i>
@@ -20,7 +21,7 @@
       <i class="fa-solid fa-pen" style="color: #ffffff"></i>
       Edit
     </button>
-    <button class="btn btn-active">
+    <button class="btn btn-active" (click)="deleteCourse()">
       <i class="fa-solid fa-trash" style="color: #ffffff"></i>
       Delete
     </button>
