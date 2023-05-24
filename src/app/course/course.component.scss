@@ -1,7 +1,9 @@
+@import "../../styles_variables.scss";
+
 .course {
   margin: 1.5rem 5rem;
   padding: 2rem;
-  border-radius: 5px;
+  border-radius: $primary-border-radius;
   background: white;
   display: flex;
   justify-content: space-between;
@@ -21,7 +23,7 @@
 .calendar,
 .time {
   font-size: small;
-  color: #aaa;
+  color: $primary-icon-color;
 }
 
 .describe {

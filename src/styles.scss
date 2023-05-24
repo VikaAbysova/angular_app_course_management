@@ -1,3 +1,5 @@
+@import "./styles_variables.scss";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,20 +7,20 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
-  font-size: 1rem;
-  line-height: 2rem;
+  font-family: $primary-font-family;
+  font-size: $primary-font-size;
+  line-height: $primary-line-height;
   background-color: #fff;
-  color: #333;
+  color: $primary-color;
 }
 
 .btn {
   border: none;
-  color: white;
+  color: $primary-btn-color;
   cursor: pointer;
-  padding: 10px 0 10px 0;
-  width: 7rem;
-  font-size: 1rem;
-  background: #30b6dd;
-  border-radius: 5px;
+  padding: $primary-btn-padding;
+  width: $ptimary-btn-width;
+  font-size: $primary-font-size;
+  background: $primary-btn-background;
+  border-radius: $primary-border-radius;
 }
