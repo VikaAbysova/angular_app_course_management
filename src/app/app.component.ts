@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+  import { Component, OnInit } from '@angular/core';
 
 export interface UserEntity {
   id: string;
@@ -21,6 +21,10 @@ export interface Course {
 })
 export class AppComponent implements OnInit {
   courses: Course[];
+
+  deleteCourse(id: string) {
+    console.log('delete id', id);
+  }
 
   ngOnInit() {
     this.courses = [
@@ -51,12 +55,7 @@ export class AppComponent implements OnInit {
         creationDate: new Date(),
         durationMin: 40,
         description: 'Lorem ipsum dolor sit amet, consectetur adip',
-      }
+      },
     ];
-    console.log('onInit')
-  }
-
-  deleteCourse(id: string) {
-    console.log('delete id', id);
   }
 }

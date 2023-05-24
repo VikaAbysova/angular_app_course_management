@@ -1,11 +1,11 @@
-<article class="course">
+<article class="course" *ngIf="course">
   <div class="describe">
     <div class="course-header">
       <h1>{{ course.title }}</h1>
       <div class="time">
         <div>
           <i class="fa-regular fa-clock" style="color: #aaa"></i>
-          {{ course.durationMin}}
+          {{ course.durationMin }}
         </div>
         <div class="calendar">
           <i class="fa-solid fa-calendar-days" style="color: #aaa"></i>
