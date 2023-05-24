@@ -8,5 +8,10 @@
 }
 
 .title-bread {
+  list-style: none;
   font-size: medium;
+}
+
+.title-bread a {
+  text-decoration: none;
 }
