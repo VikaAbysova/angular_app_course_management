@@ -21,7 +21,7 @@
 
 .fa-magnifying-glass {
   position: absolute;
-  color: $primary-icon-color;
+  color: $primary-icon-dark-color;
   margin: 4rem 6.4rem;
   font-size: larger;
 }
@@ -51,4 +51,5 @@
 .fa-plus {
   padding-right: .5rem;
   font-size: larger;
+  color: $primary-icon-light-color;
 }
