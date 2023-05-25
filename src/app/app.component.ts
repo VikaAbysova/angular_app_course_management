@@ -38,4 +38,4 @@ export class AppComponent {
     },
   ];
 }
-export { Course };
+// export { Course };
