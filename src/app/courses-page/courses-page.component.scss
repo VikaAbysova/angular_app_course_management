@@ -1,28 +1,33 @@
+<<<<<<< HEAD
+=======
+@import "../../styles_variables.scss";
+
+>>>>>>> components
 .input-search {
   padding: 15px 20px 15px 60px;
   margin: 3rem 0.5rem 3rem 5rem;
   border: 1px solid rgba(169, 169, 169, 0.5);
   outline: none;
   width: 30rem;
-  font-size: 1rem;
-  color: #333;
-  border-radius: 5px;
+  font-size: $primary-font-size;
+  color: $primary-color;
+  border-radius: $primary-border-radius;
 }
 
 .input-search:focus {
-  box-shadow: 0 0 3px 0 #aaa;
+  box-shadow: $primary-box-shadow-input;
 }
 
 .fa-magnifying-glass {
   position: absolute;
-  color: #aaa;
+  color: $primary-icon-dark-color;
   margin: 4rem 6.4rem;
   font-size: larger;
 }
 
 .input-search::placeholder {
   color: rgba(169, 169, 169, 0.5);
-  font-size: 1rem;
+  font-size: $primary-font-size;
 }
 
 .btn-search {
@@ -45,4 +50,5 @@
 .fa-plus {
   padding-right: .5rem;
   font-size: larger;
+  color: $primary-icon-light-color;
 }

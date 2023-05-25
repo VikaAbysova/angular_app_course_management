@@ -1,24 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-
-export interface UserEntity {
-  id: string;
-  firstName: string;
-  lastName: string;
-}
-
-export interface Course {
-  id: string;
-  title: string;
-  creationDate: Date;
-  durationMin: number;
-  description: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { Course } from './model/course.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
+
 export class AppComponent implements OnInit {
   courses: Course[];
 
@@ -51,9 +39,9 @@ export class AppComponent implements OnInit {
         creationDate: new Date(),
         durationMin: 40,
         description: 'Lorem ipsum dolor sit amet, consectetur adip',
-      }
+      },
     ];
-    console.log('onInit')
+    console.log('onInit');
   }
 
   deleteCourse(id: string) {
