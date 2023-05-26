@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { LoadMoreBtnComponent } from './load-more-btn/load-more-btn.component';
 import { LogoComponent } from './logo/logo.component';
+import { CoursesSearchComponent } from './courses-search/courses-search.component';
 
 describe('AppComponent', () => {
   beforeEach(() =>
@@ -20,6 +21,7 @@ describe('AppComponent', () => {
         CourseComponent,
         CoursesPageComponent,
         LoadMoreBtnComponent,
+        CoursesSearchComponent
       ],
     })
   );

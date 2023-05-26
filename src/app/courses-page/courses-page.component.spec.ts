@@ -20,4 +20,10 @@ describe('CoursesPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should have <button> with "Add course"', () => {
+  //   const pageElement: HTMLElement = fixture.nativeElement;
+  //   const button = pageElement.querySelector('button');
+  //   expect(button.textContent).toEqual('Add course');
+  // })
 });
