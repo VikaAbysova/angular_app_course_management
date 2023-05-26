@@ -1,18 +1,5 @@
 import { Component } from '@angular/core';
-
-export interface UserEntity {
-  id: string;
-  firstName: string;
-  lastName: string;
-}
-
-export interface Course {
-  id: string;
-  title: string;
-  creationDate: Date;
-  durationMin: number;
-  description: string;
-}
+import { Course } from './model/course.model';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +20,22 @@ export class AppComponent {
       title: 'Course 2',
       creationDate: new Date(),
       durationMin: 20,
-      description: 'Lorem ipsum dolor sit amet, consectetur adip yy',
+      description: ' Lorem ipsum dolor sit amet,',
+    },
+    {
+      id: '3',
+      title: 'Course 3',
+      creationDate: new Date(),
+      durationMin: 30,
+      description: 'Lorem ipsum dolor sit amet, consectetur adip',
+    },
+    {
+      id: '4',
+      title: 'Course 4',
+      creationDate: new Date(),
+      durationMin: 40,
+      description: 'Lorem ipsum dolor sit amet, consectetur adip',
     },
   ];
 }
+// export { Course };

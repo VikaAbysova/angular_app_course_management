@@ -9,6 +9,7 @@ import {BreadcrumbsComponent} from './breadcrumbs/breadcrumbs.component';
 import {CourseComponent} from './course/course.component';
 import {CoursesPageComponent} from './courses-page/courses-page.component';
 import {NgOptimizedImage} from "@angular/common";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import {NgOptimizedImage} from "@angular/common";
   ],
   imports: [
     BrowserModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    FormsModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

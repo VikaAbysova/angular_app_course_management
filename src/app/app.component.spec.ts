@@ -1,10 +1,15 @@
-// import { TestBed } from '@angular/core/testing';
-// import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
+import { TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
 
-// describe('AppComponent', () => {
-//   beforeEach(() => TestBed.configureTestingModule({
-//     declarations: [AppComponent]
-//   }));
+describe('AppComponent', () => {
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      declarations: [AppComponent],
+      imports: [FormsModule],
+    })
+  );
+});
 
 //   it('should create the app', () => {
 //     const fixture = TestBed.createComponent(AppComponent);

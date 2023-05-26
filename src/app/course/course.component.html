@@ -2,12 +2,12 @@
   <div class="describe">
     <div class="course-header">
       <h1>{{ course.title }}</h1>
-      <div class="course-timing">
+      <div class="time">
         <div>
-          <i class="fa-regular fa-clock" style="color: #aaa"></i>
+          <i class="fa-regular fa-clock"></i>
         </div>
         <div class="calendar">
-          <i class="fa-solid fa-calendar-days" style="color: #aaa"></i>
+          <i class="fa-solid fa-calendar-days"></i>
           {{ course.creationDate | date : "d MMM, y" }}
         </div>
       </div>
@@ -17,11 +17,11 @@
 
   <div class="btn-content">
     <button class="btn btn-active">
-      <i class="fa-solid fa-pen" style="color: #ffffff"></i>
+      <i class="fa-solid fa-pen"></i>
       Edit
     </button>
     <button class="btn btn-active">
-      <i class="fa-solid fa-trash" style="color: #ffffff"></i>
+      <i class="fa-solid fa-trash"></i>
       Delete
     </button>
   </div>
