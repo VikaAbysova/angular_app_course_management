@@ -1,15 +1,17 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {AppComponent} from './app.component';
-import {HeaderComponent} from './header/header.component';
-import {FooterComponent} from './footer/footer.component';
-import {LogoComponent} from './logo/logo.component';
-import {BreadcrumbsComponent} from './breadcrumbs/breadcrumbs.component';
-import {CourseComponent} from './course/course.component';
-import {CoursesPageComponent} from './courses-page/courses-page.component';
-import {NgOptimizedImage} from "@angular/common";
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { LogoComponent } from './logo/logo.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { CourseComponent } from './course/course.component';
+import { CoursesPageComponent } from './courses-page/courses-page.component';
+import { NgOptimizedImage } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { LoadMoreBtnComponent } from './load-more-btn/load-more-btn.component';
+import { CoursesSearchComponent } from './courses-search/courses-search.component';
 
 @NgModule({
   declarations: [
@@ -19,16 +21,12 @@ import { FormsModule } from '@angular/forms';
     LogoComponent,
     BreadcrumbsComponent,
     CourseComponent,
-    CoursesPageComponent
+    CoursesPageComponent,
+    LoadMoreBtnComponent,
+    CoursesSearchComponent,
   ],
-  imports: [
-    BrowserModule,
-    NgOptimizedImage,
-    FormsModule,
-  
-  ],
+  imports: [BrowserModule, NgOptimizedImage, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
