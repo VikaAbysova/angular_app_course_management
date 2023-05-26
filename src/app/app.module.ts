@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -11,6 +10,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { CourseComponent } from './course/course.component';
 import { CoursesPageComponent } from './courses-page/courses-page.component';
 import { LoadMoreBtnComponent } from './load-more-btn/load-more-btn.component';
+import { CoursesSearchComponent } from './courses-search/courses-search.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +22,10 @@ import { LoadMoreBtnComponent } from './load-more-btn/load-more-btn.component';
     CourseComponent,
     CoursesPageComponent,
     LoadMoreBtnComponent,
+    CoursesSearchComponent,
   ],
-  imports: [BrowserModule, CommonModule, FormsModule],
+  imports: [BrowserModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
