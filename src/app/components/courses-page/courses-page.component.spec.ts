@@ -1,3 +1,4 @@
+import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesPageComponent } from './courses-page.component';
@@ -38,8 +39,9 @@ describe('CoursesPageComponent', () => {
   });
 
   it('should have <button> with "Add course"', () => {
-    const button: HTMLElement = fixture.nativeElement.querySelector('button');
-    expect(button.textContent).toContain('Add course');
+    const button = fixture.debugElement.query(By.css('.btn-plus'));
+    const btnContent = button.nativeElement.textContent;
+    expect(btnContent).toContain('Add course');
   });
 
   it('should show in console log "delete id 3" when deleteCourse method is called whith "3"', () => {
@@ -70,7 +72,7 @@ describe('CoursesPageComponent', () => {
   it('should render list of courses using *ngFor directive', () => {
     component.courses = mockCoursesList;
     fixture.detectChanges();
-    const coursesList:[] = fixture.nativeElement.querySelectorAll('app-course');
+    const coursesList = fixture.debugElement.queryAll(By.css('app-course'));
     expect(mockCoursesList.length).toBe(coursesList.length);
   });
 

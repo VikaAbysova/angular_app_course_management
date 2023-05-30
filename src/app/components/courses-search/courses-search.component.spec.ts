@@ -1,3 +1,4 @@
+import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -27,32 +28,32 @@ describe('CoursesSearchComponent', () => {
     component.searchCourse = 'test value';
     fixture.detectChanges();
     await fixture.whenStable();
-    const inputElement = fixture.nativeElement.querySelector('.input-search');
-    expect(inputElement.value).toBe('test value');
+    const inputElement = fixture.debugElement.query(By.css('.input-search'));
+    expect(inputElement.nativeElement.value).toBe('test value');
   });
 
   it('should update searchCourse value when setting input value', () => {
-    const inputElement = fixture.nativeElement.querySelector('.input-search');
-    inputElement.value = 'test value';
-    inputElement.dispatchEvent(new Event('input'));
+    const inputElement = fixture.debugElement.query(By.css('.input-search'));
+    inputElement.nativeElement.value = 'test value';
+    inputElement.nativeElement.dispatchEvent(new Event('input'));
     expect(component.searchCourse).toBe('test value');
   });
 
   it('should called function when button clicked', () => {
-    const button = fixture.nativeElement.querySelector('.btn-search');
-    expect(button.textContent).toContain('Search');
+    const button = fixture.debugElement.query(By.css('.btn-search'));
+    expect(button.nativeElement.textContent).toContain('Search');
     spyOn(component, 'searchClick');
-    button.click();
+    button.nativeElement.click();
     expect(component.searchClick).toHaveBeenCalled();
   });
 
   it('should display input value in console log when changing input value', () => {
-    const inputElement = fixture.nativeElement.querySelector('.input-search');
-    const button = fixture.nativeElement.querySelector('.btn-search');
+    const inputElement = fixture.debugElement.query(By.css('.input-search'));
+    const button = fixture.debugElement.query(By.css('.btn-search'));
     spyOn(console, 'log');
-    inputElement.value = 'test value';
-    inputElement.dispatchEvent(new Event('input'));
-    button.click();
+    inputElement.nativeElement.value = 'test value';
+    inputElement.nativeElement.dispatchEvent(new Event('input'));
+    button.nativeElement.click();
     expect(console.log).toHaveBeenCalledWith('test value');
   });
 });

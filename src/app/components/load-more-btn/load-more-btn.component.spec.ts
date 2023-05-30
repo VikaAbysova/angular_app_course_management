@@ -1,3 +1,4 @@
+import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoadMoreBtnComponent } from './load-more-btn.component';
@@ -20,10 +21,10 @@ describe('LoadMoreBtnComponent', () => {
   });
 
   it('should display "Load More.." in console.log when button is clicked', () => {
-    const button = fixture.nativeElement.querySelector('.load-btn');
+    const button = fixture.debugElement.query(By.css('.load-btn'));
     expect(button).toBeTruthy();
     spyOn(console, 'log');
-    button.click();
+    button.nativeElement.click();
     expect(console.log).toHaveBeenCalledWith('Load More..');
   });
 });

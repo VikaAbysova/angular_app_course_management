@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Course} from '../../interfaces/Course.interface';
+import {Course} from '../../interfaces/сourse.interface';
 
 @Component({
   selector: 'app-course',
@@ -10,6 +10,7 @@ export class CourseComponent {
 
   @Input() course: Course;
   @Output() deleteId: EventEmitter<string> = new EventEmitter<string>()
+
 
   deleteCourse() {
     this.deleteId.emit(this.course.id);

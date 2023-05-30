@@ -1,6 +1,6 @@
-import { coursesList } from '../../data/data-courses';
+import { coursesList } from '../../mocks/courses.mock';
 import { Component, OnInit } from '@angular/core';
-import { Course } from '../../interfaces/Course.interface';
+import { Course } from '../../interfaces/сourse.interface';
 
 @Component({
   selector: 'app-courses-page',
