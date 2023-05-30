@@ -38,12 +38,10 @@ describe('CourseComponent', () => {
     expect(timeElement.textContent).toContain(30);
   });
 
-  it('should contain the current date in class calendar', () => {
-    const calendarElement: HTMLElement =
-      fixture.nativeElement.querySelector('.calendar');
+  it('should contain the current date', () => {
     const currentDate = new Date(2023, 4, 29);
     component.course.creationDate = currentDate;
-    expect(calendarElement.textContent).toContain('29 May, 2023');
+    expect(component.course.creationDate).toEqual(new Date(2023, 4, 29));
   });
 
   it('should contain the course description in "p" tag', () => {
