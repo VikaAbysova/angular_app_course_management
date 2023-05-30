@@ -9,7 +9,7 @@ describe('CourseComponent', () => {
   const courseItem = {
     id: '1',
     title: 'Angular',
-    creationDate: new Date(),
+    creationDate: new Date(2023, 4, 29),
     durationMin: 30,
     description: 'description1',
   };
@@ -41,8 +41,6 @@ describe('CourseComponent', () => {
   });
 
   it('should contain the current date', () => {
-    component.course.creationDate = new Date(2023, 4, 29);
-    fixture.detectChanges();
     const dateElement = fixture.debugElement.query(By.css('.calendar'));
     const dateContent = dateElement.nativeElement.textContent;
     expect(dateContent).toContain('29 May, 2023');
