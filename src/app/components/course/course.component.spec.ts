@@ -4,7 +4,7 @@ import { CourseComponent } from './course.component';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 
-describe('Class test approach', () => {
+describe('CourseComponent. Class test approach', () => {
   it('raises the deleteId event when function called', () => {
     const component = new CourseComponent();
     const course: Course = {
@@ -23,7 +23,7 @@ describe('Class test approach', () => {
   });
 });
 
-describe('Stand-alone approach', () => {
+describe('CourseComponent. Stand-alone approach', () => {
   let component: CourseComponent;
   let fixture: ComponentFixture<CourseComponent>;
 
@@ -93,8 +93,7 @@ describe('Stand-alone approach', () => {
   });
 });
 
-describe('Test-host approach', () => {
-  let component: CourseComponent;
+describe('CourseComponent. Test-host approach', () => {
   let hostComponent: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
   @Component({
@@ -127,9 +126,6 @@ describe('Test-host approach', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HostComponent);
     hostComponent = fixture.componentInstance;
-    component = fixture.debugElement.query(
-      By.directive(CourseComponent)
-    ).componentInstance;
     fixture.detectChanges();
   });
 
@@ -142,7 +138,7 @@ describe('Test-host approach', () => {
 
   it('should emit deleteId event when button clicked', () => {
     const button = fixture.debugElement.query(By.css('.btn-delete'));
-    const spyEmit = spyOn(component.deleteId, 'emit');
+    const spyEmit = spyOn(hostComponent, 'deleteCourse');
     button.nativeElement.click();
     expect(spyEmit).toHaveBeenCalledWith(hostComponent.course.id);
   });
