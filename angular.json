@@ -24,7 +24,10 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss", "src/assets/styles/fonts.css", "src/styles_variables.scss"],
+            "styles": ["src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
             "scripts": [
               {
                 "input": "src/assets/scripts/fontawesome.js"
@@ -83,7 +86,8 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss", "src/styles_variables.scss"],
+            "codeCoverage": true,
+            "styles": ["src/styles.scss", "src/styles/_variables.scss"],
             "scripts": []
           }
         },
