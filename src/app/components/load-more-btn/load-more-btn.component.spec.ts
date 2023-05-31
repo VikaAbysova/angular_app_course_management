@@ -20,7 +20,7 @@ describe('LoadMoreBtnComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display "Load More.." in console.log when button is clicked', () => {
+  it('should display "Load More.." in console when button clicked', () => {
     const button = fixture.debugElement.query(By.css('.load-btn'));
     expect(button).toBeTruthy();
     spyOn(console, 'log');

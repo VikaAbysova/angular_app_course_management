@@ -12,7 +12,7 @@ export class CourseComponent {
   @Output() deleteId: EventEmitter<string> = new EventEmitter<string>()
 
 
-  deleteCourse() {
+  emitDeleteId() {
     this.deleteId.emit(this.course.id);
   }
 }

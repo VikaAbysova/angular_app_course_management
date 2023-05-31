@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesPageComponent } from './courses-page.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { coursesList } from 'src/app/mocks/courses.mock';
 
 describe('CoursesPageComponent', () => {
   const mockCoursesList = [
@@ -38,20 +39,20 @@ describe('CoursesPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have <button> with "Add course"', () => {
+  it('should have button with "Add course"', () => {
     const button = fixture.debugElement.query(By.css('.btn-plus'));
     const btnContent = button.nativeElement.textContent;
     expect(btnContent).toContain('Add course');
   });
 
-  it('should show in console log "delete id 3" when deleteCourse method is called whith "3"', () => {
+  it('should show correct id when function called', () => {
     spyOn(console, 'log');
     const id = '3';
     component.deleteCourse(id);
     expect(console.log).toHaveBeenCalledWith('delete id', id);
   });
 
-  it('should not change courses when deleteCourse method is called', () => {
+  it('should not change courses when deleteCourse method called', () => {
     const id = '1';
     component.courses = mockCoursesList;
     component.deleteCourse(id);
@@ -77,7 +78,7 @@ describe('CoursesPageComponent', () => {
   });
 
   it('should initialize property courses when ngOnInit method called', () => {
-    component.ngOnInit(mockCoursesList);
-    expect(component.courses).toEqual(mockCoursesList);
+    component.ngOnInit();
+    expect(component.courses).toEqual(coursesList);
   });
 });

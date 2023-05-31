@@ -1,8 +1,29 @@
+import { Course } from './../../interfaces/сourse.interface';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseComponent } from './course.component';
 import { By } from '@angular/platform-browser';
+import { Component } from '@angular/core';
 
-describe('CourseComponent', () => {
+describe('Class test approach', () => {
+  it('raises the deleteId event when function called', () => {
+    const component = new CourseComponent();
+    const course: Course = {
+      id: '1',
+      title: 'Angular',
+      creationDate: new Date(),
+      durationMin: 30,
+      description: 'description1',
+    };
+    component.course = course;
+
+    let emitedId: string | undefined;
+    component.deleteId.subscribe((id: string) => (emitedId = id));
+    component.emitDeleteId();
+    expect(emitedId).toBe(course.id);
+  });
+});
+
+describe('Stand-alone approach', () => {
   let component: CourseComponent;
   let fixture: ComponentFixture<CourseComponent>;
 
@@ -28,53 +49,101 @@ describe('CourseComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should contain the course title in "title" class', () => {
+  it('should contain course title', () => {
     const titleElement = fixture.debugElement.query(By.css('.title'));
     const titleContent = titleElement.nativeElement.textContent;
     expect(titleContent).toContain('Angular');
   });
 
-  it('should contain the course durationMin in class "time"', () => {
+  it('should contain course durationMin', () => {
     const timeElement = fixture.debugElement.query(By.css('.time'));
     const timeContent = timeElement.nativeElement.textContent;
     expect(timeContent).toContain(30);
   });
 
-  it('should contain the current date', () => {
+  it('should contain current date', () => {
     const dateElement = fixture.debugElement.query(By.css('.calendar'));
     const dateContent = dateElement.nativeElement.textContent;
     expect(dateContent).toContain('29 May, 2023');
   });
 
-  it('should contain the course description in class "description"', () => {
+  it('should contain course description', () => {
     const pElement = fixture.debugElement.query(By.css('.description'));
     const pContent = pElement.nativeElement.textContent;
     expect(pContent).toContain('description1');
   });
 
-  it('should contain the <button> "Edit"', () => {
+  it('should contain button "Edit"', () => {
     const button = fixture.debugElement.query(By.css('.btn-edit'));
     const btnContent = button.nativeElement.textContent;
     expect(btnContent).toContain('Edit');
   });
 
-  it('should contain the <button> "Delete"', () => {
+  it('should contain button "Delete"', () => {
     const button = fixture.debugElement.query(By.css('.btn-delete'));
     const btnContent = button.nativeElement.textContent;
     expect(btnContent).toContain('Delete');
   });
 
-  it('should emit course id when delete clicked', () => {
+  it('should call function when delete button clicked', () => {
     const button = fixture.debugElement.query(By.css('.btn-delete'));
-    spyOn(component.deleteId, 'emit');
+    spyOn(component, 'emitDeleteId');
     button.nativeElement.click();
-    expect(component.deleteId.emit).toHaveBeenCalledWith('1');
+    expect(component.emitDeleteId).toHaveBeenCalled();
+  });
+});
+
+describe('Test-host approach', () => {
+  let component: CourseComponent;
+  let hostComponent: HostComponent;
+  let fixture: ComponentFixture<HostComponent>;
+  @Component({
+    template: `
+      <app-course
+        [course]="course"
+        (deleteId)="deleteCourse($event)"
+      ></app-course>
+    `,
+  })
+  class HostComponent {
+    course: Course = {
+      id: '2',
+      title: 'Hello',
+      creationDate: new Date(),
+      durationMin: 30,
+      description: 'description2',
+    };
+    deleteCourse(id: string) {
+      console.log('delete id', id);
+    }
+  }
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [HostComponent, CourseComponent],
+    }).compileComponents();
   });
 
-  it('should called the function by clicking the delete button', () => {
+  beforeEach(() => {
+    fixture = TestBed.createComponent(HostComponent);
+    hostComponent = fixture.componentInstance;
+    component = fixture.debugElement.query(
+      By.directive(CourseComponent)
+    ).componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should display correct title from host component', () => {
+    const title = fixture.debugElement.query(By.css('.title'));
+    expect(title.nativeElement.textContent).toContain(
+      hostComponent.course.title
+    );
+  });
+
+  it('should emit deleteId event when button clicked', () => {
     const button = fixture.debugElement.query(By.css('.btn-delete'));
-    spyOn(component, 'deleteCourse');
+    const spyEmit = spyOn(component.deleteId, 'emit');
     button.nativeElement.click();
-    expect(component.deleteCourse).toHaveBeenCalled();
+    expect(spyEmit).toHaveBeenCalledWith(hostComponent.course.id);
   });
 });

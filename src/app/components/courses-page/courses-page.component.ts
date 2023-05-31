@@ -10,8 +10,8 @@ import { Course } from '../../interfaces/сourse.interface';
 export class CoursesPageComponent implements OnInit {
   courses: Course[];
 
-  ngOnInit(courses = coursesList) {
-    this.courses = courses;
+  ngOnInit() {
+    this.courses = coursesList;
   }
 
   deleteCourse(id: string) {

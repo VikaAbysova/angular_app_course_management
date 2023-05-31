@@ -24,7 +24,7 @@ describe('CoursesSearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should update input value after changing the searchCourse value', async () => {
+  it('should update input value when change searchCourse value', async () => {
     component.searchCourse = 'test value';
     fixture.detectChanges();
     await fixture.whenStable();
@@ -32,7 +32,7 @@ describe('CoursesSearchComponent', () => {
     expect(inputElement.nativeElement.value).toBe('test value');
   });
 
-  it('should update searchCourse value when setting input value', () => {
+  it('should update searchCourse value when change input value', () => {
     const inputElement = fixture.debugElement.query(By.css('.input-search'));
     inputElement.nativeElement.value = 'test value';
     inputElement.nativeElement.dispatchEvent(new Event('input'));
@@ -47,7 +47,7 @@ describe('CoursesSearchComponent', () => {
     expect(component.searchClick).toHaveBeenCalled();
   });
 
-  it('should display input value in console log when changing input value', () => {
+  it('should display input value in console log when change input value', () => {
     const inputElement = fixture.debugElement.query(By.css('.input-search'));
     const button = fixture.debugElement.query(By.css('.btn-search'));
     spyOn(console, 'log');
