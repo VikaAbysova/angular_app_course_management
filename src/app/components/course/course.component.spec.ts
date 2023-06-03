@@ -1,3 +1,4 @@
+import { FreshBorderDirective } from 'src/app/directives/fresh-border.directive';
 import { Course } from './../../interfaces/сourse.interface';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseComponent } from './course.component';
@@ -5,6 +6,7 @@ import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
 
 describe('CourseComponent. Class test approach', () => {
+
   it('raises the deleteId event when function called', () => {
     const component = new CourseComponent();
     const course: Course = {
@@ -37,7 +39,7 @@ describe('CourseComponent. Stand-alone approach', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CourseComponent],
+      declarations: [CourseComponent, FreshBorderDirective],
     });
     fixture = TestBed.createComponent(CourseComponent);
     component = fixture.componentInstance;
@@ -119,7 +121,7 @@ describe('CourseComponent. Test-host approach', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HostComponent, CourseComponent],
+      declarations: [HostComponent, CourseComponent, FreshBorderDirective],
     }).compileComponents();
   });
 

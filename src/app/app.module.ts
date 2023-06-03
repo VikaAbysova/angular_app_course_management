@@ -11,6 +11,7 @@ import { CourseComponent } from './components/course/course.component';
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { LoadMoreBtnComponent } from './components/load-more-btn/load-more-btn.component';
 import { CoursesSearchComponent } from './components/courses-search/courses-search.component';
+import { FreshBorderDirective } from './directives/fresh-border.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CoursesSearchComponent } from './components/courses-search/courses-sear
     CoursesPageComponent,
     LoadMoreBtnComponent,
     CoursesSearchComponent,
+    FreshBorderDirective,
   ],
   imports: [BrowserModule, FormsModule],
   providers: [],
