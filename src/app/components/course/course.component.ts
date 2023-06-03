@@ -4,7 +4,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { Course } from '../../interfaces/сourse.interface';
+import { Course } from '../../interfaces/course.interface';
 
 @Component({
   selector: 'app-course',

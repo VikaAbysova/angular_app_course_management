@@ -1,12 +1,7 @@
-import { By } from '@angular/platform-browser';
-import {
-  DebugElement,
-  Component,
-  NO_ERRORS_SCHEMA,
-  ElementRef,
-} from '@angular/core';
-import { FreshBorderDirective } from './fresh-border.directive';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {Component, DebugElement, ElementRef, NO_ERRORS_SCHEMA,} from '@angular/core';
+import {FreshBorderDirective} from './course-relevance.directive';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 @Component({
   template: `
@@ -48,8 +43,8 @@ describe('FreshBorderDirective', () => {
     component.creationDate.setDate(currentDate.getDate() + 1);
     fixture.detectChanges();
     const elP: DebugElement = fixture.debugElement.query(By.css('p'));
-    const p = elP.nativeElement;
-    expect(p.style.borderColor).not.toBe('blue');
+    const p: HTMLElement = elP.nativeElement;
+    expect(p.classList.contains('blue-border')).toBe(false);
   });
 
   it('should color course in green border when creation date is within last 14 days', () => {
@@ -57,7 +52,7 @@ describe('FreshBorderDirective', () => {
     fixture.detectChanges();
     const elDiv: DebugElement = fixture.debugElement.query(By.css('.course'));
     const div: HTMLElement = elDiv.nativeElement;
-    expect(div.style.borderColor).toBe('green');
+    expect(div.classList.contains('green-border')).toBe(true);
   });
 
   it('should color course in blue border when creation date is future', () => {
@@ -65,7 +60,7 @@ describe('FreshBorderDirective', () => {
     fixture.detectChanges();
     const elDiv: DebugElement = fixture.debugElement.query(By.css('.course'));
     const div: HTMLElement = elDiv.nativeElement;
-    expect(div.style.borderColor).toBe('blue');
+    expect(div.classList.contains('blue-border')).toBe(true);
   });
 
   it('should not change color course in other case', () => {
@@ -73,6 +68,8 @@ describe('FreshBorderDirective', () => {
     fixture.detectChanges();
     const elDiv: DebugElement = fixture.debugElement.query(By.css('.course'));
     const div: HTMLElement = elDiv.nativeElement;
-    expect(div.style.borderColor).toBe('');
+    const greenBorderClass = div.classList.contains('green-border');
+    const blueBorderClass = div.classList.contains('blue-border');
+    expect(greenBorderClass && blueBorderClass).toBe(false);
   });
 });

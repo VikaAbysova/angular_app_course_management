@@ -1,9 +1,9 @@
-import { FreshBorderDirective } from 'src/app/directives/fresh-border.directive';
-import { Course } from './../../interfaces/сourse.interface';
+import { FreshBorderDirective } from 'src/app/directives/course-relevance.directive';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CourseComponent } from './course.component';
 import { By } from '@angular/platform-browser';
 import { Component } from '@angular/core';
+import { Course } from 'src/app/interfaces/course.interface';
 
 describe('CourseComponent. Class test approach', () => {
 
