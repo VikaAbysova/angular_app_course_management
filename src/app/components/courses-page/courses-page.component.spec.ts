@@ -25,7 +25,7 @@ describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
   let fixture: ComponentFixture<CoursesPageComponent>;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [CoursesPageComponent],
       schemas: [NO_ERRORS_SCHEMA],
@@ -80,5 +80,22 @@ describe('CoursesPageComponent', () => {
   it('should initialize property courses when ngOnInit method called', () => {
     component.ngOnInit();
     expect(component.courses).toEqual(coursesList);
+  });
+
+  it("shouldn't render message element when courses exist", () => {
+    component.courses = coursesList;
+    fixture.detectChanges();
+    const messageEl = fixture.debugElement.query(By.css('.message'));
+    expect(messageEl).toBeNull();
+  });
+
+  it('should render message when courses is empty', () => {
+    component.courses = [];
+    fixture.detectChanges();
+    const messageEl = fixture.debugElement.query(By.css('.message'));
+    expect(messageEl).toBeTruthy();
+    expect(messageEl.nativeElement.textContent).toBe(
+      'NO DATA, FEEL FREE TO ADD NEW COURSE'
+    );
   });
 });

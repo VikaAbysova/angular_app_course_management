@@ -23,7 +23,7 @@
 }
 
 .input-search::placeholder {
-  color: rgba(169, 169, 169, 0.5);
+  color: $primary-input-placeholder;
   font-size: $primary-font-size;
 }
 

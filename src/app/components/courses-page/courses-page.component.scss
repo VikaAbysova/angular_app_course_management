@@ -3,7 +3,6 @@
 .adding-section {
   display: flex;
   justify-content: space-between;
-
 }
 
 .btn-plus {
@@ -17,4 +16,13 @@
   padding-right: 0.5rem;
   font-size: larger;
   color: $primary-icon-light-color;
+}
+
+.message {
+  text-align: center;
+  font-weight: bold;
+  margin: $primary-box-margin;
+  border-radius: $primary-border-radius;
+  background-color: white;
+  box-shadow: $primary-box-shadow;
 }
