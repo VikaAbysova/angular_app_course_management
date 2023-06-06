@@ -1,5 +1,5 @@
 import {By} from '@angular/platform-browser';
-import {Component, DebugElement, ElementRef, NO_ERRORS_SCHEMA,} from '@angular/core';
+import {Component, DebugElement, NO_ERRORS_SCHEMA,} from '@angular/core';
 import {FreshBorderDirective} from './course-relevance.directive';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
@@ -32,11 +32,6 @@ describe('FreshBorderDirective', () => {
     const currentDateCourse = currentDate;
     jasmine.clock().mockDate(currentDateCourse);
     component.creationDate = currentDateCourse;
-  });
-
-  it('should create an instance', () => {
-    const directive = new FreshBorderDirective(new ElementRef(null));
-    expect(directive).toBeTruthy();
   });
 
   it('should not color p element in blue', () => {

@@ -50,3 +50,15 @@
 .blue-border {
   border: 3px solid blue;
 }
+
+.icon-star::after {
+  content: '\f005';
+  font-family: $primary-font-family-icon;
+  font-size: medium;
+  color: #f1e904;
+  margin-left: .5rem;
+}
+
+.bg-color {
+  background-color: rgb(220, 248, 246);
+}

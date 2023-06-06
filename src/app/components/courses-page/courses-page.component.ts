@@ -1,6 +1,7 @@
 import { coursesList } from '../../mocks/courses.mock';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../../interfaces/course.interface';
+import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 
 @Component({
   selector: 'app-courses-page',
@@ -8,10 +9,16 @@ import { Course } from '../../interfaces/course.interface';
   styleUrls: ['./courses-page.component.scss'],
 })
 export class CoursesPageComponent implements OnInit {
+  constructor(private orderByPipe: OrderByPipe) {}
   courses: Course[];
 
-  ngOnInit() {
-    this.courses = coursesList;
+  ngOnInit(): void {
+    const courses = coursesList;
+    this.courses = this.orderByPipe.transform(courses);
+  }
+
+  applyFilter(filteredCourses: Course[]): void {
+    this.courses = filteredCourses;
   }
 
   deleteCourse(id: string) {

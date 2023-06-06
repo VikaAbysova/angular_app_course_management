@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
-import { ONE_DAY, TWO_WEEKS } from '../constants/directive.constants';
+import { ONE_DAY, TWO_WEEKS } from '../constants/timestamps.consts';
 
 @Directive({
   selector: '[appFreshBorder]',
@@ -11,16 +11,16 @@ export class FreshBorderDirective implements OnChanges {
 
   ngOnChanges(): void {
     const currentDate = new Date().getTime();
-    const twoWeekDate = currentDate - TWO_WEEKS;
+    const twoWeeksAgo = currentDate - TWO_WEEKS;
     const creationCourseDate = this.creationDate.getTime();
     const diff = currentDate - creationCourseDate;
 
     const actualCourseDate =
       diff < ONE_DAY && diff > 0 ? currentDate : creationCourseDate;
     const actualTwoWeekDate =
-      twoWeekDate - creationCourseDate < ONE_DAY
+    twoWeeksAgo - creationCourseDate < ONE_DAY
         ? creationCourseDate
-        : twoWeekDate;
+        : twoWeeksAgo;
 
     if (actualCourseDate < currentDate && actualCourseDate >= actualTwoWeekDate) {
       this.el.nativeElement.classList.add('green-border');
