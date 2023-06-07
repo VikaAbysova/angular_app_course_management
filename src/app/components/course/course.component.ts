@@ -15,7 +15,7 @@ import { DurationPipe } from 'src/app/pipes/duration.pipe';
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss'],
 })
-export class CourseComponent implements OnInit {
+export class CourseComponent implements OnChanges {
   constructor(private durationPipe: DurationPipe) {}
 
   @Input() course: Course;
@@ -25,8 +25,8 @@ export class CourseComponent implements OnInit {
     this.deleteId.emit(this.course.id);
   }
 
-  ngOnInit(): void {
-    this.course.durationMin  = this.durationPipe.transform(
+  ngOnChanges(): void {
+    this.course.durationMin = this.durationPipe.transform(
       this.course.durationMin
     );
   }

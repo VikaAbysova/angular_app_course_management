@@ -99,7 +99,7 @@ describe('CourseComponent. Stand-alone approach', () => {
   });
 
   it('should display icon star if topRated is true', () => {
-    const spanEl: DebugElement = fixture.debugElement.query(By.css('span'));
+    const spanEl: DebugElement = fixture.debugElement.query(By.css('.title'));
     expect(spanEl.nativeElement.classList).toContain('icon-star');
   });
 
@@ -107,7 +107,7 @@ describe('CourseComponent. Stand-alone approach', () => {
     const courseEl: DebugElement = fixture.debugElement.query(
       By.css('.course')
     );
-    expect(courseEl.nativeElement.classList).toContain('bg-color');
+    expect(courseEl.nativeElement.classList).toContain('background-topRated');
   });
 
   it('should not display icon star if topRated is false', () => {
@@ -121,7 +121,7 @@ describe('CourseComponent. Stand-alone approach', () => {
     };
     component.course = courseRatedFalse;
     fixture.detectChanges();
-    const spanEl: DebugElement = fixture.debugElement.query(By.css('span'));
+    const spanEl: DebugElement = fixture.debugElement.query(By.css('.title'));
     expect(spanEl.nativeElement.classList).not.toContain('icon-star');
   });
 

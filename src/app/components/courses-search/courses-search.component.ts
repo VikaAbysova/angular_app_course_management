@@ -1,6 +1,3 @@
-import { coursesList } from './../../mocks/courses.mock';
-import { Course } from 'src/app/interfaces/course.interface';
-import { FilterCoursesPipe } from './../../pipes/filter-courses.pipe';
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -10,21 +7,11 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class CoursesSearchComponent {
   searchCourse = '';
-  courses: Course[] = coursesList;
 
-  @Output() updateCourses: EventEmitter<Course[]> = new EventEmitter<
-    Course[]
-  >();
-
-  constructor(private filterCoursesPipe: FilterCoursesPipe) {}
+  @Output() courseTitle: EventEmitter<string> = new EventEmitter<string>();
 
   searchClick() {
-    const filteredCourses = this.filterCoursesPipe.transform(
-      this.searchCourse,
-      this.courses
-    );
+    this.courseTitle.emit(this.searchCourse);
     console.log(this.searchCourse);
-
-    this.updateCourses.emit(filteredCourses);
   }
 }

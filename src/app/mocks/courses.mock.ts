@@ -4,7 +4,7 @@ export const coursesList: Course[] = [
     id: '1',
     title: 'Course 1',
     creationDate: new Date(2023, 5, 1),
-    durationMin: 56,
+    durationMin: 40,
     description: 'Lorem ipsum dolor sit amet, consectetur adip, ',
     topRated: true,
   },

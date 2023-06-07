@@ -70,14 +70,15 @@ describe('Courses-Search. Test-host approach', () => {
   @Component({
     template: `
       <app-courses-search
-        (updateCourses)="applyFilter($event)"
+        (courseTitle)="applyFilter($event)"
       ></app-courses-search>
     `,
   })
   class HostComponent {
     courses: Course[] = coursesList;
-    applyFilter(filteredCourses: Course[]): void {
-      this.courses = filteredCourses;
+    courseTitle: string;
+    applyFilter(courseTitle: string) {
+      this.courseTitle = courseTitle;
     }
   }
 
@@ -102,6 +103,6 @@ describe('Courses-Search. Test-host approach', () => {
     inputElement.nativeElement.dispatchEvent(new Event('input'));
     const spyEmit = spyOn(hostComponent, 'applyFilter');
     button.nativeElement.click();
-    expect(spyEmit).toHaveBeenCalledWith([hostComponent.courses[3]]);
+    expect(spyEmit).toHaveBeenCalledWith(hostComponent.courses[3].title.toLowerCase());
   });
 });

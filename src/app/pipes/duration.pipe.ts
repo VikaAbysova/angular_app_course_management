@@ -14,8 +14,7 @@ export class DurationPipe implements PipeTransform {
       const hh = `${hour}`;
       const mm = `${minute}`;
       return minutes < MINUTES_IN_HOUR ? `${minutes} min` : `${hh} h ${mm} min`;
-    } else {
-      return minutes;
     }
+    return minutes;
   }
 }

@@ -1,4 +1,5 @@
-import { OrderByPipe } from './../../pipes/order-by.pipe';
+import { OrderByDatePipe } from './../../pipes/order-by-date.pipe';
+import { FilterCoursesPipe } from './../../pipes/filter-courses.pipe';
 import { coursesList } from './../../mocks/courses.mock';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -10,11 +11,11 @@ describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
   let fixture: ComponentFixture<CoursesPageComponent>;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesPageComponent],
+      declarations: [CoursesPageComponent, OrderByDatePipe],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [OrderByPipe]
+      providers: [FilterCoursesPipe, OrderByDatePipe],
     });
     fixture = TestBed.createComponent(CoursesPageComponent);
     component = fixture.componentInstance;
