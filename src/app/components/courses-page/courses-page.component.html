@@ -1,13 +1,20 @@
 <div class="adding-section">
-  <app-courses-search></app-courses-search>
+  <app-courses-search (courseTitle)="applyFilter($event)"></app-courses-search>
   <button class="btn btn-plus">
-    <i class="fa-solid fa-plus"></i>Add course</button>
+    <i class="fa-solid fa-plus"></i>Add course
+  </button>
 </div>
 
-<app-course
-  *ngFor="let c of courses; trackBy: trackById"
-  [course]="c"
-  (deleteId)="deleteCourse($event)"
-></app-course>
+<div *ngIf="courses.length; else message">
+  <app-course
+    *ngFor="let c of courses | orderByDate; trackBy: trackById"
+    [course]="c"
+    (deleteId)="deleteCourse($event)"
+  ></app-course>
+</div>
 
-<app-load-more-btn></app-load-more-btn>
+<ng-template #message>
+  <p class="message">NO DATA, FEEL FREE TO ADD NEW COURSE</p>
+</ng-template>
+
+<app-load-more-btn *ngIf="courses.length"></app-load-more-btn>

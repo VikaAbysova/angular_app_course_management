@@ -1,3 +1,5 @@
+import { FilterCoursesPipe } from './pipes/filter-courses.pipe';
+import { OrderByDatePipe } from './pipes/order-by-date.pipe';
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
@@ -21,8 +23,9 @@ describe('AppComponent', () => {
         CourseComponent,
         CoursesPageComponent,
         LoadMoreBtnComponent,
-        CoursesSearchComponent
+        CoursesSearchComponent,
       ],
+      providers: [OrderByDatePipe, FilterCoursesPipe],
     })
   );
 

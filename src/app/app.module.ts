@@ -11,6 +11,10 @@ import { CourseComponent } from './components/course/course.component';
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { LoadMoreBtnComponent } from './components/load-more-btn/load-more-btn.component';
 import { CoursesSearchComponent } from './components/courses-search/courses-search.component';
+import { FreshBorderDirective } from './directives/course-relevance.directive';
+import { DurationPipe } from './pipes/duration.pipe';
+import { OrderByDatePipe } from './pipes/order-by-date.pipe';
+import { FilterCoursesPipe } from './pipes/filter-courses.pipe';
 
 @NgModule({
   declarations: [
@@ -23,9 +27,13 @@ import { CoursesSearchComponent } from './components/courses-search/courses-sear
     CoursesPageComponent,
     LoadMoreBtnComponent,
     CoursesSearchComponent,
+    FreshBorderDirective,
+    DurationPipe,
+    OrderByDatePipe,
+    FilterCoursesPipe,
   ],
   imports: [BrowserModule, FormsModule],
-  providers: [],
+  providers: [OrderByDatePipe, DurationPipe, FilterCoursesPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

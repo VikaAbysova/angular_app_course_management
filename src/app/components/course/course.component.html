@@ -1,9 +1,15 @@
-<article class="course" *ngIf="course">
+<article
+  class="course"
+  [appFreshBorder]="course.creationDate"
+  [ngClass]="{ 'background-topRated': course.topRated }"
+>
   <div class="describe">
     <div class="course-header">
-      <h1 class="title">{{ course.title }}</h1>
+      <h1 class="title" [ngClass]="{ 'icon-star': course.topRated }">
+        {{ course.title | uppercase }}
+      </h1>
       <div class="time">
-        <div>
+        <div class="clock">
           <i class="fa-regular fa-clock"></i>
           {{ course.durationMin }}
         </div>

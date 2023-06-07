@@ -1,13 +1,13 @@
 @import "/src/styles/variables";
 
 .course {
-  margin: 1.5rem 5rem;
+  margin: $primary-box-margin;
   padding: 2rem;
   border-radius: $primary-border-radius;
   background: white;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 0 10px 5px #aaa;
+  box-shadow: $primary-box-shadow;
 }
 
 .btn-content {
@@ -41,4 +41,24 @@
 
 .course-header {
   margin-bottom: 1rem;
+}
+
+.green-border {
+  border: 3px solid green;
+}
+
+.blue-border {
+  border: 3px solid blue;
+}
+
+.icon-star::after {
+  content: '\f005';
+  font-family: $primary-font-family-icon;
+  font-size: medium;
+  color: #f1e904;
+  margin-left: .5rem;
+}
+
+.background-topRated {
+  background-color: rgb(220, 248, 246);
 }

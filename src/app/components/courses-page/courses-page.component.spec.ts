@@ -1,34 +1,21 @@
+import { OrderByDatePipe } from './../../pipes/order-by-date.pipe';
+import { FilterCoursesPipe } from './../../pipes/filter-courses.pipe';
+import { coursesList } from './../../mocks/courses.mock';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesPageComponent } from './courses-page.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { coursesList } from 'src/app/mocks/courses.mock';
 
 describe('CoursesPageComponent', () => {
-  const mockCoursesList = [
-    {
-      id: '1',
-      title: 'title 1',
-      creationDate: new Date(),
-      durationMin: 30,
-      description: 'description1',
-    },
-    {
-      id: '2',
-      title: 'title 2',
-      creationDate: new Date(),
-      durationMin: 40,
-      description: 'description2',
-    },
-  ];
   let component: CoursesPageComponent;
   let fixture: ComponentFixture<CoursesPageComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesPageComponent],
+      declarations: [CoursesPageComponent, OrderByDatePipe],
       schemas: [NO_ERRORS_SCHEMA],
+      providers: [FilterCoursesPipe, OrderByDatePipe],
     });
     fixture = TestBed.createComponent(CoursesPageComponent);
     component = fixture.componentInstance;
@@ -54,9 +41,9 @@ describe('CoursesPageComponent', () => {
 
   it('should not change courses when deleteCourse method called', () => {
     const id = '1';
-    component.courses = mockCoursesList;
+    component.courses = coursesList;
     component.deleteCourse(id);
-    expect(component.courses).toEqual(mockCoursesList);
+    expect(component.courses).toEqual(coursesList);
   });
 
   it('should return 2 when trachById method called', () => {
@@ -66,19 +53,49 @@ describe('CoursesPageComponent', () => {
       creationDate: new Date(),
       durationMin: 40,
       description: 'description2',
+      topRated: true,
     };
     expect(component.trackById(0, courseItem)).toBe('2');
   });
 
   it('should render list of courses using *ngFor directive', () => {
-    component.courses = mockCoursesList;
-    fixture.detectChanges();
     const coursesList = fixture.debugElement.queryAll(By.css('app-course'));
-    expect(mockCoursesList.length).toBe(coursesList.length);
+    expect(coursesList.length).toBe(coursesList.length);
   });
 
   it('should initialize property courses when ngOnInit method called', () => {
     component.ngOnInit();
     expect(component.courses).toEqual(coursesList);
+  });
+
+  it("shouldn't render message element when courses exist", () => {
+    component.courses = coursesList;
+    fixture.detectChanges();
+    const messageEl = fixture.debugElement.query(By.css('.message'));
+    expect(messageEl).toBeNull();
+  });
+
+  it('should render message when courses are empty', () => {
+    component.courses = [];
+    fixture.detectChanges();
+    const messageEl = fixture.debugElement.query(By.css('.message'));
+    expect(messageEl).toBeTruthy();
+    expect(messageEl.nativeElement.textContent).toBe(
+      'NO DATA, FEEL FREE TO ADD NEW COURSE'
+    );
+  });
+
+  it("shouldn't render load-more button when courses are empty", () => {
+    component.courses = [];
+    fixture.detectChanges();
+    const loadMoreBtn = fixture.debugElement.query(By.css('app-load-more-btn'));
+    expect(loadMoreBtn).toBeNull();
+  });
+
+  it('should render load-more button when courses exist', () => {
+    component.courses = coursesList;
+    fixture.detectChanges();
+    const loadMoreBtn = fixture.debugElement.query(By.css('app-load-more-btn'));
+    expect(loadMoreBtn).toBeTruthy();
   });
 });
