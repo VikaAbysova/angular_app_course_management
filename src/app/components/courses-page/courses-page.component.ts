@@ -1,8 +1,9 @@
-import { OrderByDatePipe } from './../../pipes/order-by-date.pipe';
-import { FilterCoursesPipe } from './../../pipes/filter-courses.pipe';
+import { OrderByDatePipe } from '../../pipes/order-by-date.pipe';
+import { FilterCoursesPipe } from '../../pipes/filter-courses.pipe';
 import { coursesList } from '../../mocks/courses.mock';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../../interfaces/course.interface';
+import { CoursesService } from '../../services/courses.service';
 
 @Component({
   selector: 'app-courses-page',
@@ -12,23 +13,26 @@ import { Course } from '../../interfaces/course.interface';
 export class CoursesPageComponent implements OnInit {
   constructor(
     private orderByDatePipe: OrderByDatePipe,
-    private filterCoursesPipe: FilterCoursesPipe
+    private filterCoursesPipe: FilterCoursesPipe,
+    private coursesService: CoursesService
   ) {}
+
   courses: Course[];
 
   ngOnInit(): void {
-    this.courses = coursesList;
+    this.courses = this.coursesService.getList();
   }
 
   applyFilter(courseTitle: string): void {
-    const filteredCourses: Course[] = this.filterCoursesPipe.transform(
-      courseTitle,
-      coursesList
-    );
-    this.courses = filteredCourses;
+    this.courses = this.filterCoursesPipe.transform(courseTitle, coursesList);
   }
 
   deleteCourse(id: string) {
+    this.coursesService.removeItem(id);
+    const result = prompt('Do you really want to delete this course?', 'no');
+    result === 'yes'
+      ? (this.courses = this.coursesService.getList())
+      : this.courses;
     console.log('delete id', id);
   }
 
