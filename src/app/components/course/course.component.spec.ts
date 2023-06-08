@@ -64,6 +64,7 @@ describe('CourseComponent. Stand-alone approach', () => {
     const durationPipe = new DurationPipe();
     const duration = component.course.durationMin;
     component.course.durationMin = durationPipe.transform(duration);
+    fixture.detectChanges();
     expect(duration).toContain('2 h 20 min');
   });
 

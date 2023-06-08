@@ -1,3 +1,4 @@
+import { IfAuthenticatedDirective } from './../../directives/if-authenticated.directive';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
@@ -9,7 +10,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
+      declarations: [HeaderComponent, IfAuthenticatedDirective],
       schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(HeaderComponent);
