@@ -1,0 +1,35 @@
+<form action="#" class="login">
+  <h1>Login</h1>
+  <div class="email">
+    <label for="email" class="label"
+      >E-mail:<span class="required">*required</span></label
+    >
+    <input
+      type="email"
+      required
+      id="email"
+      name="email"
+      placeholder="Enter e-mail"
+      class="input"
+      [(ngModel)]="emailValue"
+    />
+  </div>
+  <div class="password">
+    <label for="password" class="label"
+      >Password:<span class="required">*required</span></label
+    >
+    <input
+      type="password"
+      required
+      id="password"
+      name="password"
+      placeholder="Enter password"
+      class="input"
+      [(ngModel)]="passwordValue"
+    />
+  </div>
+  <div class="action">
+    <a href="#" class="faq">Forgot password?</a>
+    <button class="button" type="submit">Login</button>
+  </div>
+</form>

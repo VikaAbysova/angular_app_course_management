@@ -2,8 +2,16 @@
   <app-logo></app-logo>
 </app-header>
 
-<app-breadcrumbs></app-breadcrumbs>
+<app-breadcrumbs
+  *appIfAuthenticated="authService.isAuthenticated()"
+></app-breadcrumbs>
 
-<app-courses-page></app-courses-page>
+<app-courses-page
+  *appIfAuthenticated="authService.isAuthenticated()"
+></app-courses-page>
+
+<app-login-page
+  *appIfAuthenticated="!authService.isAuthenticated()"
+></app-login-page>
 
 <app-footer></app-footer>

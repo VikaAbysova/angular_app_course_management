@@ -3,7 +3,7 @@
 .input-search {
   padding: 15px 20px 15px 60px;
   margin: 3rem 0.5rem 3rem 5rem;
-  border: 1px solid rgba(169, 169, 169, 0.5);
+  border: $primar-input-border;
   outline: none;
   width: 30rem;
   font-size: $primary-font-size;

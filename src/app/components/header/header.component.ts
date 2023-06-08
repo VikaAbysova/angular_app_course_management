@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
+import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +7,9 @@ import {AuthService} from "../../services/auth.service";
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private authService: AuthService) {
-  }
+  constructor(public authService: AuthService) {}
 
   onLogout() {
-    console.log()
+    console.log(this.authService.getUserInfo());
   }
 }

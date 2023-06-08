@@ -11,13 +11,12 @@ import { CoursesService } from '../../services/courses.service';
   styleUrls: ['./courses-page.component.scss'],
 })
 export class CoursesPageComponent implements OnInit {
+  courses: Course[];
   constructor(
     private orderByDatePipe: OrderByDatePipe,
     private filterCoursesPipe: FilterCoursesPipe,
     private coursesService: CoursesService
   ) {}
-
-  courses: Course[];
 
   ngOnInit(): void {
     this.courses = this.coursesService.getList();

@@ -9,12 +9,11 @@ export class AuthService {
     id: '123',
     firstName: 'Victoriya',
     lastName: 'Rainbow',
-    token: '123victory',
   };
 
   login() {
     localStorage.setItem('firstName', this.userInfo.firstName);
-    localStorage.setItem('token', this.userInfo.token);
+    localStorage.setItem('token', '123victory');
   }
 
   logout() {
@@ -26,6 +25,6 @@ export class AuthService {
   }
 
   getUserInfo() {
-    return localStorage.getItem('firstName');
+    return this.userInfo.firstName;
   }
 }
