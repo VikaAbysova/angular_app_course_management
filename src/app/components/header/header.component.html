@@ -1,11 +1,12 @@
 <header class="header">
   <ng-content></ng-content>
-  <div class="user-block">
+  <div class="user-block"
+  *appIfAuthenticated="authService.isAuthenticated()">
     <div>
       <i class="fa-sharp fa-solid fa-user"></i>
-      <p class="login">User login</p>
+      <p class="login">Victoriya</p>
     </div>
-    <button class="btn">
+    <button class="btn" (click)="onLogout()">
       <i class="fa-solid fa-right-from-bracket"></i>
       Log off
     </button>
