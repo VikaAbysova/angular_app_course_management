@@ -8,10 +8,8 @@
   gap: 1rem;
   box-shadow: $primary-box-shadow;
   border-radius: $primary-border-radius;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: fit-content;
+  margin: 3.3rem auto;
 }
 
 .email,
@@ -41,7 +39,7 @@
 }
 
 .email .required {
-  left: 13.7rem
+  left: 13.7rem;
 }
 
 .faq {
