@@ -27,11 +27,11 @@ export class CoursesPageComponent implements OnInit {
   }
 
   deleteCourse(id: string) {
-    this.coursesService.removeItem(id);
-    const result = prompt('Do you really want to delete this course?', 'no');
-    result === 'yes'
-      ? (this.courses = this.coursesService.getList())
-      : this.courses;
+    const result = prompt('Do you really want to delete this course?', 'yes');
+    if (result === 'yes') {
+      this.coursesService.removeItem(id);
+      this.courses = this.coursesService.getList();
+    }
     console.log('delete id', id);
   }
 

@@ -11,5 +11,6 @@ export class HeaderComponent {
 
   onLogout() {
     console.log(this.authService.getUserInfo());
+    this.authService.logout();
   }
 }
