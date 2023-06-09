@@ -2,8 +2,6 @@
 
 .login {
   background-color: white;
-  width: fit-content;
-  height: auto;
   padding: 3rem;
   display: flex;
   flex-direction: column;
@@ -29,7 +27,6 @@
 .input {
   border: $primar-input-border;
   padding: 1rem;
-  outline: none;
   width: 20rem;
 }
 .label {
