@@ -3,15 +3,17 @@
 </app-header>
 
 <app-breadcrumbs
-  *appIfAuthenticated="authService.isAuthenticated()"
+  *appIfAuthenticated="!authService.isAuthenticated()"
 ></app-breadcrumbs>
 
 <app-courses-page
-  *appIfAuthenticated="authService.isAuthenticated()"
+  *appIfAuthenticated="!authService.isAuthenticated()"
 ></app-courses-page>
 
 <app-login-page
   *appIfAuthenticated="!authService.isAuthenticated()"
 ></app-login-page>
+
+<app-add-course-page *appIfAuthenticated="authService.isAuthenticated()"></app-add-course-page>
 
 <app-footer></app-footer>

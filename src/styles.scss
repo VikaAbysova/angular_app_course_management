@@ -24,3 +24,37 @@ body {
   background: $primary-btn-background;
   border-radius: $primary-border-radius;
 }
+
+.faq-ref {
+  font-size: small;
+  color: blue;
+  font-weight: bolder;
+}
+
+.input {
+  border: $primar-input-border;
+  padding: 1rem;
+  width: 20rem;
+  outline: none;
+  font-size: $primary-font-size;
+  color: $primary-color;
+  border-radius: $primary-border-radius;
+}
+
+.input::placeholder {
+  color: $primary-input-placeholder;
+  font-size: $primary-font-size;
+  font-family: "Roboto", sans-serif;
+}
+
+.input:focus {
+  box-shadow: $primary-box-shadow-input;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.label-column {
+  display: grid;
+}

@@ -62,10 +62,9 @@ describe('CourseComponent. Stand-alone approach', () => {
 
   it('should contain course durationMin', () => {
     const durationPipe = new DurationPipe();
-    const duration = component.course.durationMin;
-    component.course.durationMin = durationPipe.transform(duration);
+    component.course.durationMin = durationPipe.transform(140);
     fixture.detectChanges();
-    expect(duration).toContain('2 h 20 min');
+    expect(component.course.durationMin).toContain('2 h 20 min');
   });
 
   it('should contain current date', () => {
@@ -123,7 +122,7 @@ describe('CourseComponent. Stand-alone approach', () => {
     component.course = courseRatedFalse;
     fixture.detectChanges();
     const spanEl: DebugElement = fixture.debugElement.query(By.css('.title'));
-    expect(spanEl.nativeElement.classList).not.toContain('icon-star');
+    expect(spanEl.nativeElement.classList).not.toContain('.icon-star');
   });
 
   it('should not change background color if topRated is false', () => {

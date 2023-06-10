@@ -1,0 +1,18 @@
+@import "/src/styles/variables";
+@import "/src/styles/extends";
+
+.duration {
+  display: flex;
+}
+
+.duration-pipe {
+  @extend %flex-center;
+  margin-left: 2rem;
+  width: 10rem;
+  border: $primar-input-border;
+  border-radius: $primary-border-radius;
+}
+
+.input {
+  padding: 0.5rem;
+}

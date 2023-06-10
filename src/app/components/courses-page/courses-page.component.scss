@@ -1,8 +1,9 @@
 @import "/src/styles/variables";
+@import "/src/styles/extends";
+
 
 .adding-section {
-  display: flex;
-  justify-content: space-between;
+  @extend %flex-between;
 }
 
 .btn-plus {
@@ -21,8 +22,5 @@
 .message {
   text-align: center;
   font-weight: bold;
-  margin: $primary-box-margin;
-  border-radius: $primary-border-radius;
-  background-color: white;
-  box-shadow: $primary-box-shadow;
+  @extend %box-shape;
 }

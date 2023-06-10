@@ -1,0 +1,26 @@
+@import "/src/styles/variables";
+
+%flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%box-shape {
+  margin: $primary-box-margin;
+  border-radius: $primary-border-radius;
+  background: white;
+  box-shadow: $primary-box-shadow;
+}
+
+%form-shape{
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

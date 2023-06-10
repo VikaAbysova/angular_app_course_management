@@ -1,13 +1,10 @@
 @import "/src/styles/variables";
+@import "/src/styles/extends";
 
 .load-more {
   height: 3rem;
-  background: white;
-  margin: $primary-box-margin;
-  border-radius: $primary-border-radius;
-  justify-content: center;
-  box-shadow: $primary-box-shadow;
-  display: flex;
+  @extend %flex-center;
+  @extend %box-shape;
 }
 
 .load-btn {
