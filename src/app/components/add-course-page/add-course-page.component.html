@@ -26,7 +26,7 @@
   <app-add-course-duration></app-add-course-duration>
   <app-add-course-authors></app-add-course-authors>
   <div class="action">
-    <button class="btn" type="submit">Save</button>
-    <button class="btn">Cancel</button>
+    <button class="btn" type="submit" (click)="onSave()">Save</button>
+    <button class="btn" (click)="onCancel()">Cancel</button>
   </div>
 </form>

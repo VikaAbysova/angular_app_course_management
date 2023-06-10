@@ -8,4 +8,12 @@ import { Component } from '@angular/core';
 export class AddCoursePageComponent {
   title: string;
   description: string;
+
+  onSave() {
+    console.log('Save');
+  }
+
+  onCancel() {
+    console.log('Cancel');
+  }
 }
