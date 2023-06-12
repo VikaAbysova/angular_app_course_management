@@ -1,3 +1,5 @@
+import { DurationPipe } from 'src/app/pipes/duration.pipe';
+import { AddCoursePageModule } from './components/add-course-page/add-course-page.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +15,6 @@ import { CoursesPageComponent } from './components/courses-page/courses-page.com
 import { LoadMoreBtnComponent } from './components/load-more-btn/load-more-btn.component';
 import { CoursesSearchComponent } from './components/courses-search/courses-search.component';
 import { FreshBorderDirective } from './directives/course-relevance.directive';
-import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByDatePipe } from './pipes/order-by-date.pipe';
 import { FilterCoursesPipe } from './pipes/filter-courses.pipe';
 import { IfAuthenticatedDirective } from './directives/if-authenticated.directive';
@@ -30,13 +31,12 @@ import { IfAuthenticatedDirective } from './directives/if-authenticated.directiv
     LoadMoreBtnComponent,
     CoursesSearchComponent,
     FreshBorderDirective,
-    DurationPipe,
     OrderByDatePipe,
     FilterCoursesPipe,
     IfAuthenticatedDirective,
   ],
-  imports: [BrowserModule, FormsModule, LoginPageModule],
-  providers: [OrderByDatePipe, DurationPipe, FilterCoursesPipe],
+  imports: [BrowserModule, FormsModule, LoginPageModule, AddCoursePageModule],
+  providers: [OrderByDatePipe, FilterCoursesPipe, DurationPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

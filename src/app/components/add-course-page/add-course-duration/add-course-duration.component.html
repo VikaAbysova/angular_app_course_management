@@ -1,0 +1,15 @@
+<div class="label-column">
+  <label for="duration" class="label">Duration:</label>
+  <div class="duration">
+    <input
+      type="number"
+      class="input"
+      id="duration"
+      name="duration"
+      [(ngModel)]="durationValue"
+    />
+    <div class="duration-pipe">
+      <p>{{ durationValue | durationPipe }}</p>
+    </div>
+  </div>
+</div>

@@ -1,18 +1,8 @@
 @import "/src/styles/variables";
 
-.input-search {
+.input {
   padding: 15px 20px 15px 60px;
   margin: 3rem 0.5rem 3rem 5rem;
-  border: $primar-input-border;
-  outline: none;
-  width: 30rem;
-  font-size: $primary-font-size;
-  color: $primary-color;
-  border-radius: $primary-border-radius;
-}
-
-.input-search:focus {
-  box-shadow: $primary-box-shadow-input;
 }
 
 .fa-magnifying-glass {
@@ -22,12 +12,7 @@
   font-size: larger;
 }
 
-.input-search::placeholder {
-  color: $primary-input-placeholder;
-  font-size: $primary-font-size;
-}
-
-.btn-search {
+.btn {
   background: #9bc837;
   padding: 15px 20px;
 }

@@ -32,12 +32,12 @@ describe('CoursesSearchComponent', () => {
     component.searchCourse = 'test value';
     fixture.detectChanges();
     await fixture.whenStable();
-    const inputElement = fixture.debugElement.query(By.css('.input-search'));
+    const inputElement = fixture.debugElement.query(By.css('.input'));
     expect(inputElement.nativeElement.value).toBe('test value');
   });
 
   it('should update searchCourse value when change input value', () => {
-    const inputElement = fixture.debugElement.query(By.css('.input-search'));
+    const inputElement = fixture.debugElement.query(By.css('.input'));
     inputElement.nativeElement.value = 'test value';
     inputElement.nativeElement.dispatchEvent(new Event('input'));
     expect(component.searchCourse).toBe('test value');
@@ -53,7 +53,7 @@ describe('CoursesSearchComponent', () => {
 
   it('should display input value in console log when change input value', () => {
     const inputElement: DebugElement = fixture.debugElement.query(
-      By.css('.input-search')
+      By.css('.input')
     );
     const button = fixture.debugElement.query(By.css('.btn-search'));
     spyOn(console, 'log');
@@ -96,7 +96,7 @@ describe('Courses-Search. Test-host approach', () => {
 
   it('should emit updateCourses event when Search button clicked', () => {
     const inputElement: DebugElement = fixture.debugElement.query(
-      By.css('.input-search')
+      By.css('.input')
     );
     const button = fixture.debugElement.query(By.css('.btn-search'));
     inputElement.nativeElement.value = 'course 4';

@@ -1,13 +1,10 @@
 @import "/src/styles/variables";
+@import "/src/styles/extends";
+
 
 .course {
-  margin: $primary-box-margin;
   padding: 2rem;
-  border-radius: $primary-border-radius;
-  background: white;
-  display: flex;
-  justify-content: space-between;
-  box-shadow: $primary-box-shadow;
+  @extend %flex-between, %box-shape;
 }
 
 .btn-content {
@@ -30,8 +27,7 @@
 
 .course-header,
 .time {
-  display: flex;
-  justify-content: space-between;
+  @extend %flex-between;
   align-items: center;
 }
 

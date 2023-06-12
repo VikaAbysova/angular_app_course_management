@@ -1,0 +1,32 @@
+<form action="#" class="form">
+  <div class="label-column">
+    <label for="title" class="label">Title:</label>
+    <input
+      type="text"
+      id="title"
+      name="title"
+      placeholder="Enter title"
+      class="input"
+      [(ngModel)]="title"
+    />
+  </div>
+  <div class="label-column">
+    <label for="description" class="label">Description:</label>
+    <textarea
+      name="description"
+      id="description"
+      cols="30"
+      rows="4"
+      placeholder="Enter description"
+      [(ngModel)]="description"
+      class="input"
+    ></textarea>
+  </div>
+  <app-add-course-date></app-add-course-date>
+  <app-add-course-duration></app-add-course-duration>
+  <app-add-course-authors></app-add-course-authors>
+  <div class="action">
+    <button class="btn" type="submit" (click)="onSave()">Save</button>
+    <button class="btn" (click)="onCancel()">Cancel</button>
+  </div>
+</form>

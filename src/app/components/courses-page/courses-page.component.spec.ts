@@ -39,11 +39,11 @@ describe('CoursesPageComponent', () => {
     expect(console.log).toHaveBeenCalledWith('delete id', id);
   });
 
-  it('should not change courses when deleteCourse method called', () => {
-    const id = '1';
+  it('should delete course when deleteCourse method called', () => {
     component.courses = coursesList;
-    component.deleteCourse(id);
-    expect(component.courses).toEqual(coursesList);
+    fixture.detectChanges();
+    component.deleteCourse('1');
+    expect(component.courses.length).toEqual(coursesList.length - 1);
   });
 
   it('should return 2 when trachById method called', () => {
