@@ -8,6 +8,7 @@
       name="duration"
       [(ngModel)]="durationValue"
       required
+      (input)="emitDuration()"
     />
     <div class="duration-pipe">
       <p>{{ durationValue | durationPipe }}</p>

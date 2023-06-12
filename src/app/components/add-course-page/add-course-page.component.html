@@ -28,8 +28,8 @@
       required
     ></textarea>
   </div>
-  <app-add-course-date (dateValue)="creationDate"></app-add-course-date>
-  <app-add-course-duration (durationValue)="durationMin"></app-add-course-duration>
+  <app-add-course-date (date)="setDate($event)"></app-add-course-date>
+  <app-add-course-duration (duration)="setDuration($event)"></app-add-course-duration>
   <app-add-course-authors></app-add-course-authors>
   <div class="action">
     <button class="btn" type="submit" (click)="onSave()">Save</button>

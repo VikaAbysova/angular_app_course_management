@@ -11,11 +11,19 @@ import { Component } from '@angular/core';
 export class AddCoursePageComponent {
   title: string;
   description: string;
-  creationDate = new Date();
+  creationDate: Date;
   durationMin: number;
   topRated: false;
 
   constructor(private coursesService: CoursesService, private router: Router) {}
+
+  setDate(date: Date): void {
+    this.creationDate = date;
+  }
+
+  setDuration(minutes: number): void {
+    this.durationMin = minutes;
+  }
 
   onSave() {
     const newCourse: Course = {
@@ -28,10 +36,9 @@ export class AddCoursePageComponent {
     };
     this.coursesService.createCourse(newCourse);
     this.router.navigate(['/courses']);
-    console.log('newCourse', newCourse);
   }
 
   onCancel() {
-    console.log('Cancel');
+    this.router.navigate(['/courses']);
   }
 }

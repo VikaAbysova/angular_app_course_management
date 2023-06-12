@@ -22,7 +22,7 @@
     <p class="description">{{ course.description }}</p>
   </div>
   <div class="btn-content">
-    <button class="btn btn-edit">
+    <button class="btn btn-edit" [routerLink]="['/courses', course.id]">
       <i class="fa-solid fa-pen"></i>
       Edit
     </button>
