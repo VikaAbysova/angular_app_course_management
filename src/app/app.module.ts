@@ -18,6 +18,8 @@ import { FreshBorderDirective } from './directives/course-relevance.directive';
 import { OrderByDatePipe } from './pipes/order-by-date.pipe';
 import { FilterCoursesPipe } from './pipes/filter-courses.pipe';
 import { IfAuthenticatedDirective } from './directives/if-authenticated.directive';
+import { AppRoutingModule } from './app-routing.module';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +36,9 @@ import { IfAuthenticatedDirective } from './directives/if-authenticated.directiv
     OrderByDatePipe,
     FilterCoursesPipe,
     IfAuthenticatedDirective,
+    ErrorPageComponent,
   ],
-  imports: [BrowserModule, FormsModule, LoginPageModule, AddCoursePageModule],
+  imports: [BrowserModule, FormsModule, LoginPageModule, AddCoursePageModule, AppRoutingModule],
   providers: [OrderByDatePipe, FilterCoursesPipe, DurationPipe],
   bootstrap: [AppComponent],
 })

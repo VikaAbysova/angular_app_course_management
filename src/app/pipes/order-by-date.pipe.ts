@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class OrderByDatePipe implements PipeTransform {
   transform(coursesList: Course[]): Course[] {
     return coursesList.sort(
-      (a, b) => b.creationDate.getTime() - a.creationDate.getTime()
+      (a, b) => (b.creationDate as Date).getTime() - (a.creationDate as Date).getTime()
     );
   }
 }

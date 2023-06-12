@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-course-date.component.scss'],
 })
 export class AddCourseDateComponent {
-  dateValue = '';
+  dateValue: string;
 }

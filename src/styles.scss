@@ -58,3 +58,9 @@ body {
 .label-column {
   display: grid;
 }
+
+.required {
+  font-size: small;
+  color: rgb(236, 53, 53);
+  position: relative;
+}

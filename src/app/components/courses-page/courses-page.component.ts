@@ -1,4 +1,4 @@
-import { OrderByDatePipe } from '../../pipes/order-by-date.pipe';
+import { Router } from '@angular/router';
 import { FilterCoursesPipe } from '../../pipes/filter-courses.pipe';
 import { coursesList } from '../../mocks/courses.mock';
 import { Component, OnInit } from '@angular/core';
@@ -13,9 +13,9 @@ import { CoursesService } from '../../services/courses.service';
 export class CoursesPageComponent implements OnInit {
   courses: Course[];
   constructor(
-    private orderByDatePipe: OrderByDatePipe,
     private filterCoursesPipe: FilterCoursesPipe,
-    private coursesService: CoursesService
+    private coursesService: CoursesService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +33,10 @@ export class CoursesPageComponent implements OnInit {
       this.courses = this.coursesService.getList();
     }
     console.log('delete id', id);
+  }
+
+  addCourse() {
+    this.router.navigate(['/courses/new']);
   }
 
   trackById(index: number, course: Course): string {

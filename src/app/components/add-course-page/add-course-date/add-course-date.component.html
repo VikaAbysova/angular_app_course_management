@@ -1,5 +1,5 @@
 <div class="label-column">
-  <label for="date" class="label">Date:</label>
+  <label for="date" class="label">Date: <span class="required">*required</span></label>
   <input
     type="text"
     class="input"
@@ -7,5 +7,6 @@
     name="date"
     placeholder="Enter date"
     [(ngModel)]="dateValue"
+    required
   />
 </div>

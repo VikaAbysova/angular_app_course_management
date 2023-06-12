@@ -1,0 +1,10 @@
+@import "/src/styles/extends" ;
+.screen-img {
+  @extend %flex-center;
+  background-color: white;
+  padding: 1.3rem 0;
+}
+
+.error {
+  max-width: 100vh;
+}
