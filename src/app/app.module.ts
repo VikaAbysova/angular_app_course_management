@@ -1,4 +1,4 @@
-import { DurationPipe } from 'src/app/pipes/duration.pipe';
+import { DurationPipe } from './pipes/duration.pipe';
 import { AddCoursePageModule } from './components/add-course-page/add-course-page.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LogoComponent } from './components/logo/logo.component';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+// import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { CourseComponent } from './components/course/course.component';
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { LoadMoreBtnComponent } from './components/load-more-btn/load-more-btn.component';
@@ -20,6 +20,7 @@ import { FilterCoursesPipe } from './pipes/filter-courses.pipe';
 import { IfAuthenticatedDirective } from './directives/if-authenticated.directive';
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [

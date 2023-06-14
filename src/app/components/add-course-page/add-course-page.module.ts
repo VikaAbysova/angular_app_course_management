@@ -13,7 +13,7 @@ import { AddCourseDurationComponent } from './add-course-duration/add-course-dur
     AddCourseDateComponent,
     AddCourseDurationComponent,
     AddCourseAuthorsComponent,
-    DurationPipe,
+    DurationPipe
   ],
   imports: [CommonModule, FormsModule],
   exports: [AddCoursePageComponent],

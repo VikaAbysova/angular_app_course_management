@@ -1,7 +1,7 @@
 <nav class="bread">
   <ul class="title-bread">
     <li>
-      <a routerLink="/courses">Courses</a>
+      <a routerLink="/courses">Courses</a><span *ngIf="title">/{{ title }}</span>
     </li>
   </ul>
 </nav>

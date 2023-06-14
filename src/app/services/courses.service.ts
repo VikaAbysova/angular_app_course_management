@@ -18,13 +18,16 @@ export class CoursesService {
 
   getItemById(id: string) {
     return this.coursesList.find((course) => course.id === id);
+
   }
 
-  updateItem(id: string) {
-    return this.getItemById(id);
+  updateItem(course: Course) {
+    const finedCourseIndex = this.coursesList.indexOf(this.getItemById(course.id) as Course);
+    this.coursesList[finedCourseIndex] = {...course};
   }
 
   removeItem(id: string): void {
     this.coursesList = this.coursesList.filter((course) => course.id !== id);
   }
+
 }

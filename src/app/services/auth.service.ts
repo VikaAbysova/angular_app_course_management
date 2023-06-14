@@ -11,7 +11,7 @@ export class AuthService {
     lastName: 'Rainbow',
   };
 
-  isAuth = true;
+  isAuth = false;
 
   login() {
     localStorage.setItem('firstName', this.userInfo.firstName);

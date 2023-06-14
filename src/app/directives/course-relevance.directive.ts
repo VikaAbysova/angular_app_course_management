@@ -5,14 +5,14 @@ import { ONE_DAY, TWO_WEEKS } from '../constants/timestamps.consts';
   selector: '[appFreshBorder]',
 })
 export class FreshBorderDirective implements OnChanges {
-  @Input('appFreshBorder') creationDate: Date;
+  @Input('appFreshBorder') creationDate: Date | string;
 
   constructor(private el: ElementRef) {}
 
   ngOnChanges(): void {
     const currentDate = new Date().getTime();
     const twoWeeksAgo = currentDate - TWO_WEEKS;
-    const creationCourseDate = this.creationDate.getTime();
+    const creationCourseDate = (this.creationDate as Date).getTime();
     const diff = currentDate - creationCourseDate;
 
     const actualCourseDate =

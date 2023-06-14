@@ -18,6 +18,8 @@ import { DurationPipe } from 'src/app/pipes/duration.pipe';
 export class CourseComponent implements OnChanges {
   @Input() course: Course;
   @Output() deleteId: EventEmitter<string> = new EventEmitter<string>();
+
+  transformedDuration: string;
   constructor(private durationPipe: DurationPipe) {}
 
   emitDeleteId() {
@@ -25,7 +27,7 @@ export class CourseComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    this.course.durationMin = this.durationPipe.transform(
+    this.transformedDuration = this.durationPipe.transform(
       this.course.durationMin
     );
   }
