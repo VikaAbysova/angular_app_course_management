@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AddCoursePageRoutingModule } from './add-course-page-routing.module';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { FormsModule } from '@angular/forms';
 import { AddCourseAuthorsComponent } from './add-course-authors/add-course-authors.component';
@@ -13,9 +14,9 @@ import { AddCourseDurationComponent } from './add-course-duration/add-course-dur
     AddCourseDateComponent,
     AddCourseDurationComponent,
     AddCourseAuthorsComponent,
-    DurationPipe
+    DurationPipe,
   ],
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AddCoursePageRoutingModule],
   exports: [AddCoursePageComponent],
 })
 export class AddCoursePageModule {}

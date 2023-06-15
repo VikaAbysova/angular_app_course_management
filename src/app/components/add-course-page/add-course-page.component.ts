@@ -10,8 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddCoursePageComponent implements OnInit {
   creationDate: string | Date;
+  durationMin: number;
   param: string;
-
 
   course: Course = {
     id: '',
@@ -31,11 +31,13 @@ export class AddCoursePageComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.param = params['id'];
-      if (this.param !== 'new') {
+
+      if (Object.keys(params)[0] === 'id') {
         this.course = {
           ...(this.coursesService.getItemById(this.param) as Course),
         };
         this.creationDate = this.course.creationDate;
+        this.durationMin = this.course.durationMin as number;
         return;
       }
       this.course.id = Math.random().toString().slice(2);

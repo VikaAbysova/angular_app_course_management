@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LogoComponent } from './components/logo/logo.component';
-// import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { CourseComponent } from './components/course/course.component';
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { LoadMoreBtnComponent } from './components/load-more-btn/load-more-btn.component';
@@ -19,7 +18,7 @@ import { OrderByDatePipe } from './pipes/order-by-date.pipe';
 import { FilterCoursesPipe } from './pipes/filter-courses.pipe';
 import { IfAuthenticatedDirective } from './directives/if-authenticated.directive';
 import { AppRoutingModule } from './app-routing.module';
-import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
@@ -37,7 +36,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     OrderByDatePipe,
     FilterCoursesPipe,
     IfAuthenticatedDirective,
-    ErrorPageComponent,
+    NotFoundPageComponent,
   ],
   imports: [BrowserModule, FormsModule, LoginPageModule, AddCoursePageModule, AppRoutingModule],
   providers: [OrderByDatePipe, FilterCoursesPipe, DurationPipe],

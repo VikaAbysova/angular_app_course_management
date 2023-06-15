@@ -20,6 +20,5 @@ export class LoginPageComponent {
       this.authService.isAuth = true;
       this.router.navigate(['/courses']);
     }
-    return;
   }
 }

@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./add-course-duration.component.scss'],
 })
 export class AddCourseDurationComponent {
-  @Input() durationValue: number | string;
+  @Input() durationValue: number;
 
   @Output() duration: EventEmitter<number> = new EventEmitter<number>();
 

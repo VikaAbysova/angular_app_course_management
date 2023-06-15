@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./add-course-date.component.scss'],
 })
 export class AddCourseDateComponent {
-  @Input() dateValue: string | Date | null;
+  @Input() dateValue: Date | string | null;
 
   @Output() date: EventEmitter<Date> = new EventEmitter<Date>();
 
