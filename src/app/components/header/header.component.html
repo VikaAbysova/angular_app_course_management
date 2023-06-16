@@ -4,7 +4,7 @@
   *appIfAuthenticated="authService.isAuthenticated()">
     <div>
       <i class="fa-sharp fa-solid fa-user"></i>
-      <p class="login">Victoriya</p>
+      <p class="login">{{authService.getUserInfo()}}</p>
     </div>
     <button class="btn" (click)="onLogout()">
       <i class="fa-solid fa-right-from-bracket"></i>

@@ -1,5 +1,7 @@
 <div class="label-column">
-  <label for="duration" class="label">Duration:</label>
+  <label for="duration" class="label"
+    >Duration: <span class="required">*required</span></label
+  >
   <div class="duration">
     <input
       type="number"
@@ -7,9 +9,11 @@
       id="duration"
       name="duration"
       [(ngModel)]="durationValue"
+      required
+      (input)="emitDuration()"
     />
     <div class="duration-pipe">
-      <p>{{ durationValue | durationPipe }}</p>
+      <p>{{ durationValue | durationPipe}}</p>
     </div>
   </div>
 </div>

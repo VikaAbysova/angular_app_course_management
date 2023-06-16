@@ -3,14 +3,14 @@
 
 .form {
   @extend %form-shape;
-  padding: 1rem;
   gap: 0.5rem;
-  margin: 0.5rem 5rem;
+  margin: -2rem 3rem;
 }
 
 .input {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.4rem;
+  font-family: 'Roboto', sans-serif;
 }
 
 .action {

@@ -11,6 +11,8 @@ export class AuthService {
     lastName: 'Rainbow',
   };
 
+  isAuth: boolean;
+
   login() {
     localStorage.setItem('firstName', this.userInfo.firstName);
     localStorage.setItem('token', '123victory');
@@ -21,7 +23,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return true;
+    return this.isAuth;
   }
 
   getUserInfo() {

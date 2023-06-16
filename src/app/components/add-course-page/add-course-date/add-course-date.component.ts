@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-add-course-date',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-course-date.component.scss'],
 })
 export class AddCourseDateComponent {
-  dateValue = '';
+  @Input() dateValue: Date | string | null;
+
+  @Output() date: EventEmitter<Date> = new EventEmitter<Date>();
+
+  emitDate() {
+    this.date.emit(new Date(this.dateValue as Date));
+  }
 }

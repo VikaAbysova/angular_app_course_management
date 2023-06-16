@@ -11,7 +11,7 @@
       <div class="time">
         <div class="clock">
           <i class="fa-regular fa-clock"></i>
-          {{ course.durationMin }}
+          {{ transformedDuration }}
         </div>
         <div class="calendar">
           <i class="fa-solid fa-calendar-days"></i>
@@ -22,7 +22,7 @@
     <p class="description">{{ course.description }}</p>
   </div>
   <div class="btn-content">
-    <button class="btn btn-edit">
+    <button class="btn btn-edit" [routerLink]="['/courses', course.id]">
       <i class="fa-solid fa-pen"></i>
       Edit
     </button>

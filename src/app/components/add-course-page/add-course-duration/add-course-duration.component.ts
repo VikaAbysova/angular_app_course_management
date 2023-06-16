@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-add-course-duration',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-course-duration.component.scss'],
 })
 export class AddCourseDurationComponent {
-  durationValue: number | string = 0;
+  @Input() durationValue: number;
+
+  @Output() duration: EventEmitter<number> = new EventEmitter<number>();
+
+  emitDuration() {
+    this.duration.emit(this.durationValue as number);
+  }
 }
