@@ -6,13 +6,11 @@ import { Router, CanActivate, UrlTree } from '@angular/router';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): boolean| UrlTree {
+  canActivate(): UrlTree | boolean {
     if (this.authService.isAuthenticated()) {
       return true;
     } else {
-      const urlTree = this.router.createUrlTree(['/login']);
-      this.router.navigateByUrl(urlTree);
-      return false;
+      return this.router.createUrlTree(['/login']);
     }
   }
 }
