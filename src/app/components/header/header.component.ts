@@ -14,6 +14,6 @@ export class HeaderComponent {
     console.log(this.authService.getUserInfo());
     this.authService.logout();
     this.authService.isAuth = false;
-    this.router.navigate(['/login']);
+    this.router.navigate(['login']);
   }
 }

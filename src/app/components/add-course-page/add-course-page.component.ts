@@ -54,7 +54,10 @@ export class AddCoursePageComponent implements OnInit {
 
   onSave() {
     if (this.param === 'new') {
-      this.coursesService.createCourse(this.course);
+      this.coursesService.createCourse({
+        ...this.course,
+        id: Math.random().toString().slice(2),
+      });
     } else {
       this.coursesService.updateItem(this.course);
     }

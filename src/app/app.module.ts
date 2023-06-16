@@ -1,6 +1,6 @@
+import { NgModule } from '@angular/core';
 import { DurationPipe } from './pipes/duration.pipe';
 import { AddCoursePageModule } from './components/add-course-page/add-course-page.module';
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { LoginPageModule } from './components/login-page/login-page.module';

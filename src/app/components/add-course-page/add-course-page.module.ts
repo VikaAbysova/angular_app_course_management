@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AddCoursePageRoutingModule } from './add-course-page-routing.module';
+import { AddCoursePageRoutingModule } from './../../add-course-page-routing.module';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { FormsModule } from '@angular/forms';
 import { AddCourseAuthorsComponent } from './add-course-authors/add-course-authors.component';
