@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AuthGuard } from '../app/guards/auth.guard';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
@@ -36,7 +36,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

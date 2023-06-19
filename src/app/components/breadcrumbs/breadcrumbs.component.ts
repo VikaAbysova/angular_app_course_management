@@ -22,7 +22,7 @@ export class BreadcrumbsComponent implements OnInit {
         const currentRoute = this.router.routerState.snapshot.root;
         const courseId = currentRoute.firstChild?.paramMap.get('id');
         if (courseId) {
-          this.title = this.courseService.getItemById(courseId)?.title;
+          this.title = this.courseService.getItemById(courseId)?.name;
         } else {
           this.title = '';
         }

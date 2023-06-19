@@ -9,7 +9,7 @@
       name="title"
       placeholder="Enter title"
       class="input"
-      [(ngModel)]="course.title"
+      [(ngModel)]="course.name"
       required
     />
   </div>
@@ -29,7 +29,7 @@
     ></textarea>
   </div>
   <app-add-course-date
-    [dateValue]="creationDate | date: 'MM.dd.yyyy'"
+    [dateValue]="date | date: 'MM.dd.yyyy'"
     (date)="setDate($event)"
   ></app-add-course-date>
   <app-add-course-duration
@@ -38,7 +38,7 @@
   ></app-add-course-duration>
   <app-add-course-authors></app-add-course-authors>
   <div class="action">
-    <button class="btn" type="submit" (click)="onSave()">Save</button>
+    <button class="btn" type="submit" (click)="onSave($event)">Save</button>
     <button class="btn" (click)="onCancel()">Cancel</button>
   </div>
 </form>

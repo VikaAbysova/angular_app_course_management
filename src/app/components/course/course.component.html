@@ -1,12 +1,12 @@
 <article
   class="course"
-  [appFreshBorder]="course.creationDate"
-  [ngClass]="{ 'background-topRated': course.topRated }"
+  [appFreshBorder]="course.date"
+  [ngClass]="{ 'background-topRated': course.isTopRated }"
 >
   <div class="describe">
     <div class="course-header">
-      <h1 class="title" [ngClass]="{ 'icon-star': course.topRated }">
-        {{ course.title | uppercase }}
+      <h1 class="title" [ngClass]="{ 'icon-star': course.isTopRated }">
+        {{ course.name | uppercase }}
       </h1>
       <div class="time">
         <div class="clock">
@@ -15,7 +15,7 @@
         </div>
         <div class="calendar">
           <i class="fa-solid fa-calendar-days"></i>
-          {{ course.creationDate | date : "d MMM, y" }}
+          {{ course.date | date : "d MMM, y" }}
         </div>
       </div>
     </div>

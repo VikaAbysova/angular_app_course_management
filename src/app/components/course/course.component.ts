@@ -23,12 +23,12 @@ export class CourseComponent implements OnChanges {
   constructor(private durationPipe: DurationPipe) {}
 
   emitDeleteId() {
-    this.deleteId.emit(this.course.id);
+    this.deleteId.emit(this.course.id as string);
   }
 
   ngOnChanges(): void {
     this.transformedDuration = this.durationPipe.transform(
-      this.course.durationMin
+      this.course.durationMin as number
     );
   }
 }

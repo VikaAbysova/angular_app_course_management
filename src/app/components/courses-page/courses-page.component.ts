@@ -1,6 +1,6 @@
+import { HttpParams, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FilterCoursesPipe } from '../../pipes/filter-courses.pipe';
-import { coursesList } from '../../mocks/courses.mock';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../../interfaces/course.interface';
 import { CoursesService } from '../../services/courses.service';
@@ -8,10 +8,13 @@ import { CoursesService } from '../../services/courses.service';
 @Component({
   selector: 'app-courses-page',
   templateUrl: './courses-page.component.html',
-  styleUrls: ['./courses-page.component.scss']
+  styleUrls: ['./courses-page.component.scss'],
 })
 export class CoursesPageComponent implements OnInit {
-  courses: Course[];
+  courses: Course[] = [];
+  id: string;
+  load = true;
+
   constructor(
     private filterCoursesPipe: FilterCoursesPipe,
     private coursesService: CoursesService,
@@ -19,20 +22,42 @@ export class CoursesPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.courses = this.coursesService.getList();
+    const start = '0';
+    const count = '2';
+    let params = new HttpParams();
+    params = start ? params.append('start', start) : params;
+    params = count ? params.append('count', count) : params;
+    params = params.append('sort', 'date');
+    this.coursesService
+      .getList(params as HttpParams)
+      .subscribe((gotCourses: Course[]) => {
+        this.courses = gotCourses;
+      });
   }
 
   applyFilter(courseTitle: string): void {
-    this.courses = this.filterCoursesPipe.transform(courseTitle, coursesList);
+    this.filterCoursesPipe
+      .transform(courseTitle)
+      .subscribe((course) => (this.courses = course));
   }
 
   deleteCourse(id: string) {
     const result = prompt('Do you really want to delete this course?', 'yes');
     if (result === 'yes') {
-      this.coursesService.removeItem(id);
-      this.courses = this.coursesService.getList();
+      this.coursesService
+        .removeItem(id)
+        .subscribe((response: HttpResponse<object>) => {
+          if (response.status === 200) {
+            this.courses = this.courses.filter((course) => course.id !== id);
+          }
+        });
     }
     console.log('delete id', id);
+  }
+
+  loadCourses(coursesList: Course[]) {
+    this.courses = coursesList;
+    this.load = false;
   }
 
   addCourse() {
@@ -40,6 +65,6 @@ export class CoursesPageComponent implements OnInit {
   }
 
   trackById(index: number, course: Course): string {
-    return course.id;
+    return course.id as string;
   }
 }

@@ -4,6 +4,8 @@ import { AddCoursePageModule } from './components/add-course-page/add-course-pag
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { LoginPageModule } from './components/login-page/login-page.module';
+import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from './interceptors/index.interceptor';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -38,8 +40,15 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     IfAuthenticatedDirective,
     NotFoundPageComponent,
   ],
-  imports: [BrowserModule, FormsModule, LoginPageModule, AddCoursePageModule, AppRoutingModule],
-  providers: [OrderByDatePipe, FilterCoursesPipe, DurationPipe],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    LoginPageModule,
+    AddCoursePageModule,
+    AppRoutingModule,
+    HttpClientModule
+  ],
+  providers: [OrderByDatePipe, FilterCoursesPipe, DurationPipe, httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

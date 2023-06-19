@@ -17,4 +17,4 @@
   <p class="message">NO DATA, FEEL FREE TO ADD NEW COURSE</p>
 </ng-template>
 
-<app-load-more-btn *ngIf="courses.length"></app-load-more-btn>
+<app-load-more-btn (coursesEmit)="loadCourses($event)" *ngIf="load"></app-load-more-btn>

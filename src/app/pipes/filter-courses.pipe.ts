@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs';
+import { CoursesService } from 'src/app/services/courses.service';
+import { HttpParams } from '@angular/common/http';
 import { Course } from 'src/app/interfaces/course.interface';
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -5,9 +8,11 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filterCourses',
 })
 export class FilterCoursesPipe implements PipeTransform {
-  transform(input: string, coursesList: Course[]): Course[] {
-    return coursesList.filter((course) =>
-      course.title.toLowerCase().includes(input.toLowerCase())
-    );
+  constructor(private coursesService: CoursesService) {}
+
+  transform(term?: string): Observable<Course[]> {
+    let params = new HttpParams();
+    params = term?.trim() ? params.append('textFragment', term) : params;
+    return this.coursesService.getList(params);
   }
 }

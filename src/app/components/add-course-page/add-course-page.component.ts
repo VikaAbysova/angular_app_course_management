@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Course } from './../../interfaces/course.interface';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CoursesService } from './../../services/courses.service';
@@ -9,17 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-course-page.component.scss'],
 })
 export class AddCoursePageComponent implements OnInit {
-  creationDate: string | Date;
+  date: string | Date;
   durationMin: number;
   param: string;
 
   course: Course = {
     id: '',
-    title: '',
+    name: '',
     description: '',
-    creationDate: new Date(),
+    date: new Date(),
     durationMin: 0,
-    topRated: false,
+    isTopRated: false,
   };
 
   constructor(
@@ -36,30 +37,33 @@ export class AddCoursePageComponent implements OnInit {
         this.course = {
           ...(this.coursesService.getItemById(this.param) as Course),
         };
-        this.creationDate = this.course.creationDate;
+        this.date = this.course.date;
         this.durationMin = this.course.durationMin as number;
         return;
       }
-      this.course.id = Math.random().toString().slice(2);
     });
   }
 
   setDate(date: string | Date): void {
-    this.course.creationDate = date as string;
+    this.course.date = date as string;
   }
 
   setDuration(minutes: number): void {
     this.course.durationMin = minutes;
   }
 
-  onSave() {
+  onSave(e: Event) {
+    e.preventDefault();
     if (this.param === 'new') {
-      this.coursesService.createCourse({
-        ...this.course,
-        id: Math.random().toString().slice(2),
-      });
+      this.coursesService
+        .createCourse(this.course)
+        .subscribe((response: HttpResponse<object>) => {
+          if (response.status === 201) {
+            this.coursesService.getList();
+          }
+        });
     } else {
-      this.coursesService.updateItem(this.course);
+      this.coursesService.updateItem(this.course, +this.course.id).subscribe();
     }
     this.router.navigate(['/courses']);
   }
