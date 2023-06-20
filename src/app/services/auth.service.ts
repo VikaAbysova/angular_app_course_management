@@ -1,6 +1,6 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserEntity } from '../interfaces/User.interface';
+import { UserEntity } from '../interfaces/user.interface';
 import { catchError } from 'rxjs';
 import { HandleErrorService } from './handle-error.service';
 import { USERS_URL } from '../constants/urls.consts';
