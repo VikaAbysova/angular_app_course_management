@@ -12,7 +12,6 @@ import { CoursesService } from '../../services/courses.service';
 })
 export class CoursesPageComponent implements OnInit {
   courses: Course[] = [];
-  id: string;
   load = true;
 
   constructor(

@@ -1,9 +1,8 @@
+import { LoginPageComponent } from './components/login-page/login-page.component';
 import { NgModule } from '@angular/core';
 import { DurationPipe } from './pipes/duration.pipe';
-import { AddCoursePageModule } from './components/add-course-page/add-course-page.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { LoginPageModule } from './components/login-page/login-page.module';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './interceptors/index.interceptor';
 
@@ -39,12 +38,11 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     FilterCoursesPipe,
     IfAuthenticatedDirective,
     NotFoundPageComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    LoginPageModule,
-    AddCoursePageModule,
     AppRoutingModule,
     HttpClientModule
   ],
