@@ -1,8 +1,8 @@
-import { HttpResponse } from '@angular/common/http';
 import { Course } from './../../interfaces/course.interface';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CoursesService } from './../../services/courses.service';
 import { Component, OnInit } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-course-page',
@@ -18,7 +18,7 @@ export class AddCoursePageComponent implements OnInit {
     id: '',
     name: '',
     description: '',
-    date: new Date(),
+    date: new Date(Date.now()),
     durationMin: 0,
     isTopRated: false,
   };
@@ -33,14 +33,22 @@ export class AddCoursePageComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.param = params['id'];
 
-      if (Object.keys(params)[0] === 'id') {
-        this.course = {
-          ...(this.coursesService.getItemById(this.param) as Course),
-        };
-        this.date = this.course.date;
-        this.durationMin = this.course.durationMin as number;
-        return;
+      if (Number(+this.param)) {
+        console.log('param', this.param);
+
+        this.coursesService
+          .getItemById(this.param)
+          .subscribe(
+            (course) => (
+              (this.course = course),
+              (this.date = course.date),
+              (this.durationMin = course.durationMin as number)
+            )
+          );
       }
+      this.date = this.course.date;
+      this.durationMin = this.course.durationMin as number;
+      return;
     });
   }
 
@@ -52,16 +60,13 @@ export class AddCoursePageComponent implements OnInit {
     this.course.durationMin = minutes;
   }
 
-  onSave(e: Event) {
-    e.preventDefault();
+  onSave() {
     if (this.param === 'new') {
+      let params = new HttpParams();
+      params = params.append('sort', 'date');
       this.coursesService
         .createCourse(this.course)
-        .subscribe((response: HttpResponse<object>) => {
-          if (response.status === 201) {
-            this.coursesService.getList();
-          }
-        });
+        .subscribe(() => this.coursesService.getList(params));
     } else {
       this.coursesService.updateItem(this.course, +this.course.id).subscribe();
     }

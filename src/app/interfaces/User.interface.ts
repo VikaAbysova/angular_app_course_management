@@ -1,10 +1,8 @@
+import { Name } from './name.interface';
 export interface UserEntity {
   id?: number;
-  fakeToken: string;
-  name: {
-    first: string;
-    last: string;
-  };
+  token: string;
+  name: Name;
   login: string;
   password: string;
 }

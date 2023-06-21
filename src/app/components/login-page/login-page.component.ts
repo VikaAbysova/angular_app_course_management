@@ -1,3 +1,4 @@
+import { Credentials } from './../../interfaces/credentials.interface';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component } from '@angular/core';
@@ -8,17 +9,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-  emailValue: string;
-  passwordValue: string;
+  credentials: Credentials = {
+    login: '',
+    password: '',
+  };
 
-  constructor(
-    public authService: AuthService,
-    private router: Router,
-  ) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
-  async onLogin() {
-    if (this.emailValue && this.passwordValue) {
-      this.authService.login();
+  onLogin() {
+    if (this.credentials.login && this.credentials.password) {
+      this.authService.login(this.credentials);
       this.authService.isAuth = true;
       this.router.navigate(['/courses']);
     }

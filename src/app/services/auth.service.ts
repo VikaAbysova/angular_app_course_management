@@ -1,35 +1,32 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Token } from './../interfaces/token.interface';
+import { Credentials } from './../interfaces/credentials.interface';
+import { environment } from './../environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserEntity } from '../interfaces/user.interface';
-import { catchError } from 'rxjs';
+import { catchError, Observable, map } from 'rxjs';
 import { HandleErrorService } from './handle-error.service';
-import { USERS_URL } from '../constants/urls.consts';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService extends HandleErrorService {
   isAuth: boolean;
+  token: Token;
+  userLogin: string;
 
-  constructor(
-    private http: HttpClient,
-    private errorService: HandleErrorService
-  ) {}
+  constructor(private http: HttpClient) {
+    super();
+  }
 
-  login() {
+  login(credentials: Credentials): void {
     this.http
-      .get<UserEntity[]>(USERS_URL, {
-        observe: 'response',
-      })
-      .pipe(catchError(this.errorService.handleError))
-      .subscribe((response: HttpResponse<UserEntity[]>) => {
-        if (response.ok && response.body?.length) {
-          const user = response.body[1];
-          const { first } = user.name;
-          const token = user.fakeToken;
-          localStorage.setItem('firstName', first);
-          localStorage.setItem('token', token);
-        }
+      .post<Token>(`${environment.baseUrl}/auth/login`, credentials)
+      .pipe(catchError(this.handleError))
+      .subscribe((res) => {
+        localStorage.setItem('token', res.token),
+          (this.token = res),
+          this.getUserInfo().subscribe((login) => (this.userLogin = login));
       });
   }
 
@@ -41,7 +38,12 @@ export class AuthService {
     return this.isAuth;
   }
 
-  getUserInfo() {
-    return localStorage.getItem('firstName');
+  getUserInfo(): Observable<string> {
+    return this.http
+      .post<UserEntity>(`${environment.baseUrl}/auth/userinfo`, this.token)
+      .pipe(
+        catchError(this.handleError),
+        map((userInfo) => userInfo.login)
+      );
   }
 }

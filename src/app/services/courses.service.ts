@@ -1,57 +1,62 @@
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Course } from '../interfaces/course.interface';
 import { HandleErrorService } from './handle-error.service';
-import { catchError, map, Observable, tap } from 'rxjs';
-import { COURSES_URL } from '../constants/urls.consts';
+import { catchError, map, Observable} from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CoursesService {
+export class CoursesService extends HandleErrorService {
   coursesList: Course[] = [];
 
   constructor(
     private http: HttpClient,
     private errorService: HandleErrorService
-  ) {}
+  ) {
+    super();
+  }
 
   getList(params?: HttpParams): Observable<Course[]> {
-    return this.http.get<Course[]>(COURSES_URL, { params }).pipe(
-      map((courses: Course[]) => {
-        return courses.map((course: Course) => {
-          return {
-            ...course,
-            id: course.id.toString(),
-            date: new Date(course.date),
-          };
-        });
-      }),
-      tap((modifCourses) => (this.coursesList = modifCourses)),
-      catchError(this.errorService.handleError)
-    );
-  }
-
-  createCourse(course: Course): Observable<HttpResponse<Course>> {
     return this.http
-      .post<Course>(COURSES_URL, course, { observe: 'response' })
-      .pipe(catchError(this.errorService.handleError));
+      .get<Course[]>(`${environment.baseUrl}/courses`, { params })
+      .pipe(
+        map((courses: Course[]) => {
+          return courses.map((course: Course) => {
+            return {
+              ...course,
+              id: course.id.toString(),
+              date: new Date(course.date),
+            };
+          });
+        }),
+        catchError(this.handleError)
+      );
   }
 
-  getItemById(id: string) {
-    return this.coursesList.find((course) => course.id === id);
+  createCourse(course: Course): Observable<Course> {
+    return this.http
+      .post<Course>(`${environment.baseUrl}/courses`, course)
+      .pipe(catchError(this.handleError));
+  }
+
+  getItemById(id: string): Observable<Course> {
+    return this.http
+      .get<Course>(`${environment.baseUrl}/courses/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
   updateItem(course: Course, id: number): Observable<Course> {
     return this.http
-      .patch<Course>(`${COURSES_URL}/${id}`, course)
-      .pipe(catchError(this.errorService.handleError));
+      .patch<Course>(`${environment.baseUrl}/courses/${id}`, course)
+      .pipe(catchError(this.handleError));
   }
 
-  removeItem(id: string): Observable<HttpResponse<Course>> {
+  removeItem(id: string): Observable<Course> {
     console.log('remove', id);
     return this.http
-      .delete<Course>(`${COURSES_URL}/${id}`, { observe: 'response' })
-      .pipe(catchError(this.errorService.handleError));
+      .delete<Course>(`${environment.baseUrl}/courses/${id}`)
+      .pipe(catchError(this.handleError));
   }
 }

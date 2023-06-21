@@ -7,7 +7,7 @@
 
 <div *ngIf="courses.length; else message">
   <app-course
-    *ngFor="let c of courses | orderByDate; trackBy: trackById"
+    *ngFor="let c of courses; trackBy: trackById"
     [course]="c"
     (deleteId)="deleteCourse($event)"
   ></app-course>
