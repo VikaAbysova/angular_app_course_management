@@ -22,15 +22,15 @@ export class CoursesService extends HandleErrorService {
     return this.http
       .get<Course[]>(`${environment.baseUrl}/courses`, { params })
       .pipe(
-        map((courses: Course[]) => {
-          return courses.map((course: Course) => {
+        map((courses: Course[]) =>
+          courses.map((course: Course) => {
             return {
               ...course,
               id: course.id.toString(),
               date: new Date(course.date),
             };
-          });
-        }),
+          })
+        ),
         catchError(this.handleError)
       );
   }
