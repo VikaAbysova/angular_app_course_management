@@ -1,8 +1,10 @@
+import { DataService } from './../../services/data.service';
 import { HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../../interfaces/course.interface';
 import { CoursesService } from '../../services/courses.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-courses-page',
@@ -12,13 +14,32 @@ import { CoursesService } from '../../services/courses.service';
 export class CoursesPageComponent implements OnInit {
   courses: Course[] = [];
   load = true;
+  subscribtion: Subscription;
 
-  constructor(private coursesService: CoursesService, private router: Router) {}
+  constructor(
+    private coursesService: CoursesService,
+    private router: Router,
+    private dataService: DataService
+  ) {}
 
   ngOnInit(): void {
     const start = '0';
     const count = '2';
     let params = new HttpParams();
+
+    this.subscribtion = this.dataService.searchData$.subscribe((data) => {
+      let params = new HttpParams();
+      this.load = true;
+      if (data.length >= 3) {
+        params = params.append('textFragment', data);
+        this.coursesService
+          .getList(params)
+          .subscribe((gotCourses: Course[]) => {
+            this.courses = gotCourses;
+          });
+      }
+    });
+
     params = start ? params.append('start', start) : params;
     params = count ? params.append('count', count) : params;
     params = params.append('sort', 'date');
@@ -27,15 +48,15 @@ export class CoursesPageComponent implements OnInit {
     });
   }
 
-  applyFilter(courseTitle: string): void {
-    let params = new HttpParams();
-    params = courseTitle
-      ? params.append('textFragment', courseTitle)
-      : params.append('sort', 'date');
-    this.coursesService.getList(params).subscribe((course) => {
-      this.courses = course;
-    });
-  }
+  // applyFilter(courseTitle: string): void {
+  //   let params = new HttpParams();
+  //   params = courseTitle
+  //     ? params.append('textFragment', courseTitle)
+  //     : params.append('sort', 'date');
+  //   this.coursesService.getList(params).subscribe((course) => {
+  //     this.courses = course;
+  //   });
+  // }
 
   deleteCourse(id: string) {
     const result = prompt('Do you really want to delete this course?', 'yes');
