@@ -1,7 +1,6 @@
 import { Course } from 'src/app/interfaces/course.interface';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CoursesService } from 'src/app/services/courses.service';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-load-more-btn',
@@ -14,10 +13,8 @@ export class LoadMoreBtnComponent {
 
   loadMore(e: Event) {
     e.preventDefault();
-    let params = new HttpParams();
-    params = params.append('sort', 'date')
     this.coursesService
-      .getList(params)
+      .getList()
       .subscribe((courses) => this.coursesEmit.emit(courses));
   }
 }

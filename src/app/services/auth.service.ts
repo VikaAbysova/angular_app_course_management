@@ -1,11 +1,11 @@
 import { Token } from './../interfaces/token.interface';
 import { Credentials } from './../interfaces/credentials.interface';
-import { environment } from './../environments/environment';
+import { environment } from '../environments/environment.dev';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserEntity } from '../interfaces/user.interface';
-import { catchError, Observable, map } from 'rxjs';
+import { catchError, Subject } from 'rxjs';
 import { HandleErrorService } from './handle-error.service';
+import { UserEntity } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ import { HandleErrorService } from './handle-error.service';
 export class AuthService extends HandleErrorService {
   isAuth: boolean;
   token: Token;
-  userLogin: string;
+  loginValue$ = new Subject<string>();
 
   constructor(private http: HttpClient) {
     super();
@@ -23,10 +23,9 @@ export class AuthService extends HandleErrorService {
     this.http
       .post<Token>(`${environment.baseUrl}/auth/login`, credentials)
       .pipe(catchError(this.handleError))
-      .subscribe((res) => {
-        localStorage.setItem('token', res.token),
-          (this.token = res),
-          this.getUserInfo().subscribe((login) => (this.userLogin = login));
+      .subscribe((res: Token) => {
+        localStorage.setItem('token', res.token), (this.token = res);
+        this.getUserInfo();
       });
   }
 
@@ -38,12 +37,10 @@ export class AuthService extends HandleErrorService {
     return this.isAuth;
   }
 
-  getUserInfo(): Observable<string> {
-    return this.http
+  getUserInfo(): void {
+    this.http
       .post<UserEntity>(`${environment.baseUrl}/auth/userinfo`, this.token)
-      .pipe(
-        catchError(this.handleError),
-        map((userInfo) => userInfo.login)
-      );
+      .pipe(catchError(this.handleError))
+      .subscribe((userInfo) => this.loginValue$.next(userInfo.login));
   }
 }

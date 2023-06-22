@@ -2,7 +2,6 @@ import { Course } from './../../interfaces/course.interface';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CoursesService } from './../../services/courses.service';
 import { Component, OnInit } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-course-page',
@@ -62,11 +61,9 @@ export class AddCoursePageComponent implements OnInit {
 
   onSave() {
     if (this.param === 'new') {
-      let params = new HttpParams();
-      params = params.append('sort', 'date');
       this.coursesService
         .createCourse(this.course)
-        .subscribe(() => this.coursesService.getList(params));
+        .subscribe(() => this.coursesService.getList());
     } else {
       this.coursesService.updateItem(this.course, +this.course.id).subscribe();
     }

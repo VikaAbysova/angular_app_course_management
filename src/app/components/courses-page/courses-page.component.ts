@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../../interfaces/course.interface';
 import { CoursesService } from '../../services/courses.service';
-import { Subscription } from 'rxjs';
+import { Subscription, debounceTime, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-courses-page',
@@ -27,47 +27,36 @@ export class CoursesPageComponent implements OnInit {
     const count = '2';
     let params = new HttpParams();
 
-    this.subscribtion = this.dataService.searchData$.subscribe((data) => {
-      let params = new HttpParams();
-      this.load = true;
-      if (data.length >= 3) {
-        params = params.append('textFragment', data);
-        this.coursesService
-          .getList(params)
-          .subscribe((gotCourses: Course[]) => {
-            this.courses = gotCourses;
-          });
-      }
-    });
+    this.subscribtion = this.dataService.searchData$
+      .pipe(
+        debounceTime(700),
+        switchMap((data) => {
+          let params = new HttpParams();
+          this.load = true;
+          if (data.length >= 3) {
+            params = params.append('textFragment', data);
+          }
+          return this.coursesService.getList(params);
+        })
+      )
+      .subscribe((gotCourses: Course[]) => {
+        this.courses = gotCourses;
+      });
 
     params = start ? params.append('start', start) : params;
     params = count ? params.append('count', count) : params;
-    params = params.append('sort', 'date');
     this.coursesService.getList(params).subscribe((gotCourses: Course[]) => {
       this.courses = gotCourses;
     });
   }
 
-  // applyFilter(courseTitle: string): void {
-  //   let params = new HttpParams();
-  //   params = courseTitle
-  //     ? params.append('textFragment', courseTitle)
-  //     : params.append('sort', 'date');
-  //   this.coursesService.getList(params).subscribe((course) => {
-  //     this.courses = course;
-  //   });
-  // }
-
   deleteCourse(id: string) {
     const result = prompt('Do you really want to delete this course?', 'yes');
     if (result === 'yes') {
-      let params = new HttpParams();
-      params = params.append('sort', 'date');
-      this.coursesService.removeItem(id).subscribe(() => {
-        this.coursesService
-          .getList(params)
-          .subscribe((courses) => (this.courses = courses));
-      });
+      this.coursesService
+        .removeItem(id)
+        .pipe(switchMap(() => this.coursesService.getList()))
+        .subscribe((courses) => (this.courses = courses));
     }
     console.log('delete id', id);
   }

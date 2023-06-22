@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { DurationPipe } from './pipes/duration.pipe';
 import { BrowserModule } from '@angular/platform-browser';
+import { LoginPageModule } from './components/login-page/login-page.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './interceptors/index.interceptor';
-import { LoginPageComponent } from './components/login-page/login-page.component';
+// import { LoginPageComponent } from './components/login-page/login-page.component';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -34,13 +35,14 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     FreshBorderDirective,
     IfAuthenticatedDirective,
     NotFoundPageComponent,
-    LoginPageComponent
+    // LoginPageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    LoginPageModule
   ],
   providers: [DurationPipe, httpInterceptorProviders],
   bootstrap: [AppComponent],
