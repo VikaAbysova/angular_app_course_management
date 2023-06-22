@@ -1,17 +1,17 @@
 <form action="#" class="login">
   <h1>Login</h1>
   <div class="email">
-    <label for="email" class="label"
-      >E-mail:<span class="required">*required</span></label
+    <label for="login" class="label"
+      >Login:<span class="required">*required</span></label
     >
     <input
-      type="email"
+      type="text"
       required
-      id="email"
-      name="email"
-      placeholder="Enter e-mail"
+      id="login"
+      name="login"
+      placeholder="Enter login"
       class="input"
-      [(ngModel)]="emailValue"
+      [(ngModel)]="credentials.login"
     />
   </div>
   <div class="password">
@@ -25,7 +25,7 @@
       name="password"
       placeholder="Enter password"
       class="input"
-      [(ngModel)]="passwordValue"
+      [(ngModel)]="credentials.password"
     />
   </div>
   <div class="action">

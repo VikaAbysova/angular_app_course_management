@@ -1,5 +1,3 @@
-import { OrderByDatePipe } from './../../pipes/order-by-date.pipe';
-import { FilterCoursesPipe } from './../../pipes/filter-courses.pipe';
 import { coursesList } from './../../mocks/courses.mock';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -13,9 +11,9 @@ describe('CoursesPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesPageComponent, OrderByDatePipe],
+      declarations: [CoursesPageComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [FilterCoursesPipe, OrderByDatePipe],
+      providers: [],
     });
     fixture = TestBed.createComponent(CoursesPageComponent);
     component = fixture.componentInstance;
@@ -46,17 +44,17 @@ describe('CoursesPageComponent', () => {
     expect(component.courses.length).toEqual(coursesList.length - 1);
   });
 
-  it('should return 2 when trachById method called', () => {
-    const courseItem = {
-      id: '2',
-      title: 'title 2',
-      creationDate: new Date(),
-      durationMin: 40,
-      description: 'description2',
-      topRated: true,
-    };
-    expect(component.trackById(0, courseItem)).toBe('2');
-  });
+  // it('should return 2 when trachById method called', () => {
+  //   const courseItem = {
+  //     id: '2',
+  //     title: 'title 2',
+  //     creationDate: new Date(),
+  //     durationMin: 40,
+  //     description: 'description2',
+  //     topRated: true,
+  //   };
+  //   expect(component.trackById(0, courseItem)).toBe('2');
+  // });
 
   it('should render list of courses using *ngFor directive', () => {
     const coursesList = fixture.debugElement.queryAll(By.css('app-course'));

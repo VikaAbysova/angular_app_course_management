@@ -1,8 +1,12 @@
+import { Authors } from './authors.interface';
+
 export interface Course {
-  id: string;
-  title: string;
-  creationDate: Date | string;
-  durationMin: number | string;
+  id: string | number;
+  name: string;
   description: string;
-  topRated: boolean;
+  isTopRated: boolean;
+  date: Date | string;
+  durationMin?: number | string | undefined;
+  authors?: Authors[];
+  length?: number;
 }

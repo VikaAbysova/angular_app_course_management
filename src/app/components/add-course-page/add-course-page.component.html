@@ -9,7 +9,7 @@
       name="title"
       placeholder="Enter title"
       class="input"
-      [(ngModel)]="course.title"
+      [(ngModel)]="course.name"
       required
     />
   </div>
@@ -29,7 +29,7 @@
     ></textarea>
   </div>
   <app-add-course-date
-    [dateValue]="creationDate | date: 'MM.dd.yyyy'"
+    [dateValue]="date | date: 'MM.dd.yyyy'"
     (date)="setDate($event)"
   ></app-add-course-date>
   <app-add-course-duration

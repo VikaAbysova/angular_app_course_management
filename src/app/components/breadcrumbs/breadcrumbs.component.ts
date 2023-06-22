@@ -2,6 +2,7 @@ import { CoursesService } from './../../services/courses.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
+import { Course } from 'src/app/interfaces/course.interface';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -10,10 +11,7 @@ import { filter } from 'rxjs/operators';
 })
 export class BreadcrumbsComponent implements OnInit {
   title: string | undefined;
-  constructor(
-    private router: Router,
-    private courseService: CoursesService,
-  ) {}
+  constructor(private router: Router, private courseService: CoursesService) {}
 
   ngOnInit() {
     this.router.events
@@ -21,8 +19,12 @@ export class BreadcrumbsComponent implements OnInit {
       .subscribe(() => {
         const currentRoute = this.router.routerState.snapshot.root;
         const courseId = currentRoute.firstChild?.paramMap.get('id');
-        if (courseId) {
-          this.title = this.courseService.getItemById(courseId)?.title;
+
+        if (Number(courseId)) {
+          console.log('courseId', courseId);
+          this.courseService
+            .getItemById(courseId as string)
+            .subscribe((course: Course) => (this.title = course.name));
         } else {
           this.title = '';
         }

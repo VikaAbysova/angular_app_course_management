@@ -7,7 +7,7 @@
 
 <div *ngIf="courses.length; else message">
   <app-course
-    *ngFor="let c of courses | orderByDate; trackBy: trackById"
+    *ngFor="let c of courses; trackBy: trackById"
     [course]="c"
     (deleteId)="deleteCourse($event)"
   ></app-course>
@@ -17,4 +17,4 @@
   <p class="message">NO DATA, FEEL FREE TO ADD NEW COURSE</p>
 </ng-template>
 
-<app-load-more-btn *ngIf="courses.length"></app-load-more-btn>
+<app-load-more-btn (coursesEmit)="loadCourses($event)" *ngIf="load"></app-load-more-btn>
