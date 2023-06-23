@@ -1,3 +1,4 @@
+import { SpinnerService } from './spinner.service';
 import { Token } from './../interfaces/token.interface';
 import { Credentials } from './../interfaces/credentials.interface';
 import { environment } from '../environments/environment.dev';
@@ -15,7 +16,10 @@ export class AuthService extends HandleErrorService {
   token: Token;
   loginValue$ = new Subject<string>();
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private spinnerService: SpinnerService
+  ) {
     super();
   }
 
@@ -26,6 +30,7 @@ export class AuthService extends HandleErrorService {
       .subscribe((res: Token) => {
         localStorage.setItem('token', res.token), (this.token = res);
         this.getUserInfo();
+        this.spinnerService.showLoading(false);
       });
   }
 

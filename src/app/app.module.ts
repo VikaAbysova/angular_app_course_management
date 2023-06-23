@@ -20,6 +20,7 @@ import { IfAuthenticatedDirective } from './directives/if-authenticated.directiv
 import { AppRoutingModule } from './app-routing.module';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { SpinnerAnimationComponent } from './components/spinner-animation/spinner-animation.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     FreshBorderDirective,
     IfAuthenticatedDirective,
     NotFoundPageComponent,
+    SpinnerAnimationComponent,
     // LoginPageComponent
   ],
   imports: [
