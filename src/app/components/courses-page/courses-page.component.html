@@ -1,20 +1,25 @@
 <div class="adding-section">
-  <app-courses-search ></app-courses-search>
+  <app-courses-search></app-courses-search>
   <button class="btn btn-plus" (click)="addCourse()">
     <i class="fa-solid fa-plus"></i>Add course
   </button>
 </div>
 
-<div *ngIf="courses.length; else message">
-  <app-course
-    *ngFor="let c of courses; trackBy: trackById"
-    [course]="c"
-    (deleteId)="deleteCourse($event)"
-  ></app-course>
-</div>
+<ng-container *ngIf="courses$ | async as courses">
+  <div *ngIf="courses.length; else message">
+    <app-course
+      *ngFor="let c of courses; trackBy: trackById"
+      [course]="c"
+      (deleteId)="deleteCourse($event)"
+    ></app-course>
+  </div>
+</ng-container>
 
 <ng-template #message>
   <p class="message">NO DATA, FEEL FREE TO ADD NEW COURSE</p>
 </ng-template>
 
-<app-load-more-btn (coursesEmit)="loadCourses($event)" *ngIf="load"></app-load-more-btn>
+<app-load-more-btn
+  *ngIf="load"
+  (callEmit)="loadCourses()"
+></app-load-more-btn>

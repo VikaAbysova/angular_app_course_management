@@ -1,10 +1,14 @@
-import { SpinnerService } from './spinner.service';
+import {
+  selectIsAuth,
+  selectToken,
+} from './../store/auth-service/auth.selectors';
+import { Store } from '@ngrx/store';
 import { Token } from './../interfaces/token.interface';
 import { Credentials } from './../interfaces/credentials.interface';
 import { environment } from '../environments/environment.dev';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Subject } from 'rxjs';
+import { catchError, tap, Observable, map, switchMap } from 'rxjs';
 import { HandleErrorService } from './handle-error.service';
 import { UserEntity } from '../interfaces/user.interface';
 
@@ -12,26 +16,25 @@ import { UserEntity } from '../interfaces/user.interface';
   providedIn: 'root',
 })
 export class AuthService extends HandleErrorService {
-  isAuth: boolean;
-  token: Token;
-  loginValue$ = new Subject<string>();
+  // isAuth: boolean;
+  // token: Token;
+  // loginValue$ = new Subject<string>();
+  token$: Observable<Token>;
 
-  constructor(
-    private http: HttpClient,
-    private spinnerService: SpinnerService
-  ) {
+  constructor(private http: HttpClient, private store: Store) {
     super();
   }
 
-  login(credentials: Credentials): void {
-    this.http
+  login(credentials: Credentials) {
+    return this.http
       .post<Token>(`${environment.baseUrl}/auth/login`, credentials)
-      .pipe(catchError(this.handleError))
-      .subscribe((res: Token) => {
-        localStorage.setItem('token', res.token), (this.token = res);
-        this.getUserInfo();
-        this.spinnerService.showLoading(false);
-      });
+      .pipe(
+        catchError(this.handleError),
+        tap((res: Token) => {
+          localStorage.setItem('token', res.token),
+            (this.token$ = this.store.select(selectToken));
+        })
+      );
   }
 
   logout() {
@@ -39,13 +42,19 @@ export class AuthService extends HandleErrorService {
   }
 
   isAuthenticated() {
-    return this.isAuth;
+    return this.store.select(selectIsAuth);
   }
 
-  getUserInfo(): void {
-    this.http
-      .post<UserEntity>(`${environment.baseUrl}/auth/userinfo`, this.token)
-      .pipe(catchError(this.handleError))
-      .subscribe((userInfo) => this.loginValue$.next(userInfo.login));
+  getUserInfo(): Observable<string> {
+    return this.token$.pipe(
+      switchMap((token) =>
+        this.http.post<UserEntity>(
+          `${environment.baseUrl}/auth/userinfo`,
+          token
+        )
+      ),
+      catchError(this.handleError),
+      map((userInfo) => userInfo.login)
+    );
   }
 }

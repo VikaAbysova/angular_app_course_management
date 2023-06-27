@@ -1,3 +1,4 @@
+import { SpinnerService } from 'src/app/services/spinner.service';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,10 +21,14 @@ export class CourseComponent implements OnChanges {
   @Output() deleteId: EventEmitter<string> = new EventEmitter<string>();
 
   transformedDuration: string;
-  constructor(private durationPipe: DurationPipe) {}
+  constructor(
+    private durationPipe: DurationPipe,
+    private spinnerService: SpinnerService
+  ) {}
 
   emitDeleteId() {
     this.deleteId.emit(this.course.id as string);
+    this.spinnerService.showLoading(true);
   }
 
   ngOnChanges(): void {
