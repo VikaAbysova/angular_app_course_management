@@ -5,11 +5,9 @@ import { authReducer } from './store/auth-service/auth.reducer';
 import { NgModule, isDevMode } from '@angular/core';
 import { DurationPipe } from './pipes/duration.pipe';
 import { BrowserModule } from '@angular/platform-browser';
-import { LoginPageModule } from './components/login-page/login-page.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './interceptors/index.interceptor';
-// import { LoginPageComponent } from './components/login-page/login-page.component';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -47,7 +45,6 @@ import { courseReducer } from './store/course/course.reducer';
     IfAuthenticatedDirective,
     NotFoundPageComponent,
     SpinnerAnimationComponent,
-    // LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +52,6 @@ import { courseReducer } from './store/course/course.reducer';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    LoginPageModule,
     StoreModule.forRoot({
       auth: authReducer,
       courses: coursesReducer,

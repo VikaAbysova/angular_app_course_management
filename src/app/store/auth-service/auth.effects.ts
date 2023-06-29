@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Token } from './../../interfaces/token.interface';
 import { AuthService } from './../../services/auth.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -8,8 +9,9 @@ import {
   getUserInfo,
   getUserInfoSuccess,
 } from './auth.actions';
-import { exhaustMap, map, catchError, EMPTY, tap } from 'rxjs';
+import { exhaustMap, map, catchError, EMPTY, tap, switchMap, of } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Injectable()
 export class AuthEffects {
@@ -17,11 +19,15 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(login),
       exhaustMap(({ credentials }) =>
-        this.authService.login(credentials).pipe(
-          map((token: Token) => loginSuccess({ token })),
-          catchError(() => EMPTY)
-        )
-      )
+        this.authService
+          .login(credentials)
+          .pipe(
+            switchMap((token: Token) =>
+              of(loginSuccess({ token }), getUserInfo())
+            )
+          )
+      ),
+      catchError(() => EMPTY)
     );
   });
 
@@ -41,11 +47,22 @@ export class AuthEffects {
       exhaustMap(() =>
         this.authService.getUserInfo().pipe(
           map((login: string) => getUserInfoSuccess({ login })),
+          tap(
+            () => (
+              this.router.navigate(['/courses']),
+              this.spinnerService.showLoading(false)
+            )
+          ),
           catchError(() => EMPTY)
         )
       )
     );
   });
 
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private router: Router,
+    private spinnerService: SpinnerService
+  ) {}
 }

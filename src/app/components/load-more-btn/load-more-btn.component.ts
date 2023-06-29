@@ -13,12 +13,12 @@ export class LoadMoreBtnComponent {
     private store: Store,
     private spinnerService: SpinnerService
   ) {}
-  @Output() callEmit: EventEmitter<null> = new EventEmitter<null>();
+  @Output() isLoadingEmit: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   loadMore(e: Event) {
     e.preventDefault();
     this.store.dispatch(getCoursesList({}));
-    this.callEmit.emit();
+    this.isLoadingEmit.emit(false);
     this.spinnerService.showLoading(true)
   }
 }

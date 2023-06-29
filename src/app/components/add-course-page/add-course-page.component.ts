@@ -1,4 +1,3 @@
-import { getCoursesList } from './../../store/courses/courses.actions';
 import {
   getCourseItem,
   addCourse,
@@ -10,7 +9,7 @@ import { Course } from './../../interfaces/course.interface';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { Observable, tap } from 'rxjs';
+import { Observable} from 'rxjs';
 
 @Component({
   selector: 'app-add-course-page',
@@ -74,11 +73,6 @@ export class AddCoursePageComponent implements OnInit {
     this.spinnerService.showLoading(true);
     if (this.param === 'new') {
       this.store.dispatch(addCourse({ course: this.course }));
-      this.course$.pipe(
-        tap(() => {
-          this.store.dispatch(getCoursesList({}));
-        })
-      );
     } else {
       this.store.dispatch(
         editCourseItem({ course: this.course, id: Number(this.course.id) })

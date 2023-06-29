@@ -1,13 +1,20 @@
+import { getCoursesList } from './../courses/courses.actions';
 import { Injectable } from '@angular/core';
-import { getCourseItem, getCourseItemSuccess, addCourseSuccess, addCourse, editCourseItem, editCourseItemSuccess } from './course.actions';
+import {
+  getCourseItem,
+  getCourseItemSuccess,
+  addCourseSuccess,
+  addCourse,
+  editCourseItem,
+  editCourseItemSuccess,
+} from './course.actions';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CoursesService } from 'src/app/services/courses.service';
-import { EMPTY, catchError, exhaustMap, map } from 'rxjs';
+import { EMPTY, catchError, exhaustMap, map, of, switchMap } from 'rxjs';
 import { Course } from 'src/app/interfaces/course.interface';
 
 @Injectable()
 export class CourseEffects {
-
   getCourseItem$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(getCourseItem),
@@ -25,7 +32,9 @@ export class CourseEffects {
       ofType(addCourse),
       exhaustMap(({ course }) =>
         this.coursesService.createCourse(course).pipe(
-          map((course: Course) => addCourseSuccess({ course })),
+          switchMap((course: Course) =>
+            of(addCourseSuccess({ course }), getCoursesList({}))
+          ),
           catchError(() => EMPTY)
         )
       )
@@ -43,18 +52,6 @@ export class CourseEffects {
       )
     );
   });
-
-  // deleteCourse$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(deleteCourseItem),
-  //     exhaustMap(({ id }) =>
-  //       this.coursesService.removeItem(id).pipe(
-  //         map(() => getCoursesList({})),
-  //         catchError(() => EMPTY)
-  //       )
-  //     )
-  //   );
-  // });
 
   constructor(
     private actions$: Actions,

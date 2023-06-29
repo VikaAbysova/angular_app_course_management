@@ -16,9 +16,6 @@ import { UserEntity } from '../interfaces/user.interface';
   providedIn: 'root',
 })
 export class AuthService extends HandleErrorService {
-  // isAuth: boolean;
-  // token: Token;
-  // loginValue$ = new Subject<string>();
   token$: Observable<Token>;
 
   constructor(private http: HttpClient, private store: Store) {

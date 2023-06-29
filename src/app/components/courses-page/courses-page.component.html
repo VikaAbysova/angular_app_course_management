@@ -21,5 +21,5 @@
 
 <app-load-more-btn
   *ngIf="load"
-  (callEmit)="loadCourses()"
+  (isLoadingEmit)="loadCourses($event)"
 ></app-load-more-btn>
