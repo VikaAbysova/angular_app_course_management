@@ -8,7 +8,6 @@ import { selectCourse } from './../../store/course/course.selectors';
 import { Store } from '@ngrx/store';
 import { Course } from './../../interfaces/course.interface';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CoursesService } from './../../services/courses.service';
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Observable, tap } from 'rxjs';
@@ -34,7 +33,6 @@ export class AddCoursePageComponent implements OnInit {
   };
 
   constructor(
-    private coursesService: CoursesService,
     private spinnerService: SpinnerService,
     private router: Router,
     private route: ActivatedRoute,
@@ -53,7 +51,7 @@ export class AddCoursePageComponent implements OnInit {
         this.store.dispatch(getCourseItem({ id }));
         this.course$.subscribe(
           (course) => (
-            (this.course = {...course}),
+            (this.course = { ...course }),
             (this.date = course.date),
             (this.durationMin = course.durationMin as number)
           )

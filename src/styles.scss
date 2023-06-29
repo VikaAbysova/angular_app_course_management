@@ -25,6 +25,12 @@ body {
   border-radius: $primary-border-radius;
 }
 
+.btn-gray {
+  background-color: $primary-background-color;
+  color: $primary-color;
+  font-weight: bolder;
+}
+
 .faq-ref {
   font-size: small;
   color: blue;
