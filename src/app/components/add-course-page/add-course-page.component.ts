@@ -2,7 +2,7 @@ import { Course } from './../../interfaces/course.interface';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CoursesService } from './../../services/courses.service';
 import { Component, OnInit } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-add-course-page',
@@ -25,6 +25,7 @@ export class AddCoursePageComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
+    private spinnerService: SpinnerService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -61,14 +62,15 @@ export class AddCoursePageComponent implements OnInit {
   }
 
   onSave() {
+    this.spinnerService.showLoading(true);
     if (this.param === 'new') {
-      let params = new HttpParams();
-      params = params.append('sort', 'date');
-      this.coursesService
-        .createCourse(this.course)
-        .subscribe(() => this.coursesService.getList(params));
+      this.coursesService.createCourse(this.course).subscribe(() => {
+        this.coursesService.getList(), this.spinnerService.showLoading(false);
+      });
     } else {
-      this.coursesService.updateItem(this.course, +this.course.id).subscribe();
+      this.coursesService
+        .updateItem(this.course, +this.course.id)
+        .subscribe(() => this.spinnerService.showLoading(false));
     }
     this.router.navigate(['/courses']);
   }

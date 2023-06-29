@@ -1,3 +1,4 @@
+import { SpinnerService } from './../../services/spinner.service';
 import { Credentials } from './../../interfaces/credentials.interface';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
@@ -14,10 +15,15 @@ export class LoginPageComponent {
     password: '',
   };
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private spinnerService: SpinnerService
+  ) {}
 
   onLogin() {
     if (this.credentials.login && this.credentials.password) {
+      this.spinnerService.showLoading(true);
       this.authService.login(this.credentials);
       this.authService.isAuth = true;
       this.router.navigate(['/courses']);

@@ -1,10 +1,9 @@
 <div>
   <i class="fa-solid fa-magnifying-glass fa-rotate-90"></i>
   <input
-    [(ngModel)]="searchCourse"
+    (keyup)="handlerKeyupEvent($event)"
     class="input"
     type="search"
     placeholder="Text to search..."
   />
-  <button (click)="searchClick()" class="btn btn-search">Search</button>
 </div>

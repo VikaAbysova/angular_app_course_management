@@ -1,7 +1,7 @@
+import { SpinnerService } from './../../services/spinner.service';
 import { Course } from 'src/app/interfaces/course.interface';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CoursesService } from 'src/app/services/courses.service';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-load-more-btn',
@@ -9,15 +9,17 @@ import { HttpParams } from '@angular/common/http';
   styleUrls: ['./load-more-btn.component.scss'],
 })
 export class LoadMoreBtnComponent {
-  constructor(private coursesService: CoursesService) {}
+  constructor(
+    private coursesService: CoursesService,
+    private spinnerService: SpinnerService
+  ) {}
   @Output() coursesEmit: EventEmitter<Course[]> = new EventEmitter<Course[]>();
 
   loadMore(e: Event) {
     e.preventDefault();
-    let params = new HttpParams();
-    params = params.append('sort', 'date')
-    this.coursesService
-      .getList(params)
-      .subscribe((courses) => this.coursesEmit.emit(courses));
+    this.spinnerService.showLoading(true);
+    this.coursesService.getList().subscribe((courses) => {
+      this.coursesEmit.emit(courses), this.spinnerService.showLoading(false);
+    });
   }
 }

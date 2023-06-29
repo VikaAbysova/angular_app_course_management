@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-courses-search',
@@ -6,12 +7,11 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./courses-search.component.scss'],
 })
 export class CoursesSearchComponent {
-  searchCourse = '';
 
-  @Output() courseTitle: EventEmitter<string> = new EventEmitter<string>();
+constructor(private dataService: DataService){}
 
-  searchClick() {
-    this.courseTitle.emit(this.searchCourse);
-    console.log(this.searchCourse);
+handlerKeyupEvent(event: KeyboardEvent): void {
+  const dataValue = (event.target as HTMLInputElement).value
+    this.dataService.raiseDataKeyupEvent(dataValue)
   }
 }

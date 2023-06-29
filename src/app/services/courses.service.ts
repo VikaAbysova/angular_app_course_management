@@ -2,8 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Course } from '../interfaces/course.interface';
 import { HandleErrorService } from './handle-error.service';
-import { catchError, map, Observable} from 'rxjs';
-import { environment } from '../environments/environment';
+import { catchError, map, Observable } from 'rxjs';
+import { environment } from '../environments/environment.dev';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +11,14 @@ import { environment } from '../environments/environment';
 export class CoursesService extends HandleErrorService {
   coursesList: Course[] = [];
 
-  constructor(
-    private http: HttpClient,
-    private errorService: HandleErrorService
-  ) {
+  constructor(private http: HttpClient) {
     super();
   }
 
   getList(params?: HttpParams): Observable<Course[]> {
+    params = params
+      ? params.append('sort', 'date')
+      : new HttpParams().append('sort', 'date');
     return this.http
       .get<Course[]>(`${environment.baseUrl}/courses`, { params })
       .pipe(
