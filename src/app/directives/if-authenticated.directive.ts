@@ -4,13 +4,14 @@ import { Directive, TemplateRef, ViewContainerRef, Input } from '@angular/core';
   selector: '[appIfAuthenticated]',
 })
 export class IfAuthenticatedDirective {
-  @Input('appIfAuthenticated') set isAuth(condition: boolean) {
+  @Input('appIfAuthenticated') set isAuth(condition: boolean | null) {
     if (condition) {
       this.vieContainer.createEmbeddedView(this.templateRef);
-    } else {
-      this.vieContainer.clear();
+      return;
     }
+    this.vieContainer.clear();
   }
+
   constructor(
     private templateRef: TemplateRef<never>,
     private vieContainer: ViewContainerRef

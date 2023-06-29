@@ -1,7 +1,7 @@
-import { SpinnerService } from './../../services/spinner.service';
-import { Course } from 'src/app/interfaces/course.interface';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { getCoursesList } from './../../store/courses/courses.actions';
+import { Store } from '@ngrx/store';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CoursesService } from 'src/app/services/courses.service';
 
 @Component({
   selector: 'app-load-more-btn',
@@ -10,16 +10,15 @@ import { CoursesService } from 'src/app/services/courses.service';
 })
 export class LoadMoreBtnComponent {
   constructor(
-    private coursesService: CoursesService,
+    private store: Store,
     private spinnerService: SpinnerService
   ) {}
-  @Output() coursesEmit: EventEmitter<Course[]> = new EventEmitter<Course[]>();
+  @Output() isLoadingEmit: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   loadMore(e: Event) {
     e.preventDefault();
-    this.spinnerService.showLoading(true);
-    this.coursesService.getList().subscribe((courses) => {
-      this.coursesEmit.emit(courses), this.spinnerService.showLoading(false);
-    });
+    this.store.dispatch(getCoursesList({}));
+    this.isLoadingEmit.emit(false);
+    this.spinnerService.showLoading(true)
   }
 }

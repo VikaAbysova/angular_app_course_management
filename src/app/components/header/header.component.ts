@@ -1,3 +1,7 @@
+import { selectUserInfo } from './../../store/auth-service/auth.selectors';
+import { Observable } from 'rxjs';
+import { logout } from './../../store/auth-service/auth.actions';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
@@ -8,18 +12,19 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  loginValue: string;
-  constructor(public authService: AuthService, private router: Router) {}
+  loginValue$: Observable<string>;
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
-    this.authService.loginValue$.subscribe((userInfo) => {
-      this.loginValue = userInfo;
-    });
+this.loginValue$ = this.store.select(selectUserInfo)
   }
 
   onLogout() {
-    this.authService.logout();
-    this.authService.isAuth = false;
+    this.store.dispatch(logout());
     this.router.navigate(['login']);
   }
 }

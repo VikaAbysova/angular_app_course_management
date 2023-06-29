@@ -1,8 +1,15 @@
+import {
+  getCourseItem,
+  addCourse,
+  editCourseItem,
+} from './../../store/course/course.actions';
+import { selectCourse } from './../../store/course/course.selectors';
+import { Store } from '@ngrx/store';
 import { Course } from './../../interfaces/course.interface';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { CoursesService } from './../../services/courses.service';
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { Observable} from 'rxjs';
 
 @Component({
   selector: 'app-add-course-page',
@@ -13,6 +20,7 @@ export class AddCoursePageComponent implements OnInit {
   date: string | Date;
   durationMin: number;
   param: string;
+  course$: Observable<Course>;
 
   course: Course = {
     id: '',
@@ -24,32 +32,32 @@ export class AddCoursePageComponent implements OnInit {
   };
 
   constructor(
-    private coursesService: CoursesService,
     private spinnerService: SpinnerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
+    this.course$ = this.store.select(selectCourse);
+
     this.route.params.subscribe((params: Params) => {
       this.param = params['id'];
 
       if (Number(+this.param)) {
         console.log('param', this.param);
-
-        this.coursesService
-          .getItemById(this.param)
-          .subscribe(
-            (course) => (
-              (this.course = course),
-              (this.date = course.date),
-              (this.durationMin = course.durationMin as number)
-            )
-          );
+        const id = this.param;
+        this.store.dispatch(getCourseItem({ id }));
+        this.course$.subscribe(
+          (course) => (
+            (this.course = { ...course }),
+            (this.date = course.date),
+            (this.durationMin = course.durationMin as number)
+          )
+        );
       }
       this.date = this.course.date;
       this.durationMin = this.course.durationMin as number;
-      return;
     });
   }
 
@@ -64,13 +72,11 @@ export class AddCoursePageComponent implements OnInit {
   onSave() {
     this.spinnerService.showLoading(true);
     if (this.param === 'new') {
-      this.coursesService.createCourse(this.course).subscribe(() => {
-        this.coursesService.getList(), this.spinnerService.showLoading(false);
-      });
+      this.store.dispatch(addCourse({ course: this.course }));
     } else {
-      this.coursesService
-        .updateItem(this.course, +this.course.id)
-        .subscribe(() => this.spinnerService.showLoading(false));
+      this.store.dispatch(
+        editCourseItem({ course: this.course, id: Number(this.course.id) })
+      );
     }
     this.router.navigate(['/courses']);
   }

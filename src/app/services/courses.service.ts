@@ -1,9 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Course } from '../interfaces/course.interface';
 import { HandleErrorService } from './handle-error.service';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, tap } from 'rxjs';
 import { environment } from '../environments/environment.dev';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,16 +12,18 @@ import { environment } from '../environments/environment.dev';
 export class CoursesService extends HandleErrorService {
   coursesList: Course[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private spinnerService: SpinnerService
+  ) {
     super();
   }
 
-  getList(params?: HttpParams): Observable<Course[]> {
-    params = params
-      ? params.append('sort', 'date')
-      : new HttpParams().append('sort', 'date');
+  getList(params?: { [key: string]: string }): Observable<Course[]> {
     return this.http
-      .get<Course[]>(`${environment.baseUrl}/courses`, { params })
+      .get<Course[]>(`${environment.baseUrl}/courses`, {
+        params: { ...params, sort: 'date' },
+      })
       .pipe(
         map((courses: Course[]) =>
           courses.map((course: Course) => {
@@ -31,7 +34,8 @@ export class CoursesService extends HandleErrorService {
             };
           })
         ),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        tap(() => this.spinnerService.showLoading(false))
       );
   }
 

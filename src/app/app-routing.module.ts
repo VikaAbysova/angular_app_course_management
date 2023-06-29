@@ -3,11 +3,16 @@ import { AuthGuard } from '../app/guards/auth.guard';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { CoursesPageComponent } from './components/courses-page/courses-page.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'courses', pathMatch: 'full' },
-  { path: 'login', component: LoginPageComponent },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./components/login-page/login-page.module').then(
+        (m) => m.LoginPageModule
+      ),
+  },
   {
     path: 'courses',
     component: CoursesPageComponent,

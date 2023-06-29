@@ -4,7 +4,8 @@
 .form {
   @extend %form-shape;
   gap: 0.5rem;
-  margin: -2rem 3rem;
+  background-color: white;
+  padding: 0 5rem 1rem 5rem;
 }
 
 .input {
@@ -16,4 +17,8 @@
 .action {
   @extend %flex-between;
   width: 20rem;
+}
+
+.btn-green {
+  background-color: #9bc837;;
 }

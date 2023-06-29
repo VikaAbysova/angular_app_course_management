@@ -3,7 +3,7 @@
 </app-header>
 
 <app-breadcrumbs
-  *appIfAuthenticated="authService.isAuthenticated()"
+  *appIfAuthenticated="authService.isAuthenticated()|async"
 ></app-breadcrumbs>
 
 <router-outlet> </router-outlet>

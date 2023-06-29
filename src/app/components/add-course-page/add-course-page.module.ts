@@ -16,7 +16,11 @@ import { AddCourseDurationComponent } from './add-course-duration/add-course-dur
     AddCourseAuthorsComponent,
     DurationPipe,
   ],
-  imports: [CommonModule, FormsModule, AddCoursePageRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    AddCoursePageRoutingModule,
+  ],
   exports: [AddCoursePageComponent],
 })
 export class AddCoursePageModule {}
