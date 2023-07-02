@@ -11,7 +11,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CoursesEffects {
-
   coursesList$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(getCoursesList),
@@ -26,19 +25,17 @@ export class CoursesEffects {
     );
   });
 
-  deleteCourse$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(deleteCourseItem),
-        exhaustMap(({ id }) =>
-          this.coursesService.removeItem(id).pipe(
-            map(() => getCoursesList({})),
-            catchError(() => EMPTY)
-          )
+  deleteCourse$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(deleteCourseItem),
+      exhaustMap(({ id }) =>
+        this.coursesService.removeItem(id).pipe(
+          map(() => getCoursesList({})),
+          catchError(() => EMPTY)
         )
-      );
-    }
-  );
+      )
+    );
+  });
 
   constructor(
     private actions$: Actions,

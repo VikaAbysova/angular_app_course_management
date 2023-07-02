@@ -11,7 +11,7 @@ export const initialCourseState: CourseState = {
     description: '',
     isTopRated: false,
     date: '',
-    durationMin: 0,
+    durationMin: '',
     length: 0,
     authors: [],
   },

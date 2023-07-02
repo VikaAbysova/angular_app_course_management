@@ -1,4 +1,4 @@
-<form action="#" class="form">
+<form action="#" class="form" [formGroup]="form" (ngSubmit)="onSave()">
   <div class="label-column">
     <label for="title" class="label"
       >Title: <span class="required">*required</span></label
@@ -11,7 +11,19 @@
       class="input"
       [(ngModel)]="course.name"
       required
+      formControlName="title"
     />
+    <div
+      class="validation"
+      *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
+    >
+      <small *ngIf="form.get('title')?.errors?.['required']">
+        Title shouldn't be empty
+      </small>
+      <small *ngIf="form.get('title')?.errors?.['maxlength']">
+        Title shouldn't be more than 50 characters
+      </small>
+    </div>
   </div>
   <div class="label-column">
     <label for="description" class="label"
@@ -26,19 +38,68 @@
       [(ngModel)]="course.description"
       class="input"
       required
+      formControlName="description"
     ></textarea>
+    <div
+      class="validation"
+      *ngIf="
+        form.get('description')?.invalid && form.get('description')?.touched
+      "
+    >
+      <small *ngIf="form.get('description')?.errors?.['required']">
+        Description shouldn't be empty
+      </small>
+      {{ form.get("description")?.errors | json }}
+      <small *ngIf="form.get('description')?.errors?.['maxlength']">
+        Description shouldn't be more than 500 characters
+      </small>
+    </div>
   </div>
-  <app-add-course-date
-    [dateValue]="date | date: 'MM.dd.yyyy'"
-    (date)="setDate($event)"
-  ></app-add-course-date>
+  <app-add-course-date formControlName="date" [(ngModel)]="course.date">
+  </app-add-course-date>
+  <div>
+    {{ form.get("date")?.errors | json }}
+  </div>
+  <div
+    class="validation"
+    *ngIf="form.get('date')?.invalid && form.get('date')?.dirty"
+  >
+    <small *ngIf="form.get('date')?.errors?.['required']">
+      Date shouldn't be empty
+    </small>
+    <small *ngIf="form.get('date')?.errors?.['pattern']">
+      Check charackters. Date should be in the format MM/DD/YYYY.
+    </small>
+    <small *ngIf="form.get('date')?.errors?.['restrictedDateMore']">
+      Date shouldn't be more than 31
+    </small>
+    <small *ngIf="form.get('date')?.errors?.['restrictedMonthMore']">
+      Month shouldn't be more than 12
+    </small>
+    <small *ngIf="form.get('date')?.errors?.['restrictedDateInFebruary']">
+      Date shouldn't be more than 28 in February
+    </small>
+  </div>
   <app-add-course-duration
-  [durationValue]="durationMin"
-  (duration)="setDuration($event)"
-  ></app-add-course-duration>
+    [(ngModel)]="course.durationMin"
+    formControlName="duration"
+    ></app-add-course-duration>
+    <div
+    class="validation"
+    *ngIf="form.get('duration')?.invalid && form.get('duration')?.dirty"
+  >
+    <small *ngIf="form.get('duration')?.errors?.['required']">
+      Duration shouldn't be empty
+    </small>
+    <small *ngIf="form.get('duration')?.errors?.['invalidNumber']">
+      Restricted character. Duration must be digits only
+    </small>
+    </div>
   <app-add-course-authors></app-add-course-authors>
   <div class="action">
     <button class="btn btn-gray" (click)="onCancel()">Cancel</button>
-    <button class="btn btn-green" type="submit" (click)="onSave()">Save</button>
+    <button class="btn btn-green" type="submit" [disabled]="form.invalid">
+      Save
+    </button>
   </div>
 </form>

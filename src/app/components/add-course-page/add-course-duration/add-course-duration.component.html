@@ -4,16 +4,23 @@
   >
   <div class="duration">
     <input
-      type="number"
+      type="text"
+      maxlength="4"
       class="input"
       id="duration"
       name="duration"
-      [(ngModel)]="durationValue"
+      [value]="durationValue"
       required
-      (input)="emitDuration()"
+      (input)="onChanged($event)"
+      #duration
+      [ngClass]="{
+        'ng-touched': isDurationTouched,
+        'ng-invalid': isDurationInvalid,
+        'ng-valid': !isDurationInvalid
+      }"
     />
     <div class="duration-pipe">
-      <p>{{ durationValue | durationPipe}}</p>
+      <p>{{ duration.value | durationPipe}}</p>
     </div>
   </div>
 </div>

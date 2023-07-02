@@ -1,13 +1,23 @@
 <div class="label-column">
-  <label for="date" class="label">Date: <span class="required">*required</span></label>
+  <label for="date" class="label"
+    >Date: <span class="required">*required</span></label
+  >
+
   <input
-    type="string"
+    type="text"
     class="input"
     id="date"
     name="date"
-    placeholder="Enter date"
-    [(ngModel)]="dateValue"
+    placeholder="MM/DD/YYYY"
     required
-    (input)="emitDate()"
+    maxlength="10"
+    [value]="dateValue"
+    (input)="onChange($event)"
+    [ngClass]="{
+      'ng-touched': isDateTouched,
+      'ng-invalid': isDateInvalid,
+      'ng-valid': !isDateInvalid
+    }"
   />
+  <i class="fa-regular fa-calendar"></i>
 </div>

@@ -1,3 +1,12 @@
+@import 'src/styles/_variables.scss';
+
 .input {
   padding: 0.5rem;
+}
+
+.fa-calendar{
+  position: absolute;
+  color: $primary-icon-dark-color;
+  margin: 2.5rem 17.4rem;
+  font-size: larger;
 }

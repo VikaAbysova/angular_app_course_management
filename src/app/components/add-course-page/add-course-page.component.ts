@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {
   getCourseItem,
   addCourse,
@@ -9,7 +10,7 @@ import { Course } from './../../interfaces/course.interface';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-course-page',
@@ -17,17 +18,18 @@ import { Observable} from 'rxjs';
   styleUrls: ['./add-course-page.component.scss'],
 })
 export class AddCoursePageComponent implements OnInit {
-  date: string | Date;
-  durationMin: number;
+  // date: string | Date | null;
+  // durationMin: string;
   param: string;
   course$: Observable<Course>;
+  form: FormGroup;
 
   course: Course = {
     id: '',
     name: '',
     description: '',
-    date: new Date(Date.now()),
-    durationMin: 0,
+    date: '',
+    durationMin: '',
     isTopRated: false,
   };
 
@@ -41,6 +43,24 @@ export class AddCoursePageComponent implements OnInit {
   ngOnInit(): void {
     this.course$ = this.store.select(selectCourse);
 
+    this.form = new FormGroup({
+      title: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+      description: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(500),
+      ]),
+      date: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/),
+      ]),
+      duration: new FormControl('', [
+        Validators.required,
+      ]),
+    });
+
     this.route.params.subscribe((params: Params) => {
       this.param = params['id'];
 
@@ -48,34 +68,31 @@ export class AddCoursePageComponent implements OnInit {
         console.log('param', this.param);
         const id = this.param;
         this.store.dispatch(getCourseItem({ id }));
-        this.course$.subscribe(
-          (course) => (
-            (this.course = { ...course }),
-            (this.date = course.date),
-            (this.durationMin = course.durationMin as number)
-          )
-        );
+        this.course$.subscribe((course) => {
+          const date = new Date(course.date).toLocaleString().split(',')[0];
+          this.course = {
+            ...course,
+            date: date,
+          };
+          if (course.durationMin === undefined) {
+            this.course.durationMin = '0';
+          }
+        });
       }
-      this.date = this.course.date;
-      this.durationMin = this.course.durationMin as number;
     });
-  }
-
-  setDate(date: string | Date): void {
-    this.course.date = date as string;
-  }
-
-  setDuration(minutes: number): void {
-    this.course.durationMin = minutes;
   }
 
   onSave() {
     this.spinnerService.showLoading(true);
+    const course = {
+      ...this.course,
+      date: new Date(this.course.date).toString(),
+    };
     if (this.param === 'new') {
-      this.store.dispatch(addCourse({ course: this.course }));
+      this.store.dispatch(addCourse({ course }));
     } else {
       this.store.dispatch(
-        editCourseItem({ course: this.course, id: Number(this.course.id) })
+        editCourseItem({ course, id: Number(this.course.id) })
       );
     }
     this.router.navigate(['/courses']);

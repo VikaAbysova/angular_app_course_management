@@ -5,9 +5,10 @@ import { authReducer } from './store/auth-service/auth.reducer';
 import { NgModule, isDevMode } from '@angular/core';
 import { DurationPipe } from './pipes/duration.pipe';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './interceptors/index.interceptor';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -50,6 +51,7 @@ import { courseReducer } from './store/course/course.reducer';
     BrowserModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({

@@ -1,4 +1,4 @@
-<form action="#" class="login">
+<form action="#" class="login" [formGroup]="form" (ngSubmit)="onLogin()">
   <h1>Login</h1>
   <div class="email">
     <label for="login" class="label"
@@ -12,7 +12,16 @@
       placeholder="Enter login"
       class="input"
       [(ngModel)]="credentials.login"
+      formControlName="login"
     />
+    <div
+      class="validation"
+      *ngIf="form.get('login')?.invalid && form.get('login')?.touched"
+    >
+      <small *ngIf="form.get('login')?.errors?.['required']"
+        >Login shouldn't be empty</small
+      >
+    </div>
   </div>
   <div class="password">
     <label for="password" class="label"
@@ -26,10 +35,21 @@
       placeholder="Enter password"
       class="input"
       [(ngModel)]="credentials.password"
+      formControlName="password"
     />
+    <div
+      class="validation"
+      *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+    >
+      <small *ngIf="form.get('password')?.errors?.['required']"
+        >Password shouldn't be empty</small
+      >
+    </div>
   </div>
   <div class="action">
     <a href="#" class="faq-ref">Forgot password?</a>
-    <button class="btn btn-gray" type="submit" (click)="onLogin()">Login</button>
+    <button class="btn btn-gray" type="submit" [disabled]="form.invalid">
+      Login
+    </button>
   </div>
 </form>

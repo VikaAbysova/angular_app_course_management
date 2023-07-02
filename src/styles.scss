@@ -23,6 +23,11 @@ body {
   font-size: $primary-font-size;
   background: $primary-btn-background;
   border-radius: $primary-border-radius;
+  &:disabled {
+    cursor: not-allowed;
+    background-color: lightgrey !important;
+    color: gray;
+  }
 }
 
 .btn-gray {
@@ -69,4 +74,19 @@ body {
   font-size: small;
   color: rgb(236, 53, 53);
   position: relative;
+}
+
+input,
+textarea {
+  &.ng-touched.ng-valid {
+    border-color: lightgreen;
+  }
+  &.ng-touched.ng-invalid {
+    border-color: lightcoral;
+  }
+}
+
+.validation small {
+  color: red;
+  text-shadow: 0 0 1px;
 }
