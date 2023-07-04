@@ -77,7 +77,7 @@ body {
 }
 
 input,
-textarea {
+textarea, div {
   &.ng-touched.ng-valid {
     border-color: lightgreen;
   }

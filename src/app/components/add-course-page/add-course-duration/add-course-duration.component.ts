@@ -58,7 +58,6 @@ export class AddCourseDurationComponent
     if (!control.value) {
       this.isDurationInvalid = true;
       this.isDurationTouched = true;
-      console.log('!!!Duration', this.isDurationInvalid);
     }
     const pattern = /^\d+$/;
     if (!pattern.test(control.value) && control.value) {

@@ -1,3 +1,4 @@
+import { Authors } from './../../interfaces/authors.interface';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {
   getCourseItem,
@@ -18,8 +19,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./add-course-page.component.scss'],
 })
 export class AddCoursePageComponent implements OnInit {
-  // date: string | Date | null;
-  // durationMin: string;
   param: string;
   course$: Observable<Course>;
   form: FormGroup;
@@ -31,6 +30,7 @@ export class AddCoursePageComponent implements OnInit {
     date: '',
     durationMin: '',
     isTopRated: false,
+    authors: [],
   };
 
   constructor(
@@ -56,16 +56,14 @@ export class AddCoursePageComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/),
       ]),
-      duration: new FormControl('', [
-        Validators.required,
-      ]),
+      duration: new FormControl('', [Validators.required]),
+      authors: new FormControl([]),
     });
 
     this.route.params.subscribe((params: Params) => {
       this.param = params['id'];
 
       if (Number(+this.param)) {
-        console.log('param', this.param);
         const id = this.param;
         this.store.dispatch(getCourseItem({ id }));
         this.course$.subscribe((course) => {
@@ -73,6 +71,7 @@ export class AddCoursePageComponent implements OnInit {
           this.course = {
             ...course,
             date: date,
+            authors: [...(course.authors as Authors[])],
           };
           if (course.durationMin === undefined) {
             this.course.durationMin = '0';

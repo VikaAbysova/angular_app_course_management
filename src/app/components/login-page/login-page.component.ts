@@ -13,8 +13,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginPageComponent implements OnInit {
   credentials: Credentials = {
-    login: 'Morales',
-    password: 'id',
+    login: '',
+    password: '',
   };
 
   form: FormGroup;
@@ -39,10 +39,10 @@ export class LoginPageComponent implements OnInit {
   }
 
   onLogin() {
-    // if (this.credentials.login && this.credentials.password) {
-    //   this.spinnerService.showLoading(true);
-    //   this.store.dispatch(login({ credentials: this.credentials }));
-    // }
+    if (this.credentials.login && this.credentials.password) {
+      this.spinnerService.showLoading(true);
+      this.store.dispatch(login({ credentials: this.credentials }));
+    }
     this.spinnerService.showLoading(true);
       this.store.dispatch(login({ credentials: this.credentials }));
   }

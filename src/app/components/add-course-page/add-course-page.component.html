@@ -49,7 +49,6 @@
       <small *ngIf="form.get('description')?.errors?.['required']">
         Description shouldn't be empty
       </small>
-      {{ form.get("description")?.errors | json }}
       <small *ngIf="form.get('description')?.errors?.['maxlength']">
         Description shouldn't be more than 500 characters
       </small>
@@ -57,9 +56,6 @@
   </div>
   <app-add-course-date formControlName="date" [(ngModel)]="course.date">
   </app-add-course-date>
-  <div>
-    {{ form.get("date")?.errors | json }}
-  </div>
   <div
     class="validation"
     *ngIf="form.get('date')?.invalid && form.get('date')?.dirty"
@@ -83,8 +79,8 @@
   <app-add-course-duration
     [(ngModel)]="course.durationMin"
     formControlName="duration"
-    ></app-add-course-duration>
-    <div
+  ></app-add-course-duration>
+  <div
     class="validation"
     *ngIf="form.get('duration')?.invalid && form.get('duration')?.dirty"
   >
@@ -94,8 +90,14 @@
     <small *ngIf="form.get('duration')?.errors?.['invalidNumber']">
       Restricted character. Duration must be digits only
     </small>
-    </div>
-  <app-add-course-authors></app-add-course-authors>
+  </div>
+  <app-add-course-authors
+  formControlName="authors"
+  [(ngModel)]="course.authors"
+  ></app-add-course-authors>
+  <div class="validation">
+    <small *ngIf="form.get('authors')?.errors?.['emptyAuthors']">At least one author is required</small>
+  </div>
   <div class="action">
     <button class="btn btn-gray" (click)="onCancel()">Cancel</button>
     <button class="btn btn-green" type="submit" [disabled]="form.invalid">
