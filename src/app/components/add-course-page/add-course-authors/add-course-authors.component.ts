@@ -69,6 +69,10 @@ export class AddCourseAuthorsComponent
     this.changed(this.authorsTags);
   }
 
+  createAuthorName(author: Authors): string {
+    return author.name + ' ' + (author.lastName ? author.lastName : '');
+  }
+
   removeTag(author: Authors) {
     this.isAuthorsInvalid = false;
     const index = this.authorsTags.indexOf(author);
@@ -79,7 +83,7 @@ export class AddCourseAuthorsComponent
 
   writeValue(authorsTags: Authors[]): void {
     this.authorsTags = authorsTags;
-    this.isAuthorsInvalid = this.authorsTags.length? false: true;
+    this.isAuthorsInvalid = this.authorsTags.length ? false : true;
   }
   registerOnChange(fn: () => void): void {
     this.changed = fn;

@@ -26,6 +26,7 @@ import {
   ],
 })
 export class AddCourseDateComponent implements ControlValueAccessor, Validator {
+
   isDateInvalid = false;
   isDateTouched = false;
   dateValue: string;

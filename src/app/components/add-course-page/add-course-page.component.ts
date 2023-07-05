@@ -23,16 +23,6 @@ export class AddCoursePageComponent implements OnInit {
   course$: Observable<Course>;
   form: FormGroup;
 
-  course: Course = {
-    id: '',
-    name: '',
-    description: '',
-    date: '',
-    durationMin: '',
-    isTopRated: false,
-    authors: [],
-  };
-
   constructor(
     private spinnerService: SpinnerService,
     private router: Router,
@@ -57,7 +47,7 @@ export class AddCoursePageComponent implements OnInit {
         Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/),
       ]),
       duration: new FormControl('', [Validators.required]),
-      authors: new FormControl([]),
+      authors: new FormControl([], [Validators.minLength(1)]),
     });
 
     this.route.params.subscribe((params: Params) => {
@@ -68,14 +58,15 @@ export class AddCoursePageComponent implements OnInit {
         this.store.dispatch(getCourseItem({ id }));
         this.course$.subscribe((course) => {
           const date = new Date(course.date).toLocaleString().split(',')[0];
-          this.course = {
-            ...course,
-            date: date,
-            authors: [...(course.authors as Authors[])],
-          };
-          if (course.durationMin === undefined) {
-            this.course.durationMin = '0';
-          }
+          this.form.get('title')?.patchValue(course.name);
+          this.form.get('description')?.patchValue(course.description);
+          this.form.get('date')?.patchValue(date);
+          this.form
+            .get('duration')
+            ?.patchValue(course.durationMin ? course.durationMin : '0');
+          this.form
+            .get('authors')
+            ?.patchValue([...(course.authors as Authors[])]);
         });
       }
     });
@@ -83,21 +74,63 @@ export class AddCoursePageComponent implements OnInit {
 
   onSave() {
     this.spinnerService.showLoading(true);
-    const course = {
-      ...this.course,
-      date: new Date(this.course.date).toString(),
+    const course: Course = {
+      id: '',
+      isTopRated: false,
+      name: this.form.get('title')?.value,
+      description: this.form.get('description')?.value,
+      date: new Date(this.form.get('date')?.value).toString(),
+      durationMin: this.form.get('duration')?.value,
+      authors: this.form.get('authors')?.value,
     };
     if (this.param === 'new') {
       this.store.dispatch(addCourse({ course }));
     } else {
-      this.store.dispatch(
-        editCourseItem({ course, id: Number(this.course.id) })
-      );
+      this.store.dispatch(editCourseItem({ course, id: Number(this.param) }));
     }
     this.router.navigate(['/courses']);
   }
 
   onCancel() {
     this.router.navigate(['/courses']);
+  }
+
+  showErrorText(controlName: string): string | void {
+    const controlField = this.form.get(controlName);
+    if (controlField?.hasError('required')) {
+      return `${controlName} shouldn't be empty`;
+    }
+    if (controlField?.hasError('maxlength')) {
+      const maxLength: number =
+        controlField.getError('maxlength').requiredLength;
+      return `${controlName} shouldn't be more than ${maxLength} characters`;
+    }
+    if (controlField?.hasError('pattern') && controlName === 'date') {
+      return `Check charackters. Date should be in the format MM/DD/YYYY.`;
+    }
+    if (
+      controlField?.hasError('restrictedDateMore') &&
+      controlName === 'date'
+    ) {
+      return `Date shouldn't be more than 31`;
+    }
+    if (
+      controlField?.hasError('restrictedMonthMore') &&
+      controlName === 'date'
+    ) {
+      return `Month shouldn't be more than 12`;
+    }
+    if (
+      controlField?.hasError('restrictedDateInFebruary') &&
+      controlName === 'date'
+    ) {
+      return `Date shouldn't be more than 28 in February`;
+    }
+    if (controlField?.hasError('invalidNumber') && controlName === 'duration') {
+      return `Restricted character. Duration must be digits only`;
+    }
+    if (controlField?.hasError('emptyAuthors') && controlName === 'authors') {
+      return `At least one author is required`;
+    }
   }
 }

@@ -9,7 +9,6 @@
       name="title"
       placeholder="Enter title"
       class="input"
-      [(ngModel)]="course.name"
       required
       formControlName="title"
     />
@@ -18,10 +17,10 @@
       *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
     >
       <small *ngIf="form.get('title')?.errors?.['required']">
-        Title shouldn't be empty
+        {{ showErrorText("title") }}
       </small>
       <small *ngIf="form.get('title')?.errors?.['maxlength']">
-        Title shouldn't be more than 50 characters
+        {{ showErrorText("title") }}
       </small>
     </div>
   </div>
@@ -35,7 +34,6 @@
       cols="30"
       rows="4"
       placeholder="Enter description"
-      [(ngModel)]="course.description"
       class="input"
       required
       formControlName="description"
@@ -47,56 +45,51 @@
       "
     >
       <small *ngIf="form.get('description')?.errors?.['required']">
-        Description shouldn't be empty
+        {{ showErrorText("description") }}
       </small>
       <small *ngIf="form.get('description')?.errors?.['maxlength']">
-        Description shouldn't be more than 500 characters
+        {{ showErrorText("description") }}
       </small>
     </div>
   </div>
-  <app-add-course-date formControlName="date" [(ngModel)]="course.date">
-  </app-add-course-date>
+  <app-add-course-date formControlName="date"></app-add-course-date>
   <div
     class="validation"
     *ngIf="form.get('date')?.invalid && form.get('date')?.dirty"
   >
     <small *ngIf="form.get('date')?.errors?.['required']">
-      Date shouldn't be empty
+      {{ showErrorText("date") }}
     </small>
     <small *ngIf="form.get('date')?.errors?.['pattern']">
-      Check charackters. Date should be in the format MM/DD/YYYY.
+      {{ showErrorText("date") }}
     </small>
     <small *ngIf="form.get('date')?.errors?.['restrictedDateMore']">
-      Date shouldn't be more than 31
+      {{ showErrorText("date") }}
     </small>
     <small *ngIf="form.get('date')?.errors?.['restrictedMonthMore']">
-      Month shouldn't be more than 12
+      {{ showErrorText("date") }}
     </small>
     <small *ngIf="form.get('date')?.errors?.['restrictedDateInFebruary']">
-      Date shouldn't be more than 28 in February
+      {{ showErrorText("date") }}
     </small>
   </div>
-  <app-add-course-duration
-    [(ngModel)]="course.durationMin"
-    formControlName="duration"
-  ></app-add-course-duration>
+  <app-add-course-duration formControlName="duration"></app-add-course-duration>
   <div
     class="validation"
     *ngIf="form.get('duration')?.invalid && form.get('duration')?.dirty"
   >
     <small *ngIf="form.get('duration')?.errors?.['required']">
-      Duration shouldn't be empty
+      {{ showErrorText("duration") }}
     </small>
     <small *ngIf="form.get('duration')?.errors?.['invalidNumber']">
-      Restricted character. Duration must be digits only
+      {{ showErrorText("duration") }}
     </small>
   </div>
-  <app-add-course-authors
-  formControlName="authors"
-  [(ngModel)]="course.authors"
-  ></app-add-course-authors>
+  <app-add-course-authors formControlName="authors"></app-add-course-authors>
   <div class="validation">
-    <small *ngIf="form.get('authors')?.errors?.['emptyAuthors']">At least one author is required</small>
+    <small *ngIf="form.get('authors')?.errors?.['emptyAuthors']">{{
+      showErrorText("authors")
+    }}</small>
   </div>
   <div class="action">
     <button class="btn btn-gray" (click)="onCancel()">Cancel</button>

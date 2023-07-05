@@ -6,7 +6,7 @@ import { NgModule, isDevMode } from '@angular/core';
 import { DurationPipe } from './pipes/duration.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './interceptors/index.interceptor';
 
@@ -54,7 +54,6 @@ import { TagInputModule } from 'ngx-chips';
     BrowserAnimationsModule,
     TagInputModule,
     CommonModule,
-    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,

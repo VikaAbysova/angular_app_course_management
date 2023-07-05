@@ -1,4 +1,4 @@
-import { debounceTime, fromEvent, of, switchMap } from 'rxjs';
+import { debounceTime, of, switchMap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { getCoursesList } from 'src/app/store/courses/courses.actions';
@@ -18,15 +18,13 @@ export class CoursesSearchComponent implements OnInit {
     this.form = new FormGroup({
       search: new FormControl(''),
     });
-  }
 
-  handlerKeyupEvent(event: KeyboardEvent): void {
-    fromEvent(event.target as EventTarget, 'keyup')
-      .pipe(
+    this.form
+      .get('search')
+      ?.valueChanges.pipe(
         debounceTime(1500),
         switchMap(() => {
-
-          const dataValue = (event.target as HTMLInputElement).value;
+          const dataValue = this.form.get('search')?.value;
           if (dataValue.length >= 3) {
             const params: { [key: string]: string } = {
               textFragment: dataValue,
