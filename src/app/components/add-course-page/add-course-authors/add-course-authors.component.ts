@@ -73,9 +73,8 @@ export class AddCourseAuthorsComponent
     return author.name + ' ' + (author.lastName ? author.lastName : '');
   }
 
-  removeTag(author: Authors) {
+  removeTag(author: Authors, index: number) {
     this.isAuthorsInvalid = false;
-    const index = this.authorsTags.indexOf(author);
     this.authorsTags.splice(index, 1);
     this.authorsNames.push({ ...author });
     this.changed(this.authorsTags);
