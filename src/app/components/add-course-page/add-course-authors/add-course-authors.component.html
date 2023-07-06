@@ -1,12 +1,44 @@
 <div class="label-column">
-  <label for="authors" class="label">Authors: <span class="required">*required</span></label>
-  <div class="duration">
+  <label for="authors" class="label"
+    >Authors: <span class="required">*required</span></label
+  >
+
+  <div
+    class="authors-search"
+    [ngClass]="{
+      'ng-touched': isAuthorsTouched,
+      'ng-invalid': isAuthorsInvalid,
+      'ng-valid': !isAuthorsInvalid
+    }"
+  >
+    <ul class="tags">
+      <li class="tag" *ngFor="let author of authorsTags; let i = index">
+        {{ author.name + " " + (author.lastName ? author.lastName : "")
+        }}<button type="button" class="btn-tag" (click)="removeTag(author, i)">
+          X
+        </button>
+      </li>
+    </ul>
     <input
       type="text"
       class="input"
       id="authors"
       name="authors"
       required
-      placeholder="Start typing..."
+      placeholder="Enter author's name..."
+      (input)="onChanged($event)"
+      [(ngModel)]="searchInput"
     />
+  </div>
 </div>
+<ul>
+  <li
+    class="author-selection"
+    *ngFor="let author of authorsNames"
+    (keyup)="addAuthor(author)"
+    (click)="addAuthor(author)"
+    tabindex="0"
+  >
+    {{ createAuthorName(author) }}
+  </li>
+</ul>

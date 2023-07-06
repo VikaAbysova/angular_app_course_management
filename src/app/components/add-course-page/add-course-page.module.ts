@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AddCoursePageRoutingModule } from './../../add-course-page-routing.module';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddCourseAuthorsComponent } from './add-course-authors/add-course-authors.component';
 import { AddCoursePageComponent } from './add-course-page.component';
 import { CommonModule } from '@angular/common';
@@ -19,6 +19,7 @@ import { AddCourseDurationComponent } from './add-course-duration/add-course-dur
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AddCoursePageRoutingModule,
   ],
   exports: [AddCoursePageComponent],

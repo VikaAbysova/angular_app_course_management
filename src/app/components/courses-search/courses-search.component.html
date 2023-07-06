@@ -1,9 +1,10 @@
-<div>
+<div [formGroup]="form">
   <i class="fa-solid fa-magnifying-glass fa-rotate-90"></i>
   <input
-    (keyup)="handlerKeyupEvent($event)"
+    
     class="input"
     type="search"
     placeholder="Text to search..."
+    formControlName="search"
   />
 </div>

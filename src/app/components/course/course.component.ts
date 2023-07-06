@@ -33,7 +33,7 @@ export class CourseComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.transformedDuration = this.durationPipe.transform(
-      this.course.durationMin as number
+      this.course.durationMin? this.course.durationMin: '0'
     );
   }
 }

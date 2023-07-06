@@ -5,9 +5,11 @@ import { authReducer } from './store/auth-service/auth.reducer';
 import { NgModule, isDevMode } from '@angular/core';
 import { DurationPipe } from './pipes/duration.pipe';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './interceptors/index.interceptor';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -29,6 +31,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CommonModule } from '@angular/common';
 import { coursesReducer } from './store/courses/courses.reducer';
 import { courseReducer } from './store/course/course.reducer';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   declarations: [
@@ -48,8 +51,10 @@ import { courseReducer } from './store/course/course.reducer';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    TagInputModule,
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot({

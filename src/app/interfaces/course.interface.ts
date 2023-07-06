@@ -6,7 +6,7 @@ export interface Course {
   description: string;
   isTopRated: boolean;
   date: Date | string;
-  durationMin?: number | string | undefined;
+  durationMin?: string | undefined;
   authors?: Authors[];
   length?: number;
 }
