@@ -13,7 +13,7 @@
   >
     <ul class="tags">
       <li class="tag" *ngFor="let author of authorsTags; let i = index">
-        {{ author.name + " " + (author.lastName ? author.lastName : "")
+        {{ author.name + " " + (author.lastName ? author.lastName : "" | translate)
         }}<button type="button" class="btn-tag" (click)="removeTag(author, i)">
           X
         </button>

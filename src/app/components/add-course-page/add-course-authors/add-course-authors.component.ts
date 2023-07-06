@@ -9,6 +9,7 @@ import {
   Validator,
 } from '@angular/forms';
 import { Component, forwardRef, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-course-authors',
@@ -38,7 +39,13 @@ export class AddCourseAuthorsComponent
   isAuthorsInvalid = false;
   isAuthorsTouched = false;
 
-  constructor(private authorsService: AuthorsService) {}
+  constructor(
+    private authorsService: AuthorsService,
+    private translate: TranslateService
+  ) {
+    translate.setDefaultLang('en');
+    translate.use('en');
+  }
 
   ngOnInit(): void {
     this.authorsTags = [];

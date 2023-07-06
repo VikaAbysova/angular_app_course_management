@@ -7,6 +7,7 @@ import { AddCoursePageComponent } from './add-course-page.component';
 import { CommonModule } from '@angular/common';
 import { AddCourseDateComponent } from './add-course-date/add-course-date.component';
 import { AddCourseDurationComponent } from './add-course-duration/add-course-duration.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AddCourseDurationComponent } from './add-course-duration/add-course-dur
     FormsModule,
     ReactiveFormsModule,
     AddCoursePageRoutingModule,
+    TranslateModule
   ],
   exports: [AddCoursePageComponent],
 })
