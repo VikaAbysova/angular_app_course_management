@@ -1,0 +1,38 @@
+{
+  "Login": "Вхід",
+  "Password": "Пароль",
+  "placeholder.login": "Введіть логін",
+  "placeholder.password": "Введіть пароль",
+  "placeholder.authors": "Введіть ім'я автора",
+  "placeholder.title": "Введіть заголовок",
+  "placeholder.description": "Вкажіть опис",
+  "required": "обов'язкове",
+  "Forgot password": "Забули пароль",
+  "Log off": "Вихід",
+  "placeholder.search": "Текст для пошуку",
+  "alt.logo": "Лого",
+  "Authors": "Автори",
+  "Date": "Дата",
+  "Duration": "Тривалість",
+  "Title": "Заголовок",
+  "Description": "Опис",
+  "Cancel": "Закрити",
+  "Save": "Зберегти",
+  "Courses": "Курси",
+  "HOURS": {
+    "one": "год",
+    "two": "год",
+    "few": "год",
+    "many": "год"
+  },
+  "MINUTES": {
+    "one": "хв",
+    "two": "хв",
+    "few": "хв",
+    "many": "хв"
+  },
+  "Edit": "Редагувати",
+  "Delete": "Видалити",
+  "LOAD MORE": "ЗАВАНТАЖИТИ БІЛЬШЕ",
+  "Add course": "Додати курс"
+}

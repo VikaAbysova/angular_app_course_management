@@ -1,13 +1,14 @@
 <form action="#" class="form" [formGroup]="form" (ngSubmit)="onSave()">
   <div class="label-column">
     <label for="title" class="label"
-      >Title: <span class="required">*required</span></label
+      >{{ "Title" | translate }}:
+      <span class="required">*{{ "required" | translate }}</span></label
     >
     <input
       type="text"
       id="title"
       name="title"
-      placeholder="Enter title"
+      [placeholder]="'Enter title' | translate"
       class="input"
       required
       formControlName="title"
@@ -26,14 +27,15 @@
   </div>
   <div class="label-column">
     <label for="description" class="label"
-      >Description: <span class="required"> *required</span></label
+      >{{ "Description" | translate }}:
+      <span class="required"> *{{ "required" | translate }}</span></label
     >
     <textarea
       name="description"
       id="description"
       cols="30"
       rows="4"
-      placeholder="Enter description"
+      [placeholder]="'placeholder.description' | translate"
       class="input"
       required
       formControlName="description"
@@ -92,9 +94,11 @@
     }}</small>
   </div>
   <div class="action">
-    <button class="btn btn-gray" (click)="onCancel()">Cancel</button>
+    <button class="btn btn-gray" (click)="onCancel()">
+      {{ "Cancel" | translate }}
+    </button>
     <button class="btn btn-green" type="submit" [disabled]="form.invalid">
-      Save
+      {{ "Save" | translate }}
     </button>
   </div>
 </form>

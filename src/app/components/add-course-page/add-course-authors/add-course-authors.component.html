@@ -1,6 +1,7 @@
 <div class="label-column">
   <label for="authors" class="label"
-    >Authors: <span class="required">*required</span></label
+    >{{ "Authors" | translate }}:
+    <span class="required">*{{ "required" | translate }}</span></label
   >
 
   <div
@@ -13,22 +14,18 @@
   >
     <ul class="tags">
       <li class="tag" *ngFor="let author of authorsTags; let i = index">
-        {{ author.name + " " + (author.lastName ? author.lastName : "" | translate)
+        {{
+          author.name +
+            " " +
+            (author.lastName ? author.lastName : ("" | translate))
         }}<button type="button" class="btn-tag" (click)="removeTag(author, i)">
           X
         </button>
       </li>
     </ul>
-    <input
-      type="text"
-      class="input"
-      id="authors"
-      name="authors"
-      required
-      placeholder="Enter author's name..."
-      (input)="onChanged($event)"
-      [(ngModel)]="searchInput"
-    />
+    <input type="text" class="input" id="authors" name="authors" required
+    [placeholder]="'placeholder.authors' | translate"
+    (input)="onChanged($event)" [(ngModel)]="searchInput" />
   </div>
 </div>
 <ul>

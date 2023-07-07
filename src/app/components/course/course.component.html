@@ -24,11 +24,11 @@
   <div class="btn-content">
     <button class="btn btn-edit" [routerLink]="['/courses', course.id]">
       <i class="fa-solid fa-pen"></i>
-      Edit
+      {{ "Edit" | translate }}
     </button>
     <button class="btn btn-delete" (click)="emitDeleteId()">
       <i class="fa-solid fa-trash"></i>
-      Delete
+      {{ 'Delete' | translate }}
     </button>
   </div>
 </article>

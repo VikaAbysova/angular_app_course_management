@@ -35,6 +35,6 @@
   display: inline;
 }
 
-.user-block {
+.user-block, .usel-login{
   @extend %flex-between;
 }

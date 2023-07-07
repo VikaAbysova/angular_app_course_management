@@ -23,7 +23,7 @@ export class CourseComponent implements OnChanges {
   transformedDuration: string;
   constructor(
     private durationPipe: DurationPipe,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
   ) {}
 
   emitDeleteId() {
@@ -33,7 +33,7 @@ export class CourseComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.transformedDuration = this.durationPipe.transform(
-      this.course.durationMin? this.course.durationMin: '0'
+      this.course.durationMin ? this.course.durationMin : '0'
     );
   }
 }

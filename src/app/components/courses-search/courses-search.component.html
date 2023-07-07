@@ -1,10 +1,5 @@
 <div [formGroup]="form">
   <i class="fa-solid fa-magnifying-glass fa-rotate-90"></i>
-  <input
-    
-    class="input"
-    type="search"
-    placeholder="Text to search..."
-    formControlName="search"
-  />
+  <input class="input" type="search" [placeholder]="'placeholder.search' | translate"
+  formControlName="search" />
 </div>
