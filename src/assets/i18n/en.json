@@ -1,15 +1,17 @@
 {
   "Login": "Login",
   "Password": "Password",
-  "placeholder.login": "Enter login",
-  "placeholder.password": "Enter password",
-  "placeholder.authors": "Enter author's name",
-  "placeholder.title": "Enter title",
-  "placeholder.description": "Enter description",
+  "placeholder": {
+    "login": "Enter login",
+    "password": "Enter password",
+    "authors": "Enter author's name",
+    "title": "Enter title",
+    "description": "Enter description",
+    "search": "Text to search"
+  },
   "required": "required",
   "Forgot password": "Forgot password",
   "Log off": "Log off",
-  "placeholder.search": "Text to search",
   "alt.logo": "Logo",
   "Authors": "Authors",
   "Date": "Date",

@@ -1,4 +1,5 @@
-import { Component, forwardRef } from '@angular/core';
+import { DurationPipe } from 'src/app/pipes/duration.pipe';
+import { Component, forwardRef, OnInit } from '@angular/core';
 import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
@@ -7,6 +8,7 @@ import {
   AbstractControl,
   ValidationErrors,
 } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-course-duration',
@@ -26,23 +28,43 @@ import {
   ],
 })
 export class AddCourseDurationComponent
-  implements ControlValueAccessor, Validator
+  implements ControlValueAccessor, Validator, OnInit
 {
   isDurationInvalid = false;
   isDurationTouched = false;
   durationValue: string;
   disabled = false;
+  transformedDuration: string;
 
   changed: (duration: string) => void;
   touched: () => void;
 
+  constructor(
+    private durationPipe: DurationPipe,
+    private translate: TranslateService
+  ) {}
+
+  callDurationPipe() {
+    this.transformedDuration = this.durationPipe.transform(
+      this.durationValue ? this.durationValue : '0'
+    );
+  }
+
+  ngOnInit(): void {
+    this.translate.onLangChange.subscribe(() => {
+      this.callDurationPipe();
+    });
+  }
+
   onChanged(event: Event): void {
     const value = (<HTMLInputElement>event.target).value;
+    this.transformedDuration = this.durationPipe.transform(value ? value : '0');
     this.changed(value);
   }
 
   writeValue(duration: string): void {
     this.durationValue = duration;
+    this.callDurationPipe();
   }
   registerOnChange(fn: () => void): void {
     this.changed = fn;

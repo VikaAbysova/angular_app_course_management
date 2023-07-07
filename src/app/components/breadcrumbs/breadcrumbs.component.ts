@@ -14,7 +14,6 @@ import { Course } from 'src/app/interfaces/course.interface';
 })
 export class BreadcrumbsComponent implements OnInit{
   title: string | undefined;
-  refName = 'Courses';
   constructor(
     private router: Router,
     private courseService: CoursesService,

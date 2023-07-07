@@ -21,8 +21,8 @@ export class LoginPageComponent {
     private fb: FormBuilder,
   ) {
     this.form = this.fb.group({
-      login: ['Morales', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
-      password: ['id', [Validators.required, Validators.minLength(2)]],
+      login: ['', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
+      password: ['', [Validators.required, Validators.minLength(2)]],
     });
   }
 

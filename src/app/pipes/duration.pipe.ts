@@ -10,13 +10,8 @@ export class DurationPipe implements PipeTransform {
   minute: number;
   hoursTransl = '';
   minutesTransl = '';
-  string: string;
 
-  constructor(
-    private translate: TranslateService,
-  ) {
-    console.log(translate.currentLang);
-  }
+  constructor(private translate: TranslateService) {}
 
   transform(minutes: string): string {
     this.hour = Number.parseInt((+minutes / MINUTES_IN_HOUR).toString());
@@ -24,19 +19,15 @@ export class DurationPipe implements PipeTransform {
     const hh = `${this.hour}`;
     const mm = `${this.minute}`;
 
-    this.hoursTransl = this.translate.instant('HOURS', { count: this.hour })[
-      'few'
-    ];
-    this.minutesTransl = this.translate.instant('MINUTES', {
+    this.hoursTransl = this.translate.instant('HOURS.few', {
+      count: this.hour,
+    });
+    this.minutesTransl = this.translate.instant('MINUTES.few', {
       count: this.minute,
-    })['few'];
+    });
 
-    this.string =
-      +minutes < MINUTES_IN_HOUR
-        ? `${minutes} ${this.minutesTransl}`
-        : `${hh} ${this.hoursTransl} ${mm} ${this.minutesTransl}`;
-    console.log('string in transform', this.string);
-
-    return this.string;
+    return +minutes < MINUTES_IN_HOUR
+      ? `${minutes} ${this.minutesTransl}`
+      : `${hh} ${this.hoursTransl} ${mm} ${this.minutesTransl}`;
   }
 }

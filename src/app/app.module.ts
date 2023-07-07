@@ -37,7 +37,7 @@ import { SwitchLangComponent } from './components/switch-lang/switch-lang.compon
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 @NgModule({
   declarations: [

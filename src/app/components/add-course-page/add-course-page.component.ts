@@ -9,7 +9,7 @@ import { selectCourse } from './../../store/course/course.selectors';
 import { Store } from '@ngrx/store';
 import { Course } from './../../interfaces/course.interface';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,15 +32,10 @@ export class AddCoursePageComponent implements OnInit {
     private store: Store,
     private translate: TranslateService,
     private langService: LangService,
-    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.translate.use(this.langService.getCurrentLang() as string);
-
-    this.translate.onLangChange.subscribe(() => {
-      this.cdr.detectChanges();
-    });
 
     this.course$ = this.store.select(selectCourse);
 
