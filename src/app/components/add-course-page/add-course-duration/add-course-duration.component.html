@@ -1,6 +1,7 @@
 <div class="label-column">
   <label for="duration" class="label"
-    >Duration: <span class="required">*required</span></label
+    >{{ "Duration" | translate }}:
+    <span class="required">*{{ "required" | translate }}</span></label
   >
   <div class="duration">
     <input
@@ -20,7 +21,7 @@
       }"
     />
     <div class="duration-pipe">
-      <p>{{ duration.value | durationPipe}}</p>
+      <p>{{ transformedDuration }}</p>
     </div>
   </div>
 </div>

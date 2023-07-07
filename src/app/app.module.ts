@@ -6,10 +6,11 @@ import { NgModule, isDevMode } from '@angular/core';
 import { DurationPipe } from './pipes/duration.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './interceptors/index.interceptor';
-
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -32,7 +33,12 @@ import { CommonModule } from '@angular/common';
 import { coursesReducer } from './store/courses/courses.reducer';
 import { courseReducer } from './store/course/course.reducer';
 import { TagInputModule } from 'ngx-chips';
+import { SwitchLangComponent } from './components/switch-lang/switch-lang.component';
 
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +54,7 @@ import { TagInputModule } from 'ngx-chips';
     IfAuthenticatedDirective,
     NotFoundPageComponent,
     SpinnerAnimationComponent,
+    SwitchLangComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,10 +64,19 @@ import { TagInputModule } from 'ngx-chips';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     StoreModule.forRoot({
       auth: authReducer,
       courses: coursesReducer,
       course: courseReducer,
+    }),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([AuthEffects, CoursesEffects, CourseEffects]),

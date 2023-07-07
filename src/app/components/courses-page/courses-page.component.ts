@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../../interfaces/course.interface';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-courses-page',
@@ -17,11 +18,11 @@ import { Observable } from 'rxjs';
 export class CoursesPageComponent implements OnInit {
   courses$: Observable<Course[]>;
   load = true;
-  // subscribtionOnSearch = new Subscription();
 
   constructor(
     private router: Router,
-    private store: Store
+    private store: Store,
+    private translate: TranslateService,
   ) {}
 
   ngOnInit(): void {

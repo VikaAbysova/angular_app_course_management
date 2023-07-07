@@ -1,0 +1,40 @@
+{
+  "Login": "Login",
+  "Password": "Password",
+  "placeholder": {
+    "login": "Enter login",
+    "password": "Enter password",
+    "authors": "Enter author's name",
+    "title": "Enter title",
+    "description": "Enter description",
+    "search": "Text to search"
+  },
+  "required": "required",
+  "Forgot password": "Forgot password",
+  "Log off": "Log off",
+  "alt.logo": "Logo",
+  "Authors": "Authors",
+  "Date": "Date",
+  "Duration": "Duration",
+  "Title": "Title",
+  "Description": "Description",
+  "Cancel": "Cancel",
+  "Save": "Save",
+  "Courses": "Courses",
+  "HOURS": {
+    "one": "h",
+    "two": "h",
+    "few": "h",
+    "many": "h"
+  },
+  "MINUTES": {
+    "one": "min",
+    "two": "min",
+    "few": "min",
+    "many": "min"
+  },
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "LOAD MORE": "LOAD MORE",
+  "Add course": "Add course"
+}

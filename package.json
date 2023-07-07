@@ -22,6 +22,8 @@
     "@ngrx/effects": "^16.0.1",
     "@ngrx/store": "^16.0.1",
     "@ngrx/store-devtools": "^16.0.1",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "bootstrap-icons": "^1.10.5",
     "ngx-chips": "^3.0.0",
     "rxjs": "~7.8.0",

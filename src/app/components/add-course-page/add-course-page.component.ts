@@ -12,6 +12,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { LangService } from 'src/app/services/lang.service';
 
 @Component({
   selector: 'app-add-course-page',
@@ -27,10 +29,14 @@ export class AddCoursePageComponent implements OnInit {
     private spinnerService: SpinnerService,
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store
+    private store: Store,
+    private translate: TranslateService,
+    private langService: LangService,
   ) {}
 
   ngOnInit(): void {
+    this.translate.use(this.langService.getCurrentLang() as string);
+
     this.course$ = this.store.select(selectCourse);
 
     this.form = new FormGroup({

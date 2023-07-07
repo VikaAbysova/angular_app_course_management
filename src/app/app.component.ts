@@ -11,11 +11,12 @@ export class AppComponent implements OnInit {
   isLoading: boolean;
   constructor(
     public authService: AuthService,
-    public spinnerService: SpinnerService
+    public spinnerService: SpinnerService,
   ) {}
   ngOnInit(): void {
     this.spinnerService.isLoading$.subscribe(
       (isLoading) => (this.isLoading = isLoading)
     );
+
   }
 }

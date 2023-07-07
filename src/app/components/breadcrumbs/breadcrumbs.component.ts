@@ -1,6 +1,9 @@
 import { CoursesService } from './../../services/courses.service';
 import { NavigationEnd, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+} from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { Course } from 'src/app/interfaces/course.interface';
 
@@ -9,9 +12,12 @@ import { Course } from 'src/app/interfaces/course.interface';
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
 })
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsComponent implements OnInit{
   title: string | undefined;
-  constructor(private router: Router, private courseService: CoursesService) {}
+  constructor(
+    private router: Router,
+    private courseService: CoursesService,
+  ) {}
 
   ngOnInit() {
     this.router.events
@@ -30,4 +36,5 @@ export class BreadcrumbsComponent implements OnInit {
         }
       });
   }
+
 }

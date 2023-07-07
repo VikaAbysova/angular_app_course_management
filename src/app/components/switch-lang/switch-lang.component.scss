@@ -1,0 +1,15 @@
+@import "/src/styles/variables";
+@import "/src/styles/extends";
+
+.selection-lang {
+  font-size: small;
+  color: white;
+  background: #524d4d;
+  font-family: $primary-font-family;
+  border: none;
+}
+
+.fa-globe {
+  color: $primary-icon-light-color;
+  margin: 0 .5rem 0 2rem;
+}

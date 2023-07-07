@@ -1,0 +1,13 @@
+<div>
+  <i class="fa-solid fa-globe"></i>
+  <select
+  name="selectionLang"
+  id="selectionLang"
+  class="selection-lang"
+  [(ngModel)]="selectedLang"
+  (change)="changeLang()"
+  >
+  <option value="ua" class="lang">UA</option>
+  <option value="en" class="lang">EN</option>
+</select>
+</div>

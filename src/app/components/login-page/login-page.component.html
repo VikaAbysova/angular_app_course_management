@@ -1,15 +1,17 @@
 <form action="#" class="login" [formGroup]="form" (ngSubmit)="onLogin()">
-  <h1>Login</h1>
+  <h1>{{ "Login" | translate }}</h1>
   <div class="email">
     <label for="login" class="label"
-      >Login:<span class="required">*required</span></label
+      >{{ "Login" | translate }}:<span class="required"
+        >*{{ "required" | translate }}</span
+      ></label
     >
     <input
       type="text"
       required
       id="login"
       name="login"
-      placeholder="Enter login"
+      [placeholder]="'placeholder.login' | translate"
       class="input"
       formControlName="login"
     />
@@ -17,21 +19,23 @@
       class="validation"
       *ngIf="form.get('login')?.invalid && form.get('login')?.touched"
     >
-      <small *ngIf="form.get('login')?.errors?.['required']"
-        >{{showErrorText('login')}}</small
-      >
+      <small *ngIf="form.get('login')?.errors?.['required']">{{
+        showErrorText("login")
+      }}</small>
     </div>
   </div>
   <div class="password">
     <label for="password" class="label"
-      >Password:<span class="required">*required</span></label
+      >{{ "Password" | translate }}:<span class="required"
+        >*{{ "required" | translate }}</span
+      ></label
     >
     <input
       type="password"
       required
       id="password"
       name="password"
-      placeholder="Enter password"
+      [placeholder]="'placeholder.password' | translate"
       class="input"
       formControlName="password"
     />
@@ -39,15 +43,15 @@
       class="validation"
       *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
     >
-      <small *ngIf="form.get('password')?.errors?.['required']"
-        >{{showErrorText('password')}}</small
-      >
+      <small *ngIf="form.get('password')?.errors?.['required']">{{
+        showErrorText("password")
+      }}</small>
     </div>
   </div>
   <div class="action">
-    <a href="#" class="faq-ref">Forgot password?</a>
-    <button class="btn btn-gray" type="submit" [disabled]="form.invalid">
-      Login
+    <a href="#" class="faq-ref">{{ "Forgot password" | translate }}?</a>
+    <button class="btn btn-green" type="submit" [disabled]="form.invalid">
+      {{ "Login" | translate }}
     </button>
   </div>
 </form>

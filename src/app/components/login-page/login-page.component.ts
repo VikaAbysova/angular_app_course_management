@@ -18,7 +18,7 @@ export class LoginPageComponent {
     public authService: AuthService,
     private spinnerService: SpinnerService,
     private store: Store,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.form = this.fb.group({
       login: ['', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
